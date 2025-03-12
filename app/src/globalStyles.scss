@@ -6,17 +6,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 @layer utilities {
-
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
 
   .no-scrollbar {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   .animate-fadeIn {
@@ -120,36 +117,58 @@ th {
 }
 
 .animate-on-scroll {
+  opacity: 0;
   transform: translateY(15px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.animate-on-load {
-  transition-property: all;
+.animate-fadeIn {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
-.section-in-view {
-  opacity: 1;
-  transform: translateY(0);
+/* Make bullet points black in timeline content */
+.timeline-content ul {
+  list-style-type: disc;
 }
 
-.skill-progress-bar {
-  animation: fillWidth 1s ease-out forwards;
+.timeline-content li {
+  color: #2A2A2A;
+  margin-bottom: 0.5rem;
 }
 
+.timeline-content li::marker {
+  color: #2A2A2A;
+}
+
+/* Skill progress bar styling */
 .skill-progress-bar {
   width: 0%;
   transition: width 1s ease-out;
-  will-change: width; // Hint for performance optimization
+  will-change: width;
 }
 
+/* Skills section styling */
 .skills-section {
-  &.in-view {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    
-    .animate-on-scroll {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  margin-bottom: 2rem;
+}
+
+.skill-group-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.skill-group-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: -15%;
+  width: 130%;
+  height: 2px;
+  background-color: #7D8A69;
+}
+
+.skill-item {
+  margin-bottom: 1.25rem;
 }

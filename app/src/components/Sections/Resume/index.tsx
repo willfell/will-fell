@@ -5,14 +5,11 @@ import Section from '../../Layout/Section';
 import ResumeSection from './ResumeSection';
 import { SkillGroup } from './Skills';
 import TimelineItem from './TimelineItem';
-import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
 
 const Resume: FC = memo(() => {
-  const sectionRef = useIntersectionObserver(0.05, '-50px 0px -100px 0px');
-
   return (
     <Section className="bg-earth-tan/50" sectionId={SectionId.Resume}>
-      <div ref={sectionRef} className="flex flex-col divide-y-2 divide-sage-green/50">
+      <div className="flex flex-col divide-y-2 divide-sage-green/50">
         <ResumeSection title="Education">
           {education.map((item, index) => (
             <TimelineItem
