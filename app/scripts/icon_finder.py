@@ -42,7 +42,13 @@ skill_icons = [
     {"name": "gitops", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/git.svg", "color": "000000"},
     {"name": "argocd", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/argo.svg", "color": "000000"},
     {"name": "bitbucket", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/bitbucket.svg", "color": "000000"},
-    {"name": "codepipeline", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazonaws.svg", "color": "000000"}
+    {"name": "codepipeline", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazonaws.svg", "color": "000000"},
+
+    # Socials
+    {"name": "strava", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/strava.svg", "color": "000000"},
+    {"name": "github", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/github.svg", "color": "000000"},
+    {"name": "linkedin", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/linkedin.svg", "color": "000000"},
+
 ]
 
 # Create custom SVG for problematic icons that don't have good simple-icons

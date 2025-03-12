@@ -3,6 +3,10 @@ module.exports = {
   // darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
+      spacing: {
+        '128': '32rem',
+        '144': '36rem',
+      },  
       fontFamily: {
         sans: ['Fira Code', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['Fira Code', 'monospace'],

@@ -11,7 +11,9 @@ const Hero: FC = memo(() => {
   const { imageSrc, name, description, actions } = heroData;
   const heroRef = useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
+  // Handle scroll for parallax effect
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -21,21 +23,40 @@ const Hero: FC = memo(() => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle animations when component mounts
   useEffect(() => {
-    const heroElement = heroRef.current;
-    if (heroElement) {
-      const animateElements = heroElement.querySelectorAll('.animate-on-load');
-      animateElements.forEach((el, index) => {
-        setTimeout(() => {
-          el.classList.add('opacity-100', 'translate-y-0');
-        }, 100 * index);
-      });
-    }
+    // Make sure animation classes are reset and properly applied
+    const resetAndAnimateElements = () => {
+      // Short delay to ensure DOM is ready
+      setTimeout(() => {
+        if (heroRef.current) {
+          // First mark that we're ready to show the component
+          setIsVisible(true);
+          
+          // Find all animate-on-load elements
+          const animateElements = heroRef.current.querySelectorAll('.animate-on-load');
+          
+          // Apply animations with staggered delay
+          animateElements.forEach((el, index) => {
+            setTimeout(() => {
+              el.classList.add('animate-fadeIn');
+            }, 100 * index);
+          });
+        }
+      }, 50);
+    };
+
+    // Run animation reset and initialization
+    resetAndAnimateElements();
   }, []);
 
   return (
     <Section noPadding sectionId={SectionId.Hero}>
-      <div ref={heroRef} className="relative flex h-screen w-full items-center justify-center overflow-hidden">
+      <div 
+        ref={heroRef} 
+        className={`relative flex h-screen w-full items-center justify-center overflow-hidden ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transition: 'opacity 0.3s ease-out' }}
+      >
         {/* Background with parallax effect */}
         <div
           className="absolute inset-0 z-0"

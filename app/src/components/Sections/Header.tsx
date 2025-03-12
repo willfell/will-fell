@@ -1,136 +1,157 @@
-import { Dialog, Transition } from '@headlessui/react';
-import { Bars3BottomRightIcon } from '@heroicons/react/24/outline';
-import classNames from 'classnames';
+import { FC, memo, useEffect, useState } from 'react';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { FC, Fragment, memo, useCallback, useMemo, useState } from 'react';
-import { SectionId } from '../../data/data';
-import { useNavObserver } from '../../hooks/useNavObserver';
+import { useRouter } from 'next/router';
 
 export const headerID = 'headerNav';
 
+interface NavItem {
+  name: string;
+  href: string;
+  target?: string;
+}
+
 const Header: FC = memo(() => {
-  const [currentSection, setCurrentSection] = useState<SectionId | null>(null);
-  const navSections = useMemo(
-    () => [SectionId.About, SectionId.Resume, SectionId.Contact],
-    [],
-  );
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const router = useRouter();
+  const currentPath = router.pathname;
 
-  const intersectionHandler = useCallback((section: SectionId | null) => {
-    section && setCurrentSection(section);
-  }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
 
-  useNavObserver(navSections.map(section => `#${section}`).join(','), intersectionHandler);
+    // Watch for section changes using IntersectionObserver
+    const observeSections = () => {
+      // Only observe sections on the main page
+      if (currentPath !== '/') return;
+
+      const sections = document.querySelectorAll('section[id]');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      return () => {
+        sections.forEach((section) => {
+          observer.unobserve(section);
+        });
+      };
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    const cleanup = observeSections();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (cleanup) cleanup();
+    };
+  }, [currentPath]);
+
+  // Generate navigation links based on current page
+  const getNavItems = (): NavItem[] => {
+    // Base items that appear on all pages
+    const navItems: NavItem[] = [
+      { name: 'Home', href: '/' },
+      { name: 'Life', href: '/life' },
+      { name: 'Education', href: '/education' },
+      { name: 'Site Info', href: '/site-info' },
+      { name: 'Contact', href: '/contact' },
+    ];
+
+    // Add resume link to all pages
+    const resumeLink: NavItem = { name: 'Resume', href: '/WillFellhoelterResume.pdf', target: '_blank' };
+    navItems.push(resumeLink);
+
+    return navItems;
+  };
+
+  const navItems = getNavItems();
+
+  // Helper function to check if a nav item should be highlighted
+  const isNavItemActive = (itemHref: string): boolean => {
+    // Handle home page
+    if (itemHref === '/' && currentPath === '/') {
+      return true;
+    }
+    
+    // Handle section anchors on home page
+    if (currentPath === '/' && activeSection && `#${activeSection}` === itemHref) {
+      return true;
+    }
+    
+    // Special case for site-info page (handles both paths)
+    if (itemHref === '/site-info' && (currentPath === '/site-info' || currentPath === '/info')) {
+      return true;
+    }
+    
+    // Normal page matching
+    return currentPath === itemHref;
+  };
 
   return (
-    <>
-      <MobileNav currentSection={currentSection} navSections={navSections} />
-      <DesktopNav currentSection={currentSection} navSections={navSections} />
-    </>
-  );
-});
+    <header
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ease-in-out ${
+        scrolled ? 'bg-forest-green shadow-lg' : 'bg-transparent'
+      }`}
+      id={headerID}
+    >
+      <div className="container flex justify-between items-center h-16 px-4 mx-auto">
+        {/* Logo/Name - Changed to white when scrolled/background is green */}
+        <Link href="/" className={`text-2xl font-bold hover:text-sage-green transition-colors ${
+          scrolled ? 'text-white' : 'text-black'
+        }`}>
+          Will Fellhoelter
+        </Link>
 
-const DesktopNav: FC<{ navSections: SectionId[]; currentSection: SectionId | null }> = memo(
-  ({ navSections, currentSection }) => {
-    const baseClass =
-      '-m-1.5 p-1.5 rounded-md font-bold first-letter:uppercase hover:transition-colors hover:duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-earth-tan sm:hover:text-earth-tan text-earth-tan';
-    const activeClass = classNames(baseClass, 'text-earth-tan');
-    const inactiveClass = classNames(baseClass, 'text-earth-tan/80');
-    return (
-      <header className="fixed top-0 z-50 hidden w-full bg-forest-green/50 p-4 backdrop-blur sm:block" id={headerID}>
-        <nav className="flex justify-center gap-x-8">
-          {navSections.map(section => (
-            <NavItem
-              activeClass={activeClass}
-              current={section === currentSection}
-              inactiveClass={inactiveClass}
-              key={section}
-              section={section}
-            />
+        {/* Navigation Links - properly centered and aligned */}
+        <nav className="hidden md:flex items-center space-x-4 sm:space-x-6">
+          {navItems.map((item) => (
+            item.target ? (
+              <a
+                key={item.name}
+                href={item.href}
+                target={item.target}
+                rel="noopener noreferrer"
+                className={`flex items-center px-4 py-2 font-medium transition-colors ${
+                  scrolled ? 'text-white hover:text-earth-tan' : 'text-forest-green hover:text-sage-green'
+                }`}
+              >
+                {item.name}
+                <ArrowTopRightOnSquareIcon className="ml-1 h-4 w-4" />
+              </a>
+            ) : (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`px-4 py-2 font-medium transition-colors ${
+                  isNavItemActive(item.href)
+                    ? scrolled
+                      ? 'text-earth-tan border-b-2 border-earth-tan'
+                      : 'text-forest-green border-b-2 border-forest-green'
+                    : scrolled
+                      ? 'text-white hover:text-earth-tan'
+                      : 'text-stone-700 hover:text-forest-green'
+                }`}
+              >
+                {item.name}
+              </Link>
+            )
           ))}
         </nav>
-      </header>
-    );
-  },
-);
-
-const MobileNav: FC<{ navSections: SectionId[]; currentSection: SectionId | null }> = memo(
-  ({ navSections, currentSection }) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const toggleOpen = useCallback(() => {
-      setIsOpen(!isOpen);
-    }, [isOpen]);
-
-    const baseClass =
-      'p-2 rounded-md first-letter:uppercase transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-earth-tan';
-    const activeClass = classNames(baseClass, 'bg-deep-forest text-earth-tan font-bold');
-    const inactiveClass = classNames(baseClass, 'text-earth-tan/80 font-medium');
-    return (
-      <>
-        <button
-          aria-label="Menu Button"
-          className="fixed right-2 top-2 z-40 rounded-md bg-earth-tan p-2 ring-offset-deep-forest/60 hover:bg-sage-green focus:outline-none focus:ring-0 focus-visible:ring-2 focus-visible:ring-earth-tan focus-visible:ring-offset-2 sm:hidden"
-          onClick={toggleOpen}>
-          <Bars3BottomRightIcon className="h-8 w-8 text-forest-green" />
-          <span className="sr-only">Open sidebar</span>
-        </button>
-        <Transition.Root as={Fragment} show={isOpen}>
-          <Dialog as="div" className="fixed inset-0 z-40 flex sm:hidden" onClose={toggleOpen}>
-            <Transition.Child
-              as={Fragment}
-              enter="transition-opacity ease-linear duration-300"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-opacity ease-linear duration-300"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0">
-              <Dialog.Overlay className="fixed inset-0 bg-stone-black bg-opacity-75" />
-            </Transition.Child>
-            <Transition.Child
-              as={Fragment}
-              enter="transition ease-in-out duration-300 transform"
-              enterFrom="-translate-x-full"
-              enterTo="translate-x-0"
-              leave="transition ease-in-out duration-300 transform"
-              leaveFrom="translate-x-0"
-              leaveTo="-translate-x-full">
-              <div className="relative w-4/5 bg-forest-green">
-                <nav className="mt-5 flex flex-col gap-y-2 px-2">
-                  {navSections.map(section => (
-                    <NavItem
-                      activeClass={activeClass}
-                      current={section === currentSection}
-                      inactiveClass={inactiveClass}
-                      key={section}
-                      onClick={toggleOpen}
-                      section={section}
-                    />
-                  ))}
-                </nav>
-              </div>
-            </Transition.Child>
-          </Dialog>
-        </Transition.Root>
-      </>
-    );
-  },
-);
-
-const NavItem: FC<{
-  section: string;
-  current: boolean;
-  activeClass: string;
-  inactiveClass: string;
-  onClick?: () => void;
-}> = memo(({ section, current, inactiveClass, activeClass, onClick }) => {
-  return (
-    <Link
-      className={classNames(current ? activeClass : inactiveClass)}
-      href={`/#${section}`}
-      key={section}
-      onClick={onClick}>
-      {section}
-    </Link>
+      </div>
+    </header>
   );
 });
 
