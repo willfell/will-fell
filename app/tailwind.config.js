@@ -3,6 +3,10 @@ module.exports = {
   // darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Fira Code', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+      },
       colors: {
         'earth-tan': '#DBBB9C',
         'coral': '#E89375',

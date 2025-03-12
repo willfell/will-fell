@@ -8,6 +8,12 @@ import {
 import GithubIcon from '../components/Icon/GithubIcon';
 import LinkedInIcon from '../components/Icon/LinkedInIcon';
 // import heroImage from '../images/header-background.webp';
+import universityLogo from '../images/wsu-logo.png';
+import formlLogo from '../images/forml-logo.png';
+import projectCanaryLogo from '../images/project-canary-logo.png';
+import lendflowLogo from '../images/lendflow-logo.png';
+import mcgLogo from '../images/mcg-logo.png';
+import cernerLogo from '../images/cerner-logo.png';
 import heroImage from '../images/header-background.jpg';
 import porfolioImage1 from '../images/portfolio/portfolio-1.jpg';
 import porfolioImage2 from '../images/portfolio/portfolio-2.jpg';
@@ -112,26 +118,32 @@ export const skills: SkillGroup[] = [
       {
         name: 'AWS',
         level: 9,
+        logo: '/images/skills/aws.svg',
       },
       {
         name: 'Terraform',
         level: 8,
+        logo: '/images/skills/terraform.svg',
       },
       {
         name: 'Docker',
         level: 9,
+        logo: '/images/skills/docker.svg',
       },
       {
         name: 'Kubernetes',
         level: 7,
+        logo: '/images/skills/kubernetes.svg',
       },
       {
         name: 'Azure',
         level: 7,
+        logo: '/images/skills/azure.svg',
       },
       {
         name: 'GCP',
         level: 6,
+        logo: '/images/skills/gcp.svg',
       },
     ],
   },
@@ -141,22 +153,27 @@ export const skills: SkillGroup[] = [
       {
         name: 'Python',
         level: 9,
+        logo: '/images/skills/python.svg',
       },
       {
         name: 'TypeScript/JavaScript',
         level: 8,
+        logo: '/images/skills/typescript.svg',
       },
       {
         name: 'Bash',
         level: 8,
+        logo: '/images/skills/bash.svg',
       },
       {
         name: 'Java',
         level: 6,
+        logo: '/images/skills/java.svg',
       },
       {
         name: 'C#/.NET',
         level: 6,
+        logo: '/images/skills/csharp.svg',
       },
     ],
   },
@@ -166,22 +183,27 @@ export const skills: SkillGroup[] = [
       {
         name: 'New Relic',
         level: 8,
+        logo: '/images/skills/newrelic.svg',
       },
       {
         name: 'Prometheus',
         level: 7,
+        logo: '/images/skills/prometheus.svg',
       },
       {
         name: 'Datadog',
         level: 7,
+        logo: '/images/skills/datadog.svg',
       },
       {
         name: 'AWS CloudWatch',
         level: 8,
+        logo: '/images/skills/cloudwatch.svg',
       },
       {
         name: 'Splunk',
         level: 7,
+        logo: '/images/skills/splunk.svg',
       },
     ],
   },
@@ -191,22 +213,27 @@ export const skills: SkillGroup[] = [
       {
         name: 'GitHub Actions',
         level: 9,
+        logo: '/images/skills/github-actions.svg',
       },
       {
         name: 'GitOps',
         level: 8,
+        logo: '/images/skills/gitops.svg',
       },
       {
         name: 'ArgoCD',
         level: 7,
+        logo: '/images/skills/argocd.svg',
       },
       {
         name: 'Bitbucket Pipelines',
         level: 8,
+        logo: '/images/skills/bitbucket.svg',
       },
       {
         name: 'AWS CodePipeline',
         level: 7,
+        logo: '/images/skills/codepipeline.svg',
       },
     ],
   },
@@ -220,6 +247,7 @@ export const education: TimelineItem[] = [
     date: '2014-2018',
     location: 'Wichita State University',
     title: 'Management Information Systems',
+    imageSrc: universityLogo,
     content: <p>Earned a degree in Management Information Systems at Wichita State University.</p>,
   },
 ];
@@ -229,6 +257,7 @@ export const experience: TimelineItem[] = [
     date: 'July 2024 - Present',
     location: 'Forml (Remote)',
     title: 'Senior Full Stack Engineer',
+    imageSrc: formlLogo,
     content: (
       <ul className="list-disc pl-8">
         <li>Lead end-to-end development of a robust, full-stack platform leveraging Python, Angular, AWS, Redis, and PostgreSQL as the first engineering hire</li>
@@ -243,6 +272,7 @@ export const experience: TimelineItem[] = [
     date: 'May 2023 - July 2024',
     location: 'Project Canary, Denver',
     title: 'DevOps Engineer',
+    imageSrc: projectCanaryLogo,
     content: (
       <ul className="list-disc pl-8">
         <li>Orchestrated enterprise-wide observability strategy for 10+ critical services, implementing proactive monitoring that maintained 99.99% uptime</li>
@@ -257,6 +287,7 @@ export const experience: TimelineItem[] = [
     date: 'August 2021 - May 2023',
     location: 'Lendflow (Remote)',
     title: 'DevSecOps Engineer',
+    imageSrc: lendflowLogo,
     content: (
       <ul className="list-disc pl-8">
         <li>Built ephemeral infrastructure solutions for developers and QA, eliminating persistent environment costs by 32%</li>
@@ -271,6 +302,7 @@ export const experience: TimelineItem[] = [
     date: 'February 2020 - August 2021',
     location: 'MCG (Remote)',
     title: 'DevOps Engineer',
+    imageSrc: mcgLogo,
     content: (
       <ul className="list-disc pl-8">
         <li>Led migration from on-premises infrastructure to Azure Cloud for 3+ teams, achieving 99.9999% annual uptime</li>
@@ -284,6 +316,7 @@ export const experience: TimelineItem[] = [
     date: 'September 2018 - August 2021',
     location: 'Cerner, Kansas City',
     title: 'Systems Engineer',
+    imageSrc: cernerLogo,
     content: (
       <ul className="list-disc pl-8">
         <li>Built an AWX-powered UI for scheduling data restoration jobs and spinning up ephemeral test environments</li>
