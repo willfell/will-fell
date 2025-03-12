@@ -1,85 +1,80 @@
 // src/utils/skillAnimations.js
-
-// Only run this code on the client side
-if (typeof window !== 'undefined') {
-    // Function to initialize skill animations
-    const initSkillAnimations = () => {
-      console.log('Initializing skill animations');
-  
-      // First reset all bars to 0 width to ensure animation starts fresh
-      document.querySelectorAll('.skill-progress-bar').forEach(bar => {
-        bar.style.width = '0%';
-      });
-      
-      // Set up intersection observer for skill sections
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Add visible class to the section
-            entry.target.classList.add('in-view');
-            
-            console.log('Section in view:', entry.target);
-            
-            // Get all skill progress bars within the visible section
-            const skillBars = entry.target.querySelectorAll('.skill-progress-bar');
-            
-            console.log('Found skill bars:', skillBars.length);
-            
-            // Animate each skill bar to its target width with staggered delay
-            skillBars.forEach((bar, index) => {
-              // Get the target width from the data attribute
-              const targetWidth = bar.getAttribute('data-width');
-              
-              console.log('Animating bar to width:', targetWidth);
-              
-              // Animate to the target width with a staggered delay
-              setTimeout(() => {
-                bar.style.width = targetWidth;
-              }, 200 + (index * 50)); // Stagger animations with 50ms between each bar
-            });
-          }
-        });
-      }, { threshold: 0.2 }); // Trigger when 20% of the element is visible
-      
-      // Observe all skill sections
-      const sections = document.querySelectorAll('.skills-section');
-      console.log('Found skill sections:', sections.length);
-      
-      sections.forEach(section => {
-        observer.observe(section);
-      });
-    };
-  
-    // Function to run on page navigation or any time we want to manually trigger
-    const handleRouteChange = () => {
-      console.log('Route changed, reinitializing animations');
-      // First give the DOM time to update
-      setTimeout(initSkillAnimations, 300);
-    };
+function handleSkillsAnimation() {
+    // Get all skill progress bars
+    const progressBars = document.querySelectorAll('.skill-progress-bar');
     
-    // Initialize animations when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        console.log('DOM loaded, initializing animations');
-        // Wait a bit longer for React to hydrate and render
-        setTimeout(initSkillAnimations, 500);
-      });
-    } else {
-      // DOM already loaded, give React time to hydrate
-      console.log('DOM already loaded, initializing animations after delay');
-      setTimeout(initSkillAnimations, 500);
+    if (progressBars.length === 0) {
+      return; // No progress bars found, exit early
     }
+  
+    // Create IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const targetWidth = bar.getAttribute('data-width') || '0%';
+          
+          // Set the CSS variable and add animation class
+          bar.style.setProperty('--target-width', targetWidth);
+          setTimeout(() => {
+            bar.style.width = targetWidth;
+          }, 50);
+          
+          // Unobserve after animation starts
+          observer.unobserve(bar);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    });
     
-    // Listen for route changes
-    if (typeof window !== 'undefined') {
-      window.addEventListener('focus', handleRouteChange);
-      window.addEventListener('popstate', handleRouteChange);
-      document.addEventListener('scroll', () => {
-        // Debounce scroll events
-        clearTimeout(window.scrollTimer);
-        window.scrollTimer = setTimeout(initSkillAnimations, 200);
+    // Observe each progress bar
+    progressBars.forEach(bar => {
+      observer.observe(bar);
+    });
+    
+    // Also handle fade-in animations for other elements
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fadeIn');
+          fadeObserver.unobserve(entry.target);
+        }
       });
-    }
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    animateElements.forEach(el => {
+      fadeObserver.observe(el);
+    });
   }
   
-  export {}; // Ensure this is treated as a module
+  // Initialize animations
+  if (typeof window !== 'undefined') {
+    // Run once DOM is loaded
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(handleSkillsAnimation, 100);
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(handleSkillsAnimation, 100);
+      });
+    }
+    
+    // Also run on window load to ensure all elements are rendered
+    window.addEventListener('load', () => {
+      setTimeout(handleSkillsAnimation, 100);
+    });
+    
+    // Re-run when user scrolls (debounced)
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+      if (scrollTimer) clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(handleSkillsAnimation, 100);
+    });
+  }
+  
+  export default handleSkillsAnimation;

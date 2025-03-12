@@ -1,43 +1,16 @@
-import { FC, memo, PropsWithChildren, useMemo } from 'react';
+import { FC, memo, useMemo } from 'react';
 import Image from 'next/image';
-
 import { Skill as SkillType, SkillGroup as SkillGroupType } from '../../../data/dataDef';
 
-// Direct SVG components for problematic icons
-const AwsSvg = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF9900" className="w-6 h-6">
-    <path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.59.158-.877.27-.128.063-.247.087-.352.087a.33.33 0 0 1-.296-.159l-.16-.415c-.024-.063-.04-.127-.04-.183 0-.08.032-.151.103-.223.08-.08.24-.159.472-.255.368-.144.782-.255 1.237-.335.46-.08.93-.12 1.414-.12.878 0 1.524.215 1.933.647.405.431.607 1.094.607 1.973v2.58h.04Zm-3.142.967c.319 0 .651-.072.99-.216.343-.144.639-.36.887-.654.151-.183.263-.39.335-.63.08-.24.12-.503.12-.795v-.376a7.06 7.06 0 0 0-.783-.152 6.953 6.953 0 0 0-.799-.048c-.511 0-.895.103-1.158.319-.263.215-.39.518-.39.91 0 .376.096.663.296.87.198.207.486.31.87.31Zm6.21-7.193c0-.08.016-.151.055-.223a.457.457 0 0 1 .176-.167l.591-.319c.08-.048.16-.064.232-.064.08 0 .151.024.223.08.183.111.375.247.574.415.2.168.415.376.647.63a9.32 9.32 0 0 1 .215-.223 4.106 4.106 0 0 1 .288-.256c.096-.072.2-.143.312-.223.112-.08.231-.159.367-.239a.654.654 0 0 1 .32-.12c.112 0 .223.04.327.112l.574.399a.374.374 0 0 1 .152.295.34.34 0 0 1-.04.184 2.33 2.33 0 0 0-.271.375c-.08.136-.152.287-.224.451v5.617c0 .16-.048.288-.143.375-.096.088-.232.136-.415.136h-.67c-.16 0-.288-.048-.376-.144-.087-.096-.134-.216-.134-.375v-4.526a5.609 5.609 0 0 0-.359-.327 5.098 5.098 0 0 0-.431-.312v5.157c0 .16-.048.288-.144.375-.096.088-.231.136-.415.136h-.638c-.184 0-.32-.048-.415-.144-.096-.096-.144-.216-.144-.367V5.139c0-.16.048-.288.144-.375.096-.088.231-.136.415-.136h.638c.184 0 .32.048.415.136.096.087.144.215.144.375v.456ZM18.51 10.412c.272 0 .455.096.55.288.096.191.144.383.144.574a.507.507 0 0 1-.168.392c-.111.111-.24.167-.39.167h-.128c-.312 0-.606-.008-.886-.024a4.252 4.252 0 0 1-.742-.08 1.756 1.756 0 0 1-.567-.215 2.028 2.028 0 0 1-.415-.36.625.625 0 0 1-.184-.255 1.092 1.092 0 0 1-.056-.367v-8.18c0-.16.048-.288.144-.375.096-.088.232-.136.415-.136h.693c.184 0 .32.048.416.136.096.087.143.215.143.375V10.1c.704.24 1.432.312 2.184.216l-.152.096h-.001ZM19.53 1.993c0-.16.048-.288.144-.375.096-.088.232-.136.415-.136h.694c.184 0 .32.048.415.136.096.087.144.216.144.375v10.506c0 .16-.048.288-.144.375-.096.088-.231.136-.415.136h-.694c-.184 0-.32-.048-.415-.144-.096-.096-.144-.215-.144-.375V1.993Zm7.973 8.043c0 .678-.136 1.301-.407 1.876-.272.574-.646 1.07-1.118 1.485-.471.415-1.022.734-1.66.959-.637.223-1.3.335-1.988.335-.697 0-1.358-.112-1.987-.335-.63-.224-1.182-.544-1.653-.959-.472-.415-.838-.91-1.118-1.485-.28-.575-.415-1.198-.415-1.876 0-.678.136-1.302.415-1.876.28-.574.646-1.07 1.118-1.493.47-.415 1.022-.734 1.653-.951.629-.216 1.29-.327 1.987-.327.687 0 1.35.11 1.988.327.638.216 1.189.536 1.66.95.47.424.846.92 1.118 1.494.271.574.407 1.198.407 1.876Zm-1.429 0c0-.471-.088-.91-.255-1.302-.168-.391-.407-.734-.71-1.022a3.35 3.35 0 0 0-1.07-.694c-.415-.176-.87-.255-1.356-.255-.487 0-.941.079-1.358.255-.415.175-.774.407-1.078.694-.303.288-.535.63-.71 1.022-.167.391-.255.822-.255 1.302 0 .471.088.903.255 1.294.176.39.407.73.71 1.021.304.288.662.52 1.078.695.416.175.87.255 1.358.255.487 0 .94-.08 1.357-.255.416-.175.773-.407 1.069-.695.304-.288.543-.63.71-1.021.168-.391.256-.831.256-1.294h-.001Z"/>
-  </svg>
-);
-
-const AzureSvg = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#0078D4" className="w-6 h-6">
-    <path d="M13.05 4.24L6.56 18.05 2 18l5.09-8.76 5.96-5m.7 3.74l-3.87 8.01h9.02l-1.14-4.1-4-3.9z"/>
-  </svg>
-);
-
-const CSharpSvg = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.26 0.7 223.48 256" fill="#239120" className="w-6 h-6">
-    <path d="M117.5 0.7c4 0 8 1 11.6 3l96.1 55.7c7.2 4 11.6 11.6 11.6 19.9v111.2c0 8.3-4.4 15.9-11.6 19.9l-96.1 55.7c-3.6 2-7.6 3-11.6 3s-8-1-11.6-3l-96.1-55.7c-7.2-4-11.6-11.6-11.6-19.9V78.6c0-8.3 4.4-15.9 11.6-19.9L105.9 3c3.6-2 7.6-3 11.6-3zm0 124.9c-4.9 0-9.6-1-14-2.9-4.2-1.9-8-4.6-11.2-7.9-3.2-3.3-5.7-7.2-7.4-11.5-1.6-4.3-2.5-8.9-2.4-13.4 0-4.9 1-9.6 2.9-14 1.9-4.2 4.6-8 7.9-11.2 3.3-3.2 7.2-5.7 11.5-7.4 4.3-1.6 8.9-2.5 13.4-2.4 4.9 0 9.6 1 14 2.9 4.2 1.9 8 4.6 11.2 7.9 3.2 3.3 5.7 7.2 7.4 11.5 1.6 4.3 2.5 8.9 2.4 13.4 0 4.9-1 9.6-2.9 14-1.9 4.2-4.6 8-7.9 11.2-3.3 3.2-7.2 5.7-11.5 7.4-4.3 1.6-8.9 2.5-13.4 2.4zm67.3-26.2h-7.6v7.6h-7.6v-7.6h-7.6v-7.6h7.6v-7.6h7.6v7.6h7.6v7.6zm22.6 0h-7.6v7.6h-7.6v-7.6h-7.6v-7.6h7.6v-7.6h7.6v7.6h7.6v7.6z"/>
-  </svg>
-);
-
-const CodePipelineSvg = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FF9900" className="w-6 h-6">
-    <path d="M8.954 20.574a1.4 1.4 0 01-1.401-1.4v-1.865H7.14a2.8 2.8 0 01-2.8-2.8V8.921a2.8 2.8 0 012.8-2.8h9.72a2.8 2.8 0 012.8 2.8v5.588a2.8 2.8 0 01-2.8 2.8h-.412v1.865a1.4 1.4 0 01-1.401 1.4zm-.467-12.52v9.255h7.028V8.054zM16.86 12.642h.58v1.866h-.58zM6.56 12.642h.58v1.866h-.58z"/>
-    <path d="M10.355 4.626v2.8h3.29v-2.8z"/>
-  </svg>
-);
-
-export const SkillGroup: FC<PropsWithChildren<{ skillGroup: SkillGroupType; delay?: number }>> = memo(
+export const SkillGroup: FC<{ skillGroup: SkillGroupType; delay?: number }> = memo(
   ({ skillGroup, delay = 0 }) => {
     const { name, skills } = skillGroup;
     return (
       <div
-        className="flex flex-col animate-on-scroll opacity-0 transition-all duration-1000 skills-section"
+        className="flex flex-col animate-on-scroll skills-section"
         style={{ transitionDelay: `${delay}ms` }}
       >
-        <span className="text-center text-xl font-bold text-stone-black mb-4">{name}</span>
+        <span className="text-center text-xl font-bold text-stone-black mb-4 skill-group-title">{name}</span>
         <div className="flex flex-col gap-y-6">
           {skills.map((skill, index) => (
             <Skill key={`${skill.name}-${index}`} skill={skill} delay={index * 100} />
@@ -54,47 +27,29 @@ export const Skill: FC<{ skill: SkillType; delay?: number }> = memo(({ skill, de
   const { name, level, max = 10, logo } = skill;
   const percentage = useMemo(() => Math.round((level / max) * 100), [level, max]);
 
-  // Function to render special SVGs for problematic icons
-  const renderIcon = () => {
-    // Known problematic icons
-    if (name === 'AWS') return <AwsSvg />;
-    if (name === 'Azure') return <AzureSvg />;
-    if (name === 'C#/.NET') return <CSharpSvg />;
-    if (name === 'AWS CodePipeline') return <CodePipelineSvg />;
-
-    // Default to Image component for other icons
-    if (logo) {
-      return (
-        <Image 
-          src={logo} 
-          alt={`${name} logo`} 
-          width={24} 
-          height={24} 
-          className="object-contain"
-          unoptimized
-        />
-      );
-    }
-
-    // Fallback if no logo
-    return null;
-  };
-
   return (
     <div
-      className="flex flex-col animate-on-scroll opacity-0 transition-all duration-700"
+      className="flex flex-col animate-on-scroll skill-item"
       style={{ transitionDelay: `${delay + 200}ms` }}
     >
       <div className="flex items-center gap-3 ml-2 mb-2">
         <div className="h-6 w-6 relative flex-shrink-0">
-          {renderIcon()}
+          {logo && (
+            <Image 
+              src={logo} 
+              alt={`${name} logo`} 
+              width={24} 
+              height={24} 
+              className="object-contain"
+              unoptimized
+            />
+          )}
         </div>
         <span className="text-sm font-medium text-stone-black">{name}</span>
       </div>
       <div className="h-6 w-full overflow-hidden rounded-full bg-stone-300">
         <div
-          className="h-full rounded-full bg-forest-green transition-all duration-1000 ease-out skill-progress-bar"
-          style={{ width: '0%' }} // This ensures it starts at 0
+          className="h-full rounded-full bg-forest-green skill-progress-bar"
           data-width={`${percentage}%`}
         />
       </div>
