@@ -66,6 +66,7 @@ export interface Skill {
   name: string;
   level: number;
   max?: number;
+  logo?: string;
 }
 
 export interface SkillGroup {
@@ -91,6 +92,7 @@ export interface TimelineItem {
   location: string;
   title: string;
   content: JSX.Element;
+  imageSrc?: string | StaticImageData;
 }
 
 /**
