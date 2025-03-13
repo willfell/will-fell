@@ -22,8 +22,13 @@ interface NavPage {
 }
 
 export const SideNav: FC = memo(() => {
-  // Reordered sections: About, Experience, Portfolio (for main page)
-  const sections = [SectionId.About, SectionId.Experience, SectionId.Portfolio];
+  // Reordered sections: About, Portfolio, Experience, Skills (for main page)
+  const sections = [
+    SectionId.About,
+    SectionId.Portfolio,
+    SectionId.Experience,
+    SectionId.Skills,
+  ];
 
   // Main pages for navigation
   const mainPages: NavPage[] = [
@@ -95,6 +100,7 @@ export const SideNav: FC = memo(() => {
     [SectionId.About]: "About",
     [SectionId.Experience]: "Experience",
     [SectionId.Portfolio]: "Projects",
+    [SectionId.Skills]: "Skills",
   };
 
   // Helper function to check if a page is active

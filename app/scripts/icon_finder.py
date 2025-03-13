@@ -24,6 +24,9 @@ skill_icons = [
     {"name": "bash", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/gnubash.svg", "color": "000000"},
     {"name": "java", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/openjdk.svg", "color": "000000"},
     {"name": "csharp", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/csharp.svg", "color": "000000"},
+    {"name": "nextjs", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/nextdotjs.svg", "color": "000000"},
+    {"name": "flask", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/flask.svg", "color": "000000"},
+    {"name": "tailwind", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/tailwindcss.svg", "color": "000000"},
     
     # Infrastructure tools
     {"name": "terraform", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/terraform.svg", "color": "000000"},
@@ -36,6 +39,8 @@ skill_icons = [
     {"name": "datadog", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/datadog.svg", "color": "000000"},
     {"name": "cloudwatch", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazonaws.svg", "color": "000000"},
     {"name": "splunk", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/splunk.svg", "color": "000000"},
+    {"name": "grafana", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/grafana.svg", "color": "000000"},
+    {"name": "opensearch", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/opensearch.svg", "color": "000000"},
     
     # CI/CD tools
     {"name": "github-actions", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/githubactions.svg", "color": "000000"},
@@ -43,11 +48,21 @@ skill_icons = [
     {"name": "argocd", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/argo.svg", "color": "000000"},
     {"name": "bitbucket", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/bitbucket.svg", "color": "000000"},
     {"name": "codepipeline", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazonaws.svg", "color": "000000"},
+    {"name": "jenkins", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/jenkins.svg", "color": "000000"},
+    {"name": "ansible", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/ansible.svg", "color": "000000"},
 
     # Socials
     {"name": "strava", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/strava.svg", "color": "000000"},
     {"name": "github", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/github.svg", "color": "000000"},
     {"name": "linkedin", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/linkedin.svg", "color": "000000"},
+
+    # AWS Services
+    {"name": "ecs", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazonecs.svg", "color": "000000"},
+    {"name": "cloudwatch", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazoncloudwatch.svg", "color": "000000"},
+    {"name": "s3", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazons3.svg", "color": "000000"},
+
+    # Random
+    {"name": "reddit", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/reddit.svg", "color": "000000"},
 
 ]
 

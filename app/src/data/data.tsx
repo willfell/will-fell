@@ -6,6 +6,8 @@ import {
 } from "@heroicons/react/24/outline";
 
 import balancedBriefImage from "../images/passion-projects/balanced-brief.png";
+import bezosWatchImage from "../images/passion-projects/bezos-watch.webp";
+import willProject from "../images/passion-projects/will-and-obi.jpg";
 import universityLogo from "../images/wsu-logo.png";
 import formlLogo from "../images/forml-logo.png";
 import projectCanaryLogo from "../images/project-canary-logo.png";
@@ -13,7 +15,6 @@ import lendflowLogo from "../images/lendflow-logo.png";
 import mcgLogo from "../images/mcg-logo.png";
 import cernerLogo from "../images/cerner-logo.png";
 import heroImage from "../images/header-background.jpg";
-import porfolioImage1 from "../images/portfolio/portfolio-1.jpg";
 import profilepic from "../images/aboutmepic.jpg";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import {
@@ -48,7 +49,7 @@ export const SectionId = {
   Portfolio: "portfolio",
   Education: "eduction",
   Experience: "experience",
-  Skills: "skills",
+  Skills: "skills", // Added Skills section ID
   Stats: "stats",
   Testimonials: "testimonials",
 } as const;
@@ -117,33 +118,33 @@ export const skills: SkillGroup[] = [
     skills: [
       {
         name: "AWS",
-        level: 9,
-        logo: "/images/icons/aws.svg",
+        level: 10,
+        logo: "/images/skills/aws.svg",
       },
       {
         name: "Terraform",
-        level: 8,
-        logo: "/images/icons/terraform.svg",
+        level: 10,
+        logo: "/images/skills/terraform.svg",
       },
       {
         name: "Docker",
-        level: 9,
-        logo: "/images/icons/docker.svg",
+        level: 10,
+        logo: "/images/skills/docker.svg",
       },
       {
         name: "Kubernetes",
-        level: 7,
-        logo: "/images/icons/kubernetes.svg",
+        level: 10,
+        logo: "/images/skills/kubernetes.svg",
       },
       {
         name: "Azure",
-        level: 7,
-        logo: "/images/icons/azure.svg",
+        level: 10,
+        logo: "/images/skills/azure.svg",
       },
       {
         name: "GCP",
-        level: 6,
-        logo: "/images/icons/gcp.svg",
+        level: 10,
+        logo: "/images/skills/gcp.svg",
       },
     ],
   },
@@ -152,28 +153,28 @@ export const skills: SkillGroup[] = [
     skills: [
       {
         name: "Python",
-        level: 9,
-        logo: "/images/icons/python.svg",
+        level: 10,
+        logo: "/images/skills/python.svg",
       },
       {
         name: "TypeScript/JavaScript",
-        level: 8,
-        logo: "/images/icons/typescript.svg",
+        level: 10,
+        logo: "/images/skills/typescript.svg",
       },
       {
         name: "Bash",
-        level: 8,
-        logo: "/images/icons/bash.svg",
+        level: 10,
+        logo: "/images/skills/bash.svg",
       },
       {
         name: "Java",
-        level: 6,
-        logo: "/images/icons/java.svg",
+        level: 10,
+        logo: "/images/skills/java.svg",
       },
       {
         name: "C#/.NET",
-        level: 6,
-        logo: "/images/icons/csharp.svg",
+        level: 10,
+        logo: "/images/skills/csharp.svg",
       },
     ],
   },
@@ -182,28 +183,28 @@ export const skills: SkillGroup[] = [
     skills: [
       {
         name: "New Relic",
-        level: 8,
-        logo: "/images/icons/newrelic.svg",
+        level: 10,
+        logo: "/images/skills/newrelic.svg",
       },
       {
         name: "Prometheus",
-        level: 7,
-        logo: "/images/icons/prometheus.svg",
+        level: 10,
+        logo: "/images/skills/prometheus.svg",
       },
       {
         name: "Datadog",
-        level: 7,
-        logo: "/images/icons/datadog.svg",
+        level: 10,
+        logo: "/images/skills/datadog.svg",
       },
       {
         name: "AWS CloudWatch",
-        level: 8,
-        logo: "/images/icons/cloudwatch.svg",
+        level: 10,
+        logo: "/images/skills/cloudwatch.svg",
       },
       {
         name: "Splunk",
-        level: 7,
-        logo: "/images/icons/splunk.svg",
+        level: 10,
+        logo: "/images/skills/splunk.svg",
       },
     ],
   },
@@ -212,28 +213,28 @@ export const skills: SkillGroup[] = [
     skills: [
       {
         name: "GitHub Actions",
-        level: 9,
-        logo: "/images/icons/github-actions.svg",
+        level: 10,
+        logo: "/images/skills/github-actions.svg",
       },
       {
         name: "GitOps",
-        level: 8,
-        logo: "/images/icons/gitops.svg",
+        level: 10,
+        logo: "/images/skills/gitops.svg",
       },
       {
         name: "ArgoCD",
-        level: 7,
-        logo: "/images/icons/argocd.svg",
+        level: 10,
+        logo: "/images/skills/argocd.svg",
       },
       {
         name: "Bitbucket Pipelines",
-        level: 8,
-        logo: "/images/icons/bitbucket.svg",
+        level: 10,
+        logo: "/images/skills/bitbucket.svg",
       },
       {
         name: "AWS CodePipeline",
-        level: 7,
-        logo: "/images/icons/codepipeline.svg",
+        level: 10,
+        logo: "/images/skills/codepipeline.svg",
       },
     ],
   },
@@ -473,17 +474,17 @@ export const contact: ContactSection = {
 export const socialLinks: Social[] = [
   {
     label: "Github",
-    logo: "/images/icons/github.svg",
+    logo: "/images/skills/github.svg",
     href: "https://github.com/willfell?tab=repositories",
   },
   {
     label: "LinkedIn",
-    logo: "/images/icons/linkedin.svg",
+    logo: "/images/skills/linkedin.svg",
     href: "https://linkedin.com/in/will-fellhoelter-1aa17312b",
   },
   {
     label: "Strava",
-    logo: "/images/icons/strava.svg",
+    logo: "/images/skills/strava.svg",
     href: "https://www.strava.com/athletes/112909908",
   },
 ];
@@ -497,9 +498,83 @@ export const portfolioItems: PortfolioItem[] = [
     githubUrl: "https://github.com/willfell/balanced_brief",
     image: balancedBriefImage,
     why: "I needed an automated way of sending me news I wanted, that wasn't biased",
-    how: "Built a Python-based system that fetches news from various sources, processes it with OpenAI to remove bias, and delivers personalized content through email. The system runs on AWS ECS and integrates with Reddit to discover trending topics.",
-    techStack: ["ECS", "HTML", "CSS", "Python", "SNS", "OpenAI", "Reddit API"],
-    techIcons: ["/images/icons/aws.svg", "/images/icons/python.svg"],
+    how: "Built a Python-based system that fetches news from various sources, processes it with OpenAI to remove bias, and delivers personalized content through email. The system runs on AWS ECS and integrates with Reddit to discover trending topics. The frontend site is still available at balancedbrief.com - but functionality on the daily jobs has been removed for now. I intend on bringing it back in the future with some major infrastructure changes, and utilizing a different email service. SES is difficult and AWS will not allow me to email to anybody who signs up.",
+    techStack: [
+      "Python",
+      "React",
+      "HTML",
+      "CSS",
+      "AWS ECS",
+      "AWS Lambda",
+      "AWS SNS",
+      "AWS SES",
+      "AWS RDS",
+      "Postgres",
+      "AWS CodePipeline",
+      "OpenAI",
+      "Reddit API",
+    ],
+    techIcons: [
+      "/images/skills/python.svg",
+      "/images/skills/typescript.svg",
+      "/images/skills/aws.svg",
+      "/images/skills/docker.svg",
+      "/images/skills/codepipeline.svg",
+      "/images/skills/s3.svg",
+      "/images/skills/ecs.svg",
+      "/images/skills/reddit.svg",
+    ],
+    isPassionProject: true,
+  },
+  {
+    title: "Bezos Watch",
+    description: "A one stop shop for providing security based alerts in AWS",
+    url: "https://github.com/willfell/bezos-watch",
+    githubUrl: "https://github.com/willfell/bezos-watch",
+    image: bezosWatchImage,
+    why: "I love AWS, but when it comes to security they do a bad job at having too many services for it, and provide little to no support when it comes to managing them. I figured having a one stop shop to get notifications via Slack on suspicious AWS API calls would help me sleep at night.",
+    how: "I created a solution for by leveraging a couple of services from AWS. It utilizes Cloudtrail, AWS Event Bridge, Cloudwatch, and Lambda. When you run terraform with the stack, it will set everything up, all you have to do is supply a slack channel and slack api key and when there's an event that occurs, a metric filter on the cloudwatch log group will invoke the lambda containing the event. Lambda then goes through, filters the logs for the event, and submits that information to slack.",
+    techStack: [
+      "Python",
+      "Terraform",
+      "AWS Lambda",
+      "AWS Cloudtrail",
+      "AWS Cloudwatch",
+      "AWS CloudFormation",
+    ],
+    techIcons: [
+      "/images/skills/python.svg",
+      "/images/skills/terraform.svg",
+      "/images/skills/aws.svg",
+    ],
+    isPassionProject: true,
+  },
+  {
+    title: "This Site",
+    description: "Makes me look pretty",
+    url: "https://github.com/willfell/will-fell",
+    githubUrl: "https://github.com/willfell/will-fell",
+    image: willProject,
+    why: "It's a little corny to say your passionate about your self, but I'm passionate about my work and the skills that I've learned along the journey. I am oddly passionate about good UI, and I wanted to learn nextjs, so I figured making a site about me and what I've worked on wouldn't be a bad thing to put some time into.",
+    how: "I searched around for examples of portfolio websites for inspiration and found a couple that I liked. Decided to go ahead and make a fresh nextjs project. I read a little bit of documentation, but decided to have Claude teach me the majority of it, and utilize it to help me with styling. I've utilized Cloudfront as a frontend deploymeent strategy in the past, so I combined that with Terraform and Github Actions to make a pretty simple deploy process along with it.",
+    techStack: [
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "Terraform",
+      "AWS S3",
+      "AWS CloudFront",
+      "GitHub Actions",
+    ],
+    techIcons: [
+      "/images/skills/typescript.svg",
+      "/images/skills/nextjs.svg",
+      "/images/skills/tailwind.svg",
+      "/images/skills/github-actions.svg",
+      "/images/skills/terraform.svg",
+      "/images/skills/aws.svg",
+      "/images/skills/s3.svg",
+    ],
     isPassionProject: true,
   },
   {
@@ -507,19 +582,29 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Created a UI tool for developers and QA to instantly create and manage their own isolated test environments with automated cleanup.",
     url: "https://github.com/willfell?tab=repositories",
-    image: porfolioImage1,
+    image: projectCanaryLogo,
     isPassionProject: false,
     location: "Project Canary",
     date: "2023-2024",
     summary:
       "Built a comprehensive ephemeral environment solution that allowed developers to spin up isolated testing environments on-demand, complete with data seeding and backend services. This significantly improved development velocity and testing accuracy.",
     techStack: [
-      "Terraform",
+      "TypeScript",
       "React",
+      "Python",
+      "Terraform",
       "AWS",
-      "GitHub Actions",
       "PostgreSQL",
       "Docker",
+      "GitHub Actions",
+    ],
+    techIcons: [
+      "/images/skills/typescript.svg",
+      "/images/skills/python.svg",
+      "/images/skills/terraform.svg",
+      "/images/skills/aws.svg",
+      "/images/skills/github-actions.svg",
+      "/images/skills/docker.svg",
     ],
     how: "Developed a React frontend that communicates with an AWS Lambda API, which orchestrates the creation of isolated environments using Terraform. Each environment is automatically cleaned up after a set time period to save costs.",
   },
@@ -529,19 +614,26 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "AI-enhanced knowledge base using Retrieval Augmented Generation for searching across corporate documents.",
     url: "#",
-    image: porfolioImage1,
+    image: projectCanaryLogo,
     isPassionProject: false,
     location: "Project Canary",
     date: "2023-2024",
     summary:
       "Developed an internal AI tool that allowed employees to search across thousands of corporate documents, policies, and knowledge base articles using natural language. This dramatically improved information accessibility and reduced time spent looking for answers.",
     techStack: [
-      "AWS Bedrock",
       "Python",
       "Flask",
-      "Vector Database",
       "React",
+      "TypeScript",
+      "AWS Bedrock",
       "AWS Lambda",
+      "Vector Database",
+    ],
+    techIcons: [
+      "/images/skills/python.svg",
+      "/images/skills/flask.svg",
+      "/images/skills/typescript.svg",
+      "/images/skills/aws.svg",
     ],
     how: "Created a system that ingests documents from various sources, chunks and embeds them using OpenAI, stores them in a vector database, and retrieves relevant information using RAG techniques when users make queries. The interface allows for conversational interaction with company knowledge.",
   },
@@ -551,19 +643,28 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Comprehensive observability solution for tracking system health and performance across the organization.",
     url: "#",
-    image: porfolioImage1,
+    image: lendflowLogo,
     isPassionProject: false,
     location: "Lendflow",
     date: "2021-2023",
     summary:
       "Orchestrated a complete overhaul of the organization's monitoring infrastructure, implementing a centralized observability platform that provided real-time insights into system health, performance metrics, and business KPIs.",
     techStack: [
+      "Python",
+      "Terraform",
       "OpenSearch",
       "AWS CloudWatch",
       "Grafana",
       "Prometheus",
-      "Terraform",
-      "Python",
+    ],
+    techIcons: [
+      "/images/skills/python.svg",
+      "/images/skills/terraform.svg",
+      "/images/skills/aws.svg",
+      "/images/skills/cloudwatch.svg",
+      "/images/skills/prometheus.svg",
+      "/images/skills/opensearch.svg",
+      "/images/skills/grafana.svg",
     ],
     how: "Integrated data sources from various applications and services into a unified logging and metrics pipeline. Created custom dashboards that provided both technical and business insights, with automated alerting for critical issues.",
   },
@@ -573,13 +674,18 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Flask-based API integration that streamlined the client invoicing process.",
     url: "#",
-    image: porfolioImage1,
+    image: lendflowLogo,
     isPassionProject: false,
     location: "Lendflow",
     date: "2022",
     summary:
       "Developed an API solution that automated the client billing process, eliminating manual invoicing steps and ensuring accurate, timely billing for all clients. This reduced accounting workload while improving accuracy.",
-    techStack: ["Flask", "Python", "AWS Lambda", "PostgreSQL", "Stripe API"],
+    techStack: ["Python", "Flask", "AWS Lambda", "PostgreSQL", "Stripe API"],
+    techIcons: [
+      "/images/skills/python.svg",
+      "/images/skills/flask.svg",
+      "/images/skills/aws.svg",
+    ],
     how: "Created a Flask API that integrated with internal usage tracking systems and external payment processors. The system automatically calculated usage-based billing, generated invoices, and processed payments according to client contract terms.",
   },
 
@@ -588,19 +694,26 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Led comprehensive migration from on-premises infrastructure to Azure Cloud for multiple teams.",
     url: "#",
-    image: porfolioImage1,
+    image: mcgLogo,
     isPassionProject: false,
     location: "MCG",
     date: "2020-2021",
     summary:
       "Orchestrated a large-scale migration from legacy on-premises infrastructure to Azure Cloud, carefully planning and executing the transition to ensure zero downtime for critical healthcare applications.",
     techStack: [
-      "Azure",
+      "PowerShell",
       "Terraform",
       "Ansible",
-      "PowerShell",
+      "Azure",
       "Docker",
       "Jenkins",
+    ],
+    techIcons: [
+      "/images/skills/terraform.svg",
+      "/images/skills/ansible.svg",
+      "/images/skills/azure.svg",
+      "/images/skills/docker.svg",
+      "/images/skills/jenkins.svg",
     ],
     how: "Developed a phased migration strategy that involved infrastructure assessment, application dependency mapping, and carefully orchestrated cutover procedures. Created automation scripts to ensure consistent environment setup and configuration in the cloud.",
   },
@@ -610,13 +723,20 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "AWX-powered UI for scheduling data restoration jobs and managing ephemeral environments.",
     url: "#",
-    image: porfolioImage1,
+    image: cernerLogo,
     isPassionProject: false,
     location: "Cerner",
     date: "2018-2020",
     summary:
       "Created a self-service portal that enabled teams to manage their own data restoration needs without requiring DevOps intervention. This improved team autonomy while reducing operational overhead.",
-    techStack: ["AWX", "Ansible", "Python", "JavaScript", "Jenkins", "vSphere"],
+    techStack: ["Python", "JavaScript", "AWX", "Ansible", "Jenkins", "vSphere"],
+    techIcons: [
+      "/images/skills/python.svg",
+      "/images/skills/typescript.svg",
+      "/images/skills/ansible.svg",
+      "/images/skills/jenkins.svg",
+      "/images/skills/bash.svg",
+    ],
     how: "Built a web interface that integrated with AWX to provide a user-friendly way to schedule and manage data restoration jobs. The system automated the complex backend processes while presenting a simple interface to users.",
   },
 ];

@@ -20,7 +20,7 @@ const PortfolioCard: FC<PortfolioCardProps> = memo(
       <div
         className={classNames(
           "relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 cursor-pointer transform",
-          isCompact ? "h-64" : "h-72", // Increased height for compact cards to fit more info
+          isCompact ? "h-56" : "h-72", // Reduced height for compact cards
           isHovered ? "scale-[1.02]" : "scale-100",
         )}
         onClick={onClick}
@@ -55,7 +55,14 @@ const PortfolioCard: FC<PortfolioCardProps> = memo(
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-          <h3 className="text-xl font-bold mb-2">{title}</h3>
+          <h3
+            className={classNames(
+              "font-bold mb-2",
+              isCompact ? "text-lg" : "text-xl",
+            )}
+          >
+            {title}
+          </h3>
 
           {/* For work projects, show workplace and date */}
           {!hideDescription && (isCompact || location) && (

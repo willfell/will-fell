@@ -8,6 +8,7 @@ import {
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
+  ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
 import Socials from "./Socials";
 
@@ -210,9 +211,24 @@ const ContactPage: FC = memo(() => {
                 {/* Form Section */}
                 <div className="animate-fadeIn">
                   <div className="bg-white shadow-lg rounded-xl p-8 border border-sage-green/20">
-                    <h2 className="text-2xl font-bold text-forest-green mb-6">
+                    <h2 className="text-2xl font-bold text-forest-green mb-4">
                       Send Me a Message
                     </h2>
+
+                    {/* Warning message about form functionality */}
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4 mb-6 flex items-start">
+                      <ExclamationTriangleIcon className="h-5 w-5 text-yellow-500 mt-0.5 mr-2 flex-shrink-0" />
+                      <p className="text-sm text-yellow-700">
+                        <strong>Note:</strong> This form functionality is coming
+                        soon! For now, please contact me directly at{" "}
+                        <a
+                          href="mailto:willfellhoelter@gmail.com"
+                          className="text-forest-green underline"
+                        >
+                          willfellhoelter@gmail.com
+                        </a>
+                      </p>
+                    </div>
 
                     {submitSuccess ? (
                       <div className="bg-sage-green/20 text-forest-green p-4 rounded-md mb-4">
@@ -341,9 +357,6 @@ const ContactPage: FC = memo(() => {
                         <div>
                           <p className="font-medium">Location</p>
                           <p>Denver, Colorado</p>
-                          <p className="text-sm text-earth-tan mt-1">
-                            Available for remote work & relocation
-                          </p>
                         </div>
                       </div>
 
@@ -357,9 +370,11 @@ const ContactPage: FC = memo(() => {
                     </div>
 
                     <div className="mt-8 pt-8 border-t border-white/20">
-                      <p className="font-medium mb-4">Connect with me</p>
-                      <div className="flex space-x-4">
-                        <Socials />
+                      <div className="text-center">
+                        <p className="font-medium mb-4">Connect with me</p>
+                        <div className="flex justify-center space-x-4">
+                          <Socials />
+                        </div>
                       </div>
                     </div>
                   </div>
