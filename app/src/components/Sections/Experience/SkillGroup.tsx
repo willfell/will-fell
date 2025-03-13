@@ -29,7 +29,7 @@ const SkillGroup: FC<SkillGroupProps> = memo(({ skillGroup, delay = 0 }) => {
                 </div>
               )}
               {!skill.logo && <span className="font-medium">{skill.name}</span>}
-              <span className="text-sm">{skill.level}/10</span>
+              {/* Removed the text span that displayed the skill level */}
             </div>
             <div className="h-2 w-full bg-gray-200 rounded-full">
               <div
