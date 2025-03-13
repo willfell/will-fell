@@ -64,12 +64,12 @@ const Header: FC = memo(() => {
 
   // Generate navigation links based on current page
   const getNavItems = (): NavItem[] => {
-    // Base items that appear on all pages - "Life" page removed
+    // Base items that appear on all pages - added Me page
     const navItems: NavItem[] = [
       { name: "Home", href: "/" },
-      // "Life" page removed from here
       { name: "Education", href: "/education" },
       { name: "Site Info", href: "/site-info" },
+      { name: "Me", href: "/me" },
       { name: "Contact", href: "/contact" },
     ];
 

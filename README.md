@@ -1,66 +1,38 @@
-# Will Fellhoelter - Professional Portfolio
+# Will Fellhoelter Portfolio
 
-This is my professional portfolio website built with Next.js, React, TypeScript, and Tailwind CSS. It showcases my experience as a DevOps and Full Stack Engineer, my projects, skills, and achievements.
+A page to show my portfolio and provide some form of contact, you can see it on the world wide web [here](https://willfellhoelter.com)!
+
+## Tech Stack
+
+- **Frontend:** Next.js, React, TypeScript, Tailwind CSS
+- **Backend:** Static site (no backend server)
+- **CI/CD:** GitHub Actions
+- **Infrastructure as Code:** Terraform
+- **Hosting:** AWS S3 & AWS CloudFront
+- **Domain Management:** AWS Route 53
 
 ## Features
 
-- Responsive design that works on all devices
-- Modern, clean UI with smooth animations
-- Dynamic content loading from a centralized data file
-- Contact form for easy communication
-- Section-based layout including:
-  - About
-  - Skills
-  - Resume/Experience
-  - Portfolio
-  - Testimonials/Achievements
-  - Contact
+- Interactive portfolio showcasing projects and experiences
+- Contact form for inquiries
+- Optimized for performance and SEO
+- Responsive design for all device types
+- Deployed with a fully automated CI/CD pipeline
 
-## Technology Stack
+## Hosting and Deployment
 
-- **Framework**: Next.js
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Components**: React
-- **Icons**: Heroicons
+### Static Site Hosting
 
-## Getting Started
+- The site is built using Next.js and deployed as a static site.
+- Static assets are hosted on AWS S3.
 
-### Prerequisites
+### Content Delivery
 
-- Node.js (version 16 or later)
-- npm or yarn
+- AWS CloudFront is configured as the CDN to deliver content quickly and securely worldwide.
+- It also ensures HTTPS using AWS Certificate Manager (ACM).
 
-### Installation
+### CI/CD Pipeline
 
-1. Clone this repository
-```bash
-git clone git@github.com:willfell/will-fell.git
-cd portfolio
-```
+- GitHub Actions handle automatic deployment when changes are pushed to the main branch.
+- Terraform scripts manage infrastructure provisioning, including S3 buckets, CloudFront distributions, and DNS records in Route 53.
 
-2. Install dependencies
-```bash
-npm install
-# or
-yarn install
-```
-
-3. Run the development server
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Customization
-
-Most of the portfolio content can be modified by editing the `src/data/data.tsx` file, which contains all the personal information, skills, experiences, and portfolio items.
-
-## Deployment
-
-This site can be easily deployed to Vercel, Netlify, or other static site hosting services.
-
-Will Fellhoelter - willfellhoelter@gmail.com
