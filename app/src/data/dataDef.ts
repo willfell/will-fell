@@ -82,6 +82,17 @@ export interface PortfolioItem {
   description: string;
   url: string;
   image: string | StaticImageData;
+  why?: string;
+  how?: string;
+  techStack?: string[];
+  techIcons?: string[];
+  githubUrl?: string;
+  isPassionProject?: boolean;
+  location?: string;
+  date?: string;
+  summary?: string;
+  role?: string;
+  achievements?: string[];
 }
 
 /**
@@ -93,6 +104,7 @@ export interface TimelineItem {
   title: string;
   content: JSX.Element;
   imageSrc?: string | StaticImageData;
+  personalImage?: string | StaticImageData;
 }
 
 /**
@@ -146,7 +158,7 @@ export interface ContactValue {
  */
 export interface Social {
   label: string;
-  Icon: FC<IconProps>;
+  logo?: string;
   href: string;
 }
 
@@ -156,4 +168,13 @@ export interface Action {
   primary?: boolean;
   Icon?: (props: SVGProps<SVGSVGElement>) => JSX.Element;
   download?: boolean;
+}
+
+export enum SectionId {
+  Hero = 'hero',
+  About = 'about',
+  Education = 'education',
+  Resume = 'experience',
+  Portfolio = 'portfolio',
+  Contact = 'contact',
 }

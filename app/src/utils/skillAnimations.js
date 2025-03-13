@@ -4,9 +4,13 @@ function handleSkillsAnimation() {
     const progressBars = document.querySelectorAll('.skill-progress-bar');
     
     if (progressBars.length === 0) {
-      return; // No progress bars found, exit early
+      // No progress bars found yet, try again in a moment
+      setTimeout(handleSkillsAnimation, 500);
+      return;
     }
   
+    console.log('Found progress bars:', progressBars.length);
+    
     // Create IntersectionObserver
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -14,11 +18,18 @@ function handleSkillsAnimation() {
           const bar = entry.target;
           const targetWidth = bar.getAttribute('data-width') || '0%';
           
-          // Set the CSS variable and add animation class
+          console.log('Animating bar to width:', targetWidth);
+          
+          // Set the CSS variable and animate width
           bar.style.setProperty('--target-width', targetWidth);
+          
+          // Force layout reflow before animation
+          bar.offsetWidth;
+          
+          // Apply the width after a small delay to ensure it animates
           setTimeout(() => {
             bar.style.width = targetWidth;
-          }, 50);
+          }, 100);
           
           // Unobserve after animation starts
           observer.unobserve(bar);
@@ -55,18 +66,18 @@ function handleSkillsAnimation() {
   
   // Initialize animations
   if (typeof window !== 'undefined') {
-    // Run once DOM is loaded
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      setTimeout(handleSkillsAnimation, 100);
+    // Run once on initial load with a sufficient delay
+    if (document.readyState === 'complete') {
+      handleSkillsAnimation();
     } else {
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(handleSkillsAnimation, 100);
+      window.addEventListener('load', () => {
+        setTimeout(handleSkillsAnimation, 500);
       });
     }
     
-    // Also run on window load to ensure all elements are rendered
-    window.addEventListener('load', () => {
-      setTimeout(handleSkillsAnimation, 100);
+    // Also run when components mount/update
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(handleSkillsAnimation, 500);
     });
     
     // Re-run when user scrolls (debounced)
@@ -75,6 +86,17 @@ function handleSkillsAnimation() {
       if (scrollTimer) clearTimeout(scrollTimer);
       scrollTimer = setTimeout(handleSkillsAnimation, 100);
     });
+    
+    // Make sure it runs when navigating to the Resume section
+    const resumeLinks = document.querySelectorAll('a[href*="resume"]');
+    resumeLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(handleSkillsAnimation, 1000);
+      });
+    });
+    
+    // Export a function that can be manually called from components
+    window.runSkillsAnimation = handleSkillsAnimation;
   }
   
   export default handleSkillsAnimation;

@@ -5,9 +5,7 @@ import {
   MapIcon,
 } from '@heroicons/react/24/outline';
 
-import GithubIcon from '../components/Icon/GithubIcon';
-import LinkedInIcon from '../components/Icon/LinkedInIcon';
-// import heroImage from '../images/header-background.webp';
+import balancedBriefImage from '../images/passion-projects/balanced-brief.png'
 import universityLogo from '../images/wsu-logo.png';
 import formlLogo from '../images/forml-logo.png';
 import projectCanaryLogo from '../images/project-canary-logo.png';
@@ -16,13 +14,7 @@ import mcgLogo from '../images/mcg-logo.png';
 import cernerLogo from '../images/cerner-logo.png';
 import heroImage from '../images/header-background.jpg';
 import porfolioImage1 from '../images/portfolio/portfolio-1.jpg';
-import porfolioImage2 from '../images/portfolio/portfolio-2.jpg';
-import porfolioImage3 from '../images/portfolio/portfolio-3.jpg';
-import porfolioImage4 from '../images/portfolio/portfolio-4.jpg';
-import porfolioImage5 from '../images/portfolio/portfolio-5.jpg';
-import porfolioImage6 from '../images/portfolio/portfolio-6.jpg';
 import profilepic from '../images/aboutmepic.jpg';
-// import testimonialImage from '../images/testimonial.webp';
 import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import {
   About,
@@ -53,7 +45,8 @@ export const SectionId = {
   About: 'about',
   Contact: 'contact',
   Portfolio: 'portfolio',
-  Resume: 'resume',
+  Education: 'eduction',
+  Experience: 'experience',
   Skills: 'skills',
   Stats: 'stats',
   Testimonials: 'testimonials',
@@ -118,32 +111,32 @@ export const skills: SkillGroup[] = [
       {
         name: 'AWS',
         level: 9,
-        logo: '/images/skills/aws.svg',
+        logo: '/images/icons/aws.svg',
       },
       {
         name: 'Terraform',
         level: 8,
-        logo: '/images/skills/terraform.svg',
+        logo: '/images/icons/terraform.svg',
       },
       {
         name: 'Docker',
         level: 9,
-        logo: '/images/skills/docker.svg',
+        logo: '/images/icons/docker.svg',
       },
       {
         name: 'Kubernetes',
         level: 7,
-        logo: '/images/skills/kubernetes.svg',
+        logo: '/images/icons/kubernetes.svg',
       },
       {
         name: 'Azure',
         level: 7,
-        logo: '/images/skills/azure.svg',
+        logo: '/images/icons/azure.svg',
       },
       {
         name: 'GCP',
         level: 6,
-        logo: '/images/skills/gcp.svg',
+        logo: '/images/icons/gcp.svg',
       },
     ],
   },
@@ -153,27 +146,27 @@ export const skills: SkillGroup[] = [
       {
         name: 'Python',
         level: 9,
-        logo: '/images/skills/python.svg',
+        logo: '/images/icons/python.svg',
       },
       {
         name: 'TypeScript/JavaScript',
         level: 8,
-        logo: '/images/skills/typescript.svg',
+        logo: '/images/icons/typescript.svg',
       },
       {
         name: 'Bash',
         level: 8,
-        logo: '/images/skills/bash.svg',
+        logo: '/images/icons/bash.svg',
       },
       {
         name: 'Java',
         level: 6,
-        logo: '/images/skills/java.svg',
+        logo: '/images/icons/java.svg',
       },
       {
         name: 'C#/.NET',
         level: 6,
-        logo: '/images/skills/csharp.svg',
+        logo: '/images/icons/csharp.svg',
       },
     ],
   },
@@ -183,27 +176,27 @@ export const skills: SkillGroup[] = [
       {
         name: 'New Relic',
         level: 8,
-        logo: '/images/skills/newrelic.svg',
+        logo: '/images/icons/newrelic.svg',
       },
       {
         name: 'Prometheus',
         level: 7,
-        logo: '/images/skills/prometheus.svg',
+        logo: '/images/icons/prometheus.svg',
       },
       {
         name: 'Datadog',
         level: 7,
-        logo: '/images/skills/datadog.svg',
+        logo: '/images/icons/datadog.svg',
       },
       {
         name: 'AWS CloudWatch',
         level: 8,
-        logo: '/images/skills/cloudwatch.svg',
+        logo: '/images/icons/cloudwatch.svg',
       },
       {
         name: 'Splunk',
         level: 7,
-        logo: '/images/skills/splunk.svg',
+        logo: '/images/icons/splunk.svg',
       },
     ],
   },
@@ -213,27 +206,27 @@ export const skills: SkillGroup[] = [
       {
         name: 'GitHub Actions',
         level: 9,
-        logo: '/images/skills/github-actions.svg',
+        logo: '/images/icons/github-actions.svg',
       },
       {
         name: 'GitOps',
         level: 8,
-        logo: '/images/skills/gitops.svg',
+        logo: '/images/icons/gitops.svg',
       },
       {
         name: 'ArgoCD',
         level: 7,
-        logo: '/images/skills/argocd.svg',
+        logo: '/images/icons/argocd.svg',
       },
       {
         name: 'Bitbucket Pipelines',
         level: 8,
-        logo: '/images/skills/bitbucket.svg',
+        logo: '/images/icons/bitbucket.svg',
       },
       {
         name: 'AWS CodePipeline',
         level: 7,
-        logo: '/images/skills/codepipeline.svg',
+        logo: '/images/icons/codepipeline.svg',
       },
     ],
   },
@@ -387,45 +380,102 @@ export const contact: ContactSection = {
  * Social items
  */
 export const socialLinks: Social[] = [
-  { label: 'Github', Icon: GithubIcon, href: 'https://github.com/willfell?tab=repositories' },
-  { label: 'LinkedIn', Icon: LinkedInIcon, href: 'https://linkedin.com/in/will-fellhoelter-1aa17312b' },
+  { label: 'Github', logo: '/images/icons/github.svg', href: 'https://github.com/willfell?tab=repositories' },
+  { label: 'LinkedIn', logo: '/images/icons/linkedin.svg', href: 'https://linkedin.com/in/will-fellhoelter-1aa17312b' },
+  { label: 'Strava', logo: '/images/icons/strava.svg', href: 'https://www.strava.com/athletes/112909908' }
 ];
 
 export const portfolioItems: PortfolioItem[] = [
+  {
+    title: 'Balanced Brief',
+    description: 'An automated news aggregator that delivers non-biased content',
+    url: 'https://github.com/willfell/balanced_brief',
+    githubUrl: 'https://github.com/willfell/balanced_brief',
+    image: balancedBriefImage,
+    why: 'I needed an automated way of sending me news I wanted, that wasn\'t biased',
+    how: 'Built a Python-based system that fetches news from various sources, processes it with OpenAI to remove bias, and delivers personalized content through email. The system runs on AWS ECS and integrates with Reddit to discover trending topics.',
+    techStack: ['ECS', 'HTML', 'CSS', 'Python', 'SNS', 'OpenAI', 'Reddit API'],
+    techIcons: [
+      '/images/icons/aws.svg',
+      '/images/icons/python.svg'
+    ],
+    isPassionProject: true
+  },
   {
     title: 'Self-Service Ephemeral Environments',
     description: 'Created a UI tool for developers and QA to instantly create and manage their own isolated test environments with automated cleanup.',
     url: 'https://github.com/willfell?tab=repositories',
     image: porfolioImage1,
+    isPassionProject: false,
+    location: 'Project Canary',
+    date: '2023-2024',
+    summary: 'Built a comprehensive ephemeral environment solution that allowed developers to spin up isolated testing environments on-demand, complete with data seeding and backend services. This significantly improved development velocity and testing accuracy.',
+    techStack: ['Terraform', 'React', 'AWS', 'GitHub Actions', 'PostgreSQL', 'Docker'],
+    how: 'Developed a React frontend that communicates with an AWS Lambda API, which orchestrates the creation of isolated environments using Terraform. Each environment is automatically cleaned up after a set time period to save costs.'
   },
+  
   {
-    title: 'Retrieval Augmented Generation App',
-    description: 'Built an internal AI knowledge base using AWS Bedrock and vector databases to improve cross-departmental information sharing.',
-    url: 'https://github.com/willfell?tab=repositories',
-    image: porfolioImage2,
+    title: 'RAG-Powered Document Search',
+    description: 'AI-enhanced knowledge base using Retrieval Augmented Generation for searching across corporate documents.',
+    url: '#',
+    image: porfolioImage1,
+    isPassionProject: false,
+    location: 'Project Canary',
+    date: '2023-2024',
+    summary: 'Developed an internal AI tool that allowed employees to search across thousands of corporate documents, policies, and knowledge base articles using natural language. This dramatically improved information accessibility and reduced time spent looking for answers.',
+    techStack: ['AWS Bedrock', 'Python', 'Flask', 'Vector Database', 'React', 'AWS Lambda'],
+    how: 'Created a system that ingests documents from various sources, chunks and embeds them using OpenAI, stores them in a vector database, and retrieves relevant information using RAG techniques when users make queries. The interface allows for conversational interaction with company knowledge.'
   },
+  
   {
-    title: 'Observability Stack Migration',
-    description: 'Led the migration from a legacy monitoring solution to New Relic, improving reliability visibility while reducing costs by 14%.',
-    url: 'https://github.com/willfell?tab=repositories',
-    image: porfolioImage3,
+    title: 'Real-time Monitoring Dashboard',
+    description: 'Comprehensive observability solution for tracking system health and performance across the organization.',
+    url: '#',
+    image: porfolioImage1,
+    isPassionProject: false,
+    location: 'Lendflow',
+    date: '2021-2023',
+    summary: 'Orchestrated a complete overhaul of the organization\'s monitoring infrastructure, implementing a centralized observability platform that provided real-time insights into system health, performance metrics, and business KPIs.',
+    techStack: ['OpenSearch', 'AWS CloudWatch', 'Grafana', 'Prometheus', 'Terraform', 'Python'],
+    how: 'Integrated data sources from various applications and services into a unified logging and metrics pipeline. Created custom dashboards that provided both technical and business insights, with automated alerting for critical issues.'
   },
+  
   {
-    title: 'Terraform Infrastructure Modules',
-    description: 'Developed reusable Terraform modules for standardized cloud infrastructure deployments across multiple environments.',
-    url: 'https://github.com/willfell?tab=repositories',
-    image: porfolioImage4,
+    title: 'Automated Client Billing API',
+    description: 'Flask-based API integration that streamlined the client invoicing process.',
+    url: '#',
+    image: porfolioImage1,
+    isPassionProject: false,
+    location: 'Lendflow',
+    date: '2022',
+    summary: 'Developed an API solution that automated the client billing process, eliminating manual invoicing steps and ensuring accurate, timely billing for all clients. This reduced accounting workload while improving accuracy.',
+    techStack: ['Flask', 'Python', 'AWS Lambda', 'PostgreSQL', 'Stripe API'],
+    how: 'Created a Flask API that integrated with internal usage tracking systems and external payment processors. The system automatically calculated usage-based billing, generated invoices, and processed payments according to client contract terms.'
   },
+  
   {
-    title: 'PostgreSQL Performance Optimization',
-    description: 'Designed and implemented database optimizations for high-throughput time-series PostgreSQL databases, improving query performance by 23%.',
-    url: 'https://github.com/willfell?tab=repositories',
-    image: porfolioImage5,
+    title: 'Azure Cloud Migration',
+    description: 'Led comprehensive migration from on-premises infrastructure to Azure Cloud for multiple teams.',
+    url: '#',
+    image: porfolioImage1,
+    isPassionProject: false,
+    location: 'MCG',
+    date: '2020-2021',
+    summary: 'Orchestrated a large-scale migration from legacy on-premises infrastructure to Azure Cloud, carefully planning and executing the transition to ensure zero downtime for critical healthcare applications.',
+    techStack: ['Azure', 'Terraform', 'Ansible', 'PowerShell', 'Docker', 'Jenkins'],
+    how: 'Developed a phased migration strategy that involved infrastructure assessment, application dependency mapping, and carefully orchestrated cutover procedures. Created automation scripts to ensure consistent environment setup and configuration in the cloud.'
   },
+  
   {
-    title: 'CI/CD Pipeline Automation',
-    description: 'Built automated CI/CD pipelines with GitHub Actions and AWS, improving deployment success rates and reducing deployment time.',
-    url: 'https://github.com/willfell?tab=repositories',
-    image: porfolioImage6,
-  },
+    title: 'Data Restoration UI Portal',
+    description: 'AWX-powered UI for scheduling data restoration jobs and managing ephemeral environments.',
+    url: '#',
+    image: porfolioImage1,
+    isPassionProject: false,
+    location: 'Cerner',
+    date: '2018-2020',
+    summary: 'Created a self-service portal that enabled teams to manage their own data restoration needs without requiring DevOps intervention. This improved team autonomy while reducing operational overhead.',
+    techStack: ['AWX', 'Ansible', 'Python', 'JavaScript', 'Jenkins', 'vSphere'],
+    how: 'Built a web interface that integrated with AWX to provide a user-friendly way to schedule and manage data restoration jobs. The system automated the complex backend processes while presenting a simple interface to users.'
+  }
 ];
