@@ -9,6 +9,7 @@ import {
   InformationCircleIcon,
   EnvelopeIcon,
   ArrowDownTrayIcon,
+  UserIcon, // Added UserIcon for the Me page
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -30,11 +31,12 @@ export const SideNav: FC = memo(() => {
     SectionId.Skills,
   ];
 
-  // Main pages for navigation
+  // Main pages for navigation - Added Me page in the same order as header
   const mainPages: NavPage[] = [
     { name: "Home", href: "/", icon: HomeIcon },
     { name: "Education", href: "/education", icon: AcademicCapIcon },
     { name: "Site Info", href: "/site-info", icon: InformationCircleIcon },
+    { name: "Me", href: "/me", icon: UserIcon }, // Added Me page
     { name: "Contact", href: "/contact", icon: EnvelopeIcon },
     {
       name: "Resume",
