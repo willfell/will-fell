@@ -1,7 +1,18 @@
-import React from 'react';
+import React from "react";
 
-export const SkiIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const SkiIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M19 17l-5.29-5.29a1 1 0 0 0-1.41 0l-6.3 6.3a1 1 0 0 0 0 1.41l.7.71a1 1 0 0 0 1.41 0L21 8" />
     <path d="M3 15l2-2" />
     <path d="m7 9-4 4" />
@@ -10,8 +21,19 @@ export const SkiIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6
   </svg>
 );
 
-export const RunIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const RunIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M13 4v6l3.5 7" />
     <path d="M7 13c1.4 1 3 1 4 .5l3-1.5" />
     <path d="M18 5h1" />
@@ -20,8 +42,19 @@ export const RunIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6
   </svg>
 );
 
-export const YogaIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const YogaIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <circle cx="12" cy="6" r="2" />
     <path d="M10 14v4a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2v-4" />
     <path d="M12 20a6 6 0 0 0 6-6c0-4-3-6-6-6s-6 2-6 6a6 6 0 0 0 6 6z" />
@@ -29,8 +62,19 @@ export const YogaIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-
   </svg>
 );
 
-export const HikeIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const HikeIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M14 3v4a1 1 0 0 0 1 1h4" />
     <path d="M17 21h-6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6l4 4v12a2 2 0 0 1-2 2z" />
     <path d="m9 17 1-4-4-3 2-3 3 2 2-2" />
@@ -38,8 +82,19 @@ export const HikeIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-
   </svg>
 );
 
-export const DogWalkIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const DogWalkIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M11 5c-1.5 2-2.5 3.5-2.5 5.5 0 2 1 3 3 3s3-1 3-3-1-3.5-2.5-5.5" />
     <path d="M11 3v2" />
     <path d="M8 5h6" />
@@ -53,36 +108,91 @@ export const DogWalkIcon: React.FC<{ className?: string }> = ({ className = "h-6
   </svg>
 );
 
-export const PhotoIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const PhotoIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
     <circle cx="12" cy="13" r="3" />
   </svg>
 );
 
-export const MusicIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const MusicIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M9 18V5l12-2v13" />
     <circle cx="6" cy="18" r="3" />
     <circle cx="18" cy="16" r="3" />
   </svg>
 );
 
-export const BookIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const BookIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
   </svg>
 );
 
-export const MountainIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const MountainIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
   </svg>
 );
 
-export const BalanceIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const BalanceIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M12 18a6 6 0 0 0 0-12v12z" />
     <path d="M12 6a6 6 0 0 1 0 12V6z" />
     <path d="M12 18a6 6 0 0 0 0-12" />
@@ -90,16 +200,38 @@ export const BalanceIcon: React.FC<{ className?: string }> = ({ className = "h-6
   </svg>
 );
 
-export const CuriosityIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const CuriosityIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M12 2a4 4 0 0 1 4 4c0 1.5-.5 2.5-1.5 3.5L12 12l-2.5-2.5C8.5 8.5 8 7.5 8 6a4 4 0 0 1 4-4z" />
     <path d="M12 12v8" />
     <path d="M12 20h4" />
   </svg>
 );
 
-export const ConnectionIcon: React.FC<{ className?: string }> = ({ className = "h-6 w-6" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+export const ConnectionIcon: React.FC<{ className?: string }> = ({
+  className = "h-6 w-6",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M16 16h.01" />
     <path d="M8 16h.01" />
     <path d="M12 20h.01" />

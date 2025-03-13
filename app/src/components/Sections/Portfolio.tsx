@@ -1,19 +1,28 @@
-import { FC, memo, useState } from 'react';
-import { portfolioItems, SectionId } from '../../data/data';
-import { PortfolioItem } from '../../data/dataDef';
-import Section from '../Layout/Section';
-import PortfolioCard from './PortfolioCard';
-import ProjectDetailModal from './ProjectDetailModal';
+import { FC, memo, useState } from "react";
+import { portfolioItems, SectionId } from "../../data/data";
+import { PortfolioItem } from "../../data/dataDef";
+import Section from "../Layout/Section";
+import PortfolioCard from "./PortfolioCard";
+import ProjectDetailModal from "./ProjectDetailModal";
 
 const Portfolio: FC = memo(() => {
-  const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null);
+  const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(
+    null,
+  );
 
   // Filter for passion projects
-  const passionProjects = portfolioItems.filter(item => item.isPassionProject);
-  const regularProjects = portfolioItems.filter(item => !item.isPassionProject);
+  const passionProjects = portfolioItems.filter(
+    (item) => item.isPassionProject,
+  );
+  const regularProjects = portfolioItems.filter(
+    (item) => !item.isPassionProject,
+  );
 
   return (
-    <Section className="bg-gradient-to-b from-white to-earth-tan/20" sectionId={SectionId.Portfolio}>
+    <Section
+      className="bg-gradient-to-b from-white to-earth-tan/20"
+      sectionId={SectionId.Portfolio}
+    >
       <div className="flex flex-col gap-y-8">
         {/* Passion Projects Section with enhanced styling - reduced gap from 20 to 8 */}
         <div>
@@ -23,7 +32,8 @@ const Portfolio: FC = memo(() => {
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-coral"></span>
             </h2>
             <p className="text-stone-700 mt-4 max-w-3xl">
-              Projects I've built in my free time to solve personal needs or explore new technologies.
+              Projects I've built in my free time to solve personal needs or
+              explore new technologies.
             </p>
           </div>
 
@@ -91,5 +101,5 @@ const Portfolio: FC = memo(() => {
   );
 });
 
-Portfolio.displayName = 'Portfolio';
+Portfolio.displayName = "Portfolio";
 export default Portfolio;

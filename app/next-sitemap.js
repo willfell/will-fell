@@ -1,12 +1,12 @@
 /* eslint-env node */
 module.exports = {
-  siteUrl: 'reactresume.com',
-  exclude: ['/404*', '/500*'],
+  siteUrl: "reactresume.com",
+  exclude: ["/404*", "/500*"],
   transform: async (config, path) => {
     return {
       loc: path,
       changefreq: config.changefreq,
-      priority: path === '/' ? 1 : config.priority,
+      priority: path === "/" ? 1 : config.priority,
       lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
     };
   },
@@ -14,12 +14,12 @@ module.exports = {
   robotsTxtOptions: {
     policies: [
       {
-        userAgent: '*',
-        allow: '/',
+        userAgent: "*",
+        allow: "/",
       },
       {
-        userAgent: '*',
-        disallow: ['/404', '/500'],
+        userAgent: "*",
+        disallow: ["/404", "/500"],
       },
     ],
   },

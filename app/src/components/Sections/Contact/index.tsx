@@ -1,31 +1,31 @@
-import { EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import classNames from 'classnames';
-import { FC, memo } from 'react';
+import { EnvelopeIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import classNames from "classnames";
+import { FC, memo } from "react";
 
-import { contact, SectionId } from '../../../data/data';
-import { ContactType, ContactValue } from '../../../data/dataDef';
-import FacebookIcon from '../../Icon/FacebookIcon';
-import GithubIcon from '../../Icon/GithubIcon';
-import InstagramIcon from '../../Icon/InstagramIcon';
-import LinkedInIcon from '../../Icon/LinkedInIcon';
-import TwitterIcon from '../../Icon/TwitterIcon';
-import Section from '../../Layout/Section';
-import ContactForm from './ContactForm';
-import { useIntersectionObserver } from '../../../hooks/useIntersectionObserver';
+import { contact, SectionId } from "../../../data/data";
+import { ContactType, ContactValue } from "../../../data/dataDef";
+import FacebookIcon from "../../Icon/FacebookIcon";
+import GithubIcon from "../../Icon/GithubIcon";
+import InstagramIcon from "../../Icon/InstagramIcon";
+import LinkedInIcon from "../../Icon/LinkedInIcon";
+import TwitterIcon from "../../Icon/TwitterIcon";
+import Section from "../../Layout/Section";
+import ContactForm from "./ContactForm";
+import { useIntersectionObserver } from "../../../hooks/useIntersectionObserver";
 
 const ContactValueMap: Record<ContactType, ContactValue> = {
-  [ContactType.Email]: { Icon: EnvelopeIcon, srLabel: 'Email' },
-  [ContactType.Location]: { Icon: MapPinIcon, srLabel: 'Location' },
-  [ContactType.Github]: { Icon: GithubIcon, srLabel: 'Github' },
-  [ContactType.LinkedIn]: { Icon: LinkedInIcon, srLabel: 'LinkedIn' },
-  [ContactType.Facebook]: { Icon: FacebookIcon, srLabel: 'Facebook' },
-  [ContactType.Twitter]: { Icon: TwitterIcon, srLabel: 'Twitter' },
-  [ContactType.Instagram]: { Icon: InstagramIcon, srLabel: 'Instagram' },
+  [ContactType.Email]: { Icon: EnvelopeIcon, srLabel: "Email" },
+  [ContactType.Location]: { Icon: MapPinIcon, srLabel: "Location" },
+  [ContactType.Github]: { Icon: GithubIcon, srLabel: "Github" },
+  [ContactType.LinkedIn]: { Icon: LinkedInIcon, srLabel: "LinkedIn" },
+  [ContactType.Facebook]: { Icon: FacebookIcon, srLabel: "Facebook" },
+  [ContactType.Twitter]: { Icon: TwitterIcon, srLabel: "Twitter" },
+  [ContactType.Instagram]: { Icon: InstagramIcon, srLabel: "Instagram" },
 };
 
 const Contact: FC = memo(() => {
   const { headerText, description, items } = contact;
-  const sectionRef = useIntersectionObserver(0.05, '-50px 0px -100px 0px');
+  const sectionRef = useIntersectionObserver(0.05, "-50px 0px -100px 0px");
 
   return (
     <Section className="bg-deep-forest" sectionId={SectionId.Contact}>
@@ -53,13 +53,20 @@ const Contact: FC = memo(() => {
                     <dd className="flex items-center">
                       <a
                         className={classNames(
-                          '-m-2 flex rounded-md p-2 text-earth-tan hover:text-sage-green focus:outline-none focus:ring-2 focus:ring-sage-green transition-all duration-300',
-                          { 'hover:text-sage-green': href },
+                          "-m-2 flex rounded-md p-2 text-earth-tan hover:text-sage-green focus:outline-none focus:ring-2 focus:ring-sage-green transition-all duration-300",
+                          { "hover:text-sage-green": href },
                         )}
                         href={href}
-                        target="_blank">
-                        <Icon aria-hidden="true" className="h-4 w-4 flex-shrink-0 text-earth-tan sm:h-5 sm:w-5" />
-                        <span className="ml-3 text-sm sm:text-base">{text}</span>
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Icon
+                          aria-hidden="true"
+                          className="h-4 w-4 flex-shrink-0 text-earth-tan sm:h-5 sm:w-5"
+                        />
+                        <span className="ml-3 text-sm sm:text-base">
+                          {text}
+                        </span>
                       </a>
                     </dd>
                   </div>
@@ -73,5 +80,5 @@ const Contact: FC = memo(() => {
   );
 });
 
-Contact.displayName = 'Contact';
+Contact.displayName = "Contact";
 export default Contact;

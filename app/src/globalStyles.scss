@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap");
 
 @layer utilities {
   /* Chrome, Safari and Opera */
@@ -130,8 +130,8 @@ body {
   position: relative;
   width: 100%;
   overflow-x: hidden; /* Prevent horizontal scroll */
-  color: #2A2A2A;
-  font-family: 'Helvetica Neue', sans-serif;
+  color: #2a2a2a;
+  font-family: "Helvetica Neue", sans-serif;
   background-color: transparent;
 }
 
@@ -149,7 +149,9 @@ th {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(15px);
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
 }
 
 .animate-fadeIn {
@@ -161,7 +163,9 @@ th {
 .project-modal {
   opacity: 0;
   transform: scale(0.95);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .project-modal.show {
@@ -197,14 +201,14 @@ th {
 }
 
 .timeline-content li {
-  color: #2A2A2A;
+  color: #2a2a2a;
   margin-bottom: 0.5rem;
   padding-left: 0.5rem;
   margin-left: 0;
 }
 
 .timeline-content li::marker {
-  color: #5E6746;
+  color: #5e6746;
 }
 
 /* Mobile fix for timeline content */
@@ -213,7 +217,7 @@ th {
     padding-left: 1.25rem;
     text-align: left;
   }
-  
+
   .timeline-content li {
     padding-left: 0.25rem;
   }
@@ -238,13 +242,13 @@ th {
 }
 
 .skill-group-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -0.5rem;
   left: -15%;
   width: 130%;
   height: 2px;
-  background-color: #7D8A69;
+  background-color: #7d8a69;
 }
 
 .skill-item {

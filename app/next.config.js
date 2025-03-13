@@ -3,19 +3,19 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  output: 'export',
+  output: "export",
   trailingSlash: true,
   webpack: (config) => {
     config.module.rules.push({
       test: /\.pdf$/,
       use: {
-        loader: 'file-loader',
+        loader: "file-loader",
         options: {
-          name: '[path][name].[ext]',
-          publicPath: '/_next/static/files',
-          outputPath: 'static/files',
+          name: "[path][name].[ext]",
+          publicPath: "/_next/static/files",
+          outputPath: "static/files",
         },
       },
     });

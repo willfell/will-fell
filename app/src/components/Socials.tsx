@@ -1,5 +1,5 @@
-import { FC, memo } from 'react';
-import { socialLinks } from '../data/data';
+import { FC, memo } from "react";
+import { socialLinks } from "../data/data";
 
 const Socials: FC = memo(() => {
   return (
@@ -13,10 +13,10 @@ const Socials: FC = memo(() => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img 
-            src={logo} 
-            alt={`${label} logo`} 
-            className="h-5 w-5 align-baseline sm:h-6 sm:w-6" 
+          <img
+            src={logo}
+            alt={`${label} logo`}
+            className="h-5 w-5 align-baseline sm:h-6 sm:w-6"
           />
         </a>
       ))}
@@ -24,5 +24,5 @@ const Socials: FC = memo(() => {
   );
 });
 
-Socials.displayName = 'Socials';
+Socials.displayName = "Socials";
 export default Socials;

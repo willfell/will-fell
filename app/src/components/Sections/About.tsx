@@ -1,13 +1,13 @@
-import { FC, memo } from 'react';
-import Image from 'next/image';
-import { aboutData, SectionId } from '../../data/data';
-import Section from '../Layout/Section';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
+import { FC, memo } from "react";
+import Image from "next/image";
+import { aboutData, SectionId } from "../../data/data";
+import Section from "../Layout/Section";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 const About: FC = memo(() => {
   const { profileImageSrc, description, aboutItems } = aboutData;
 
-  const sectionRef = useIntersectionObserver(0.15, '0px 0px -50px 0px');
+  const sectionRef = useIntersectionObserver(0.15, "0px 0px -50px 0px");
 
   return (
     <Section className="bg-earth-tan" sectionId={SectionId.About}>
@@ -15,7 +15,6 @@ const About: FC = memo(() => {
         ref={sectionRef}
         className="flex flex-col items-start gap-16 md:flex-row md:items-center md:justify-between"
       >
-
         {/* LEFT COLUMN – IMAGE */}
         {profileImageSrc && (
           <div className="mt-4 flex w-full items-center justify-center md:mt-0 md:w-1/2 md:justify-center">
@@ -33,9 +32,7 @@ const About: FC = memo(() => {
         {/* RIGHT COLUMN */}
         <div className="flex flex-col md:w-1/2 md:pl-10">
           <h2 className="mb-4 text-3xl font-bold text-stone-black">About Me</h2>
-          <p className="mb-6 text-stone-black">
-            {description}
-          </p>
+          <p className="mb-6 text-stone-black">{description}</p>
 
           {/* ABOUT ITEMS – single column */}
           <ul className="space-y-4">
@@ -57,5 +54,5 @@ const About: FC = memo(() => {
   );
 });
 
-About.displayName = 'About';
+About.displayName = "About";
 export default About;
