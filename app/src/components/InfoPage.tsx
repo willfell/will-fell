@@ -1,20 +1,16 @@
 import { FC, memo, useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { SiReact, SiNextdotjs, SiGithubactions, SiAmazon, SiTerraform } from 'react-icons/si';
-import { 
-  CodeBracketIcon, 
-  ServerIcon, 
-  CloudIcon, 
-  CogIcon, 
-  ArrowPathIcon 
+import {
+  CodeBracketIcon,
+  ServerIcon,
+  CloudIcon,
+  CogIcon,
+  ArrowPathIcon
 } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import backgroundPic from '../images/info/background.jpg';
 import personalPicTwo from '../images/info/personal-2.jpg';
-
-// eslint-disable-next-line react-memo/require-memo
-const Header = dynamic(() => import('./Sections/Header'), { ssr: false });
 
 const InfoPage: FC = memo(() => {
   // Add CSS for animations directly in the component
@@ -29,7 +25,7 @@ const InfoPage: FC = memo(() => {
           transform: translateY(15px);
           transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        
+
         .animate-fadeIn {
           opacity: 1 !important;
           transform: translateY(0) !important;
@@ -49,13 +45,13 @@ const InfoPage: FC = memo(() => {
     // Handle scroll for parallax and animations
     const handleScroll = () => {
       setScrollY(window.scrollY);
-      
+
       // Handle animations on scroll
       const animateElements = document.querySelectorAll('.animate-on-scroll');
       animateElements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
-        
+
         if (elementTop < window.innerHeight - elementVisible) {
           element.classList.add('animate-fadeIn');
         }
@@ -64,7 +60,7 @@ const InfoPage: FC = memo(() => {
 
     // Add scroll event listener
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     // Handle load animations
     const handleLoadAnimations = () => {
       const animateElements = document.querySelectorAll('.animate-on-load');
@@ -79,7 +75,7 @@ const InfoPage: FC = memo(() => {
     setTimeout(() => {
       // Trigger animations once the component is mounted
       handleLoadAnimations();
-      
+
       // Initial check for elements already in viewport
       handleScroll();
     }, 10);
@@ -98,7 +94,7 @@ const InfoPage: FC = memo(() => {
       });
       setIsLoading(false);
     }, 1000);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -106,8 +102,6 @@ const InfoPage: FC = memo(() => {
 
   return (
     <div className="overflow-hidden">
-      <Header />
-      
       {/* Redesigned Hero Section with Background Image and Integrated Tech Stack */}
       <div ref={heroRef} className="relative flex h-screen w-full items-center justify-center overflow-hidden">
         {/* Background with parallax effect */}
@@ -135,18 +129,18 @@ const InfoPage: FC = memo(() => {
           {/* Full-width content box */}
           <div className="rounded-xl bg-forest-green/50 p-8 text-left shadow-xl backdrop-blur-sm border border-sage-green/20">
             <h1 className="animate-on-load text-4xl font-bold text-earth-tan sm:text-5xl lg:text-6xl">About This Project</h1>
-            
+
             <div className="animate-on-load mt-6 text-stone-100 max-w-3xl">
               <p className="mb-4">
                 This website serves as my digital portfolio and playground for experimenting with modern web technologies.
                 I built it to showcase my work, share my background, and demonstrate my skills as a DevOps and Full Stack Engineer.
               </p>
               <p>
-                Beyond being a portfolio, this project implements CI/CD principles with automated testing, deployment, 
+                Beyond being a portfolio, this project implements CI/CD principles with automated testing, deployment,
                 and infrastructure management, reflecting best practices in modern web development.
               </p>
             </div>
-            
+
             {/* Compact Tech Stack */}
             <div className="animate-on-load mt-8">
               <h3 className="text-xl font-semibold text-earth-tan mb-4">Built With</h3>
@@ -173,11 +167,11 @@ const InfoPage: FC = memo(() => {
                 </div>
               </div>
             </div>
-            
+
             <div className="animate-on-load mt-8">
-              <a 
-                href="https://github.com/willfell/will-fell" 
-                target="_blank" 
+              <a
+                href="https://github.com/willfell/will-fell"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 rounded-full border-2 border-earth-tan bg-none text-stone-100 hover:bg-sage-green/40 transition-all duration-300 hover:scale-105"
               >
@@ -199,10 +193,10 @@ const InfoPage: FC = memo(() => {
           </a>
         </div>
       </div>
-      
+
       {/* Main Content with Enhanced Gradient Background */}
-      <div 
-        ref={pageRef} 
+      <div
+        ref={pageRef}
         className="relative py-16 px-4 md:px-8"
         style={{
           background: 'linear-gradient(135deg, rgba(219,187,156,0.7) 0%, rgba(125,138,105,0.6) 25%, rgba(94,103,70,0.5) 50%, rgba(125,138,105,0.6) 75%, rgba(219,187,156,0.7) 100%)',
@@ -218,13 +212,13 @@ const InfoPage: FC = memo(() => {
             100% { background-position: 0% 50% }
           }
         `}</style>
-        
+
         <div className="max-w-screen-xl mx-auto">
-          
+
           {/* Project Overview Section with Image */}
           <section id="project-overview" className="mb-16 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="animate-on-scroll flex items-center" style={{ transitionDelay: '0ms' }}>
-              <div 
+              <div
                 className="relative rounded-xl overflow-hidden shadow-xl h-80 w-full group transition-all duration-300 hover:shadow-2xl hover:scale-[1.01]"
                 style={{
                   transform: `translateY(${scrollY * 0.03}px)`,
@@ -258,7 +252,7 @@ const InfoPage: FC = memo(() => {
                 Beyond being a portfolio, this project is also a practical implementation of the CI/CD principles I advocate for,
                 with automated testing, deployment, and infrastructure management.
               </p>
-              
+
               {/* Deployment status widget */}
               <div className="mt-6 bg-forest-green/10 backdrop-blur-sm border border-sage-green/30 rounded-lg p-4 transition-all duration-300 hover:bg-forest-green/20">
                 <h3 className="text-lg font-semibold text-forest-green mb-2">Deployment Status</h3>
@@ -275,9 +269,9 @@ const InfoPage: FC = memo(() => {
                     </span>
                   </div>
                 )}
-                <a 
-                  href="https://github.com/willfell/will-fell" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/willfell/will-fell"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center mt-2 text-sm text-forest-green hover:text-sage-green transition-colors"
                 >
@@ -289,25 +283,25 @@ const InfoPage: FC = memo(() => {
               </div>
             </div>
           </section>
-          
+
           {/* Enhanced Behind the Scenes Section with Icons and Better Visual Appeal */}
           <section className="animate-on-scroll" style={{ transitionDelay: '0ms' }}>
             <div className="relative h-max group mb-8">
               <h2 className="text-2xl font-bold text-forest-green text-center">Behind the Scenes</h2>
               <span className="absolute inset-x-0 -bottom-1 border-b-2 border-sage-green transform origin-center transition-transform duration-300 group-hover:scale-x-110" />
             </div>
-            
+
             <div className="bg-white/80 backdrop-blur-sm rounded-lg p-8 border border-sage-green/30 shadow-lg">
               <h3 className="text-xl font-semibold text-forest-green mb-6 flex items-center">
                 <CogIcon className="h-6 w-6 mr-2 text-forest-green" />
                 Development & Deployment Workflow
               </h3>
-              
+
               {/* Workflow steps with enhanced design */}
               <div className="relative">
                 {/* Connecting line */}
                 <div className="absolute left-6 top-8 bottom-8 w-1 bg-gradient-to-b from-forest-green via-sage-green to-earth-tan rounded-full hidden md:block"></div>
-                
+
                 <div className="space-y-8 relative">
                   {/* Step 1 */}
                   <div className="animate-on-scroll flex flex-col md:flex-row gap-4 relative" style={{ transitionDelay: '100ms' }}>
@@ -317,12 +311,12 @@ const InfoPage: FC = memo(() => {
                     <div className="ml-0 md:ml-6 bg-forest-green/10 rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:bg-forest-green/20 flex-1">
                       <h4 className="font-semibold text-forest-green mb-2">Development</h4>
                       <p className="text-sm text-stone-black">
-                        Code changes are made locally using React and Next.js, then pushed to GitHub for review and collaboration. 
+                        Code changes are made locally using React and Next.js, then pushed to GitHub for review and collaboration.
                         The modular component structure allows for rapid iteration and experimentation.
                       </p>
                     </div>
                   </div>
-                  
+
                   {/* Step 2 */}
                   <div className="animate-on-scroll flex flex-col md:flex-row gap-4 relative" style={{ transitionDelay: '200ms' }}>
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-sage-green flex items-center justify-center shadow-lg z-10">
@@ -331,12 +325,12 @@ const InfoPage: FC = memo(() => {
                     <div className="ml-0 md:ml-6 bg-forest-green/10 rounded-lg p-5 shadow-sm transition-all duration-300 hover:shadow-md hover:bg-forest-green/20 flex-1">
                       <h4 className="font-semibold text-forest-green mb-2">Continuous Integration</h4>
                       <p className="text-sm text-stone-black">
-                        GitHub Actions automatically builds, tests, and packages the application. Pull requests trigger 
+                        GitHub Actions automatically builds, tests, and packages the application. Pull requests trigger
                         preview deployments so changes can be verified before merging to the main branch.
                       </p>
                     </div>
                   </div>
-                  
+
                   {/* Step 3 */}
                   <div className="animate-on-scroll flex flex-col md:flex-row gap-4 relative" style={{ transitionDelay: '300ms' }}>
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-earth-tan flex items-center justify-center shadow-lg z-10">
@@ -350,7 +344,7 @@ const InfoPage: FC = memo(() => {
                       </p>
                     </div>
                   </div>
-                  
+
                   {/* Step 4 */}
                   <div className="animate-on-scroll flex flex-col md:flex-row gap-4 relative" style={{ transitionDelay: '400ms' }}>
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-slate-blue flex items-center justify-center shadow-lg z-10">
@@ -366,12 +360,12 @@ const InfoPage: FC = memo(() => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Final notes with decorative element */}
               <div className="animate-on-scroll mt-10 p-6 border-l-4 border-earth-tan bg-earth-tan/10 rounded-r-lg relative" style={{ transitionDelay: '500ms' }}>
                 {/* Decorative quote mark */}
                 <div className="absolute -top-4 -left-4 text-6xl text-earth-tan opacity-20">"</div>
-                
+
                 <p className="text-stone-black relative">
                   By implementing this automated pipeline, I can focus on creating content and features without
                   worrying about the deployment process. This approach ensures consistent deployment quality

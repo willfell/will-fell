@@ -108,12 +108,16 @@ const Header: FC = memo(() => {
       id={headerID}
     >
       <div className="container flex justify-between items-center h-16 px-4 mx-auto">
-        {/* Logo/Name - Changed to white when scrolled/background is green */}
-        <Link href="/" className={`text-2xl font-bold hover:text-sage-green transition-colors ${
-          scrolled ? 'text-white' : 'text-black'
-        }`}>
+        {/* Logo/Name - Hidden on mobile, visible on desktop */}
+        <Link href="/" className={`
+          text-2xl font-bold hover:text-sage-green transition-colors 
+          ${scrolled ? 'text-white' : 'text-black'}
+          hidden md:block`}> {/* Hidden on mobile */}
           Will Fellhoelter
         </Link>
+        
+        {/* Empty div for spacing on mobile */}
+        <div className="md:hidden flex-1"></div>
 
         {/* Navigation Links - properly centered and aligned */}
         <nav className="hidden md:flex items-center space-x-4 sm:space-x-6">
