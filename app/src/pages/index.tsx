@@ -5,6 +5,7 @@ import About from "../components/Sections/About";
 import Footer from "../components/Sections/Footer";
 import Hero from "../components/Sections/Hero";
 import Portfolio from "../components/Sections/Portfolio";
+import Skills from "../components/Sections/Experience/Skills";
 import { homePageMeta, portfolioItems } from "../data/data";
 import { SideNav } from "../components/Sections/SideNav";
 import Experience from "../components/Sections/Experience";
@@ -24,8 +25,9 @@ const Home: FC = memo(() => {
       <SideNav />
       <Hero />
       <About />
-      <Experience />
       {portfolioItems.length > 0 && <Portfolio />}
+      <Experience />
+      <Skills />
       <Footer />
     </Page>
   );

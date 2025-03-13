@@ -24,7 +24,7 @@ const Portfolio: FC = memo(() => {
       sectionId={SectionId.Portfolio}
     >
       <div className="flex flex-col gap-y-8">
-        {/* Passion Projects Section with enhanced styling - reduced gap from 20 to 8 */}
+        {/* Passion Projects Section with enhanced styling */}
         <div>
           <div className="mb-6">
             <h2 className="text-3xl font-bold text-forest-green inline-block relative after:hidden">
@@ -38,7 +38,7 @@ const Portfolio: FC = memo(() => {
           </div>
 
           <div className="bg-terracotta/5 rounded-xl p-8 shadow-md">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {passionProjects.map((item, index) => (
                 <div
                   className="animate-on-scroll"
@@ -55,7 +55,7 @@ const Portfolio: FC = memo(() => {
           </div>
         </div>
 
-        {/* Regular Projects Section with different styling */}
+        {/* Regular Projects Section with similar grid layout (3 columns) */}
         {regularProjects.length > 0 && (
           <div>
             <div className="mb-6">

@@ -43,11 +43,6 @@ const InfoPage: FC = memo(() => {
 
   const pageRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const [lastDeployment, setLastDeployment] = useState({
-    date: "",
-    status: "success",
-  });
-  const [isLoading, setIsLoading] = useState(true);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -88,21 +83,6 @@ const InfoPage: FC = memo(() => {
       // Initial check for elements already in viewport
       handleScroll();
     }, 10);
-
-    // Fetch deployment info
-    setTimeout(() => {
-      setLastDeployment({
-        date: new Date().toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        status: "success",
-      });
-      setIsLoading(false);
-    }, 1000);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -148,16 +128,15 @@ const InfoPage: FC = memo(() => {
 
             <div className="animate-on-load mt-6 text-stone-100 max-w-3xl">
               <p className="mb-4">
-                This website serves as my digital portfolio and playground for
-                experimenting with modern web technologies. I built it to
-                showcase my work, share my background, and demonstrate my skills
-                as a DevOps and Full Stack Engineer.
+                I built this website for fun as a way to learn Next.js! It gave
+                me a chance to experiment with modern web technologies while
+                creating a simple portfolio to showcase some of my work and
+                background.
               </p>
               <p>
-                Beyond being a portfolio, this project implements CI/CD
-                principles with automated testing, deployment, and
-                infrastructure management, reflecting best practices in modern
-                web development.
+                The project turned out to be a great playground for trying out
+                different React patterns and styling approaches. I had a blast
+                putting it together!
               </p>
             </div>
 
@@ -294,64 +273,40 @@ const InfoPage: FC = memo(() => {
                 <span className="absolute inset-x-0 -bottom-1 border-b-2 border-sage-green transform origin-left transition-transform duration-300 group-hover:scale-x-110" />
               </div>
               <p className="text-stone-black mb-4">
-                This website serves as my digital portfolio and playground for
-                experimenting with modern web technologies. I built it to
-                showcase my work, share my background, and demonstrate my skills
-                as a DevOps and Full Stack Engineer.
+                This website serves as my digital portfolio and a fun project to
+                learn Next.js. I wanted a place to showcase some of my work and
+                learn something at the same time.
               </p>
-              <p className="text-stone-black">
-                Beyond being a portfolio, this project is also a practical
-                implementation of the CI/CD principles I advocate for, with
-                automated testing, deployment, and infrastructure management.
+              <p className="text-stone-black mb-6">
+                I also haven't deployed to AWS Cloudfront in some time so that
+                was nice. If there any issues with the site please do let me
+                know, or make an issue on the repo linked below
               </p>
 
-              {/* Deployment status widget */}
-              <div className="mt-6 bg-forest-green/10 backdrop-blur-sm border border-sage-green/30 rounded-lg p-4 transition-all duration-300 hover:bg-forest-green/20">
-                <h3 className="text-lg font-semibold text-forest-green mb-2">
-                  Deployment Status
-                </h3>
-                {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="h-4 w-4 rounded-full border-2 border-forest-green border-t-transparent animate-spin"></div>
-                    <span className="text-sm text-stone-black">
-                      Fetching deployment info...
-                    </span>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-2">
-                    <div
-                      className={`h-3 w-3 rounded-full ${
-                        lastDeployment.status === "success"
-                          ? "bg-green-500"
-                          : "bg-red-500"
-                      }`}
-                    ></div>
-                    <span className="text-sm text-stone-black">
-                      Last deployed: {lastDeployment.date}
-                    </span>
-                  </div>
-                )}
-                <a
-                  href="https://github.com/willfell/will-fell"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center mt-2 text-sm text-forest-green hover:text-sage-green transition-colors"
+              {/* GitHub Repository Button - Replacing the deployment status widget */}
+              <a
+                href="https://github.com/willfell/will-fell"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 bg-forest-green text-white rounded-lg shadow-md transition-all duration-300 hover:bg-deep-forest hover:shadow-lg transform hover:-translate-y-1 group"
+              >
+                <svg
+                  className="w-6 h-6 mr-3 transition-transform duration-300 group-hover:rotate-12"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.891 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.481C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"
-                    ></path>
-                  </svg>
-                  View repository
-                </a>
-              </div>
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.014-1.7-2.782.603-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.891 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.841-2.337 4.687-4.565 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.481C19.138 20.164 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                  ></path>
+                </svg>
+                <span className="font-medium">View GitHub Repository</span>
+                <span className="ml-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  →
+                </span>
+              </a>
             </div>
           </section>
 
@@ -476,12 +431,10 @@ const InfoPage: FC = memo(() => {
                 </div>
 
                 <p className="text-stone-black relative">
-                  By implementing this automated pipeline, I can focus on
-                  creating content and features without worrying about the
-                  deployment process. This approach ensures consistent
-                  deployment quality and minimizes the potential for human
-                  error, while maintaining high performance and security
-                  standards.
+                  Learning Next.js by building this portfolio has been an
+                  exciting journey. I've enjoyed experimenting with React
+                  components, styling approaches, and exploring the capabilities
+                  of this framework.
                 </p>
               </div>
             </div>
