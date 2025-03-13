@@ -1,13 +1,18 @@
-import { FC, memo } from 'react';
-import { experience, SectionId } from '../../../data/data';
-import Section from '../../Layout/Section';
-import TimelineItem from './TimelineItem';
-import Skills from './Skills';
+import { FC, memo } from "react";
+import { experience, SectionId } from "../../../data/data";
+import Section from "../../Layout/Section";
+import TimelineItem from "./TimelineItem";
+import Skills from "./Skills";
 
 const Experience: FC = memo(() => {
   return (
-    <Section className="bg-gradient-to-b from-earth-tan/40 to-white" sectionId={SectionId.Experience}>
-      <div className="flex flex-col space-y-8"> {/* Changed from space-y-16 to space-y-8 */}
+    <Section
+      className="bg-gradient-to-b from-earth-tan/40 to-white"
+      sectionId={SectionId.Experience}
+    >
+      <div className="flex flex-col space-y-8">
+        {" "}
+        {/* Changed from space-y-16 to space-y-8 */}
         {/* Work Experience Section with enhanced visual styling */}
         <div className="bg-slate-blue/5 rounded-xl p-8 shadow-sm border border-slate-blue/10">
           <div className="mb-8">
@@ -16,7 +21,8 @@ const Experience: FC = memo(() => {
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-sage-green"></span>
             </h2>
             <p className="text-stone-600 mt-4 max-w-3xl">
-              My journey as a professional, highlighting roles where I've made significant contributions and developed my expertise.
+              My journey as a professional, highlighting roles where I've made
+              significant contributions and developed my expertise.
             </p>
           </div>
 
@@ -30,7 +36,6 @@ const Experience: FC = memo(() => {
             ))}
           </div>
         </div>
-
         {/* Skills Section with different background color for visual variety */}
         <div className="bg-forest-green/5 rounded-xl p-8 shadow-sm border border-forest-green/10">
           <div className="mb-8">
@@ -52,5 +57,5 @@ const Experience: FC = memo(() => {
   );
 });
 
-Experience.displayName = 'Experience';
+Experience.displayName = "Experience";
 export default Experience;

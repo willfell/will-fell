@@ -1,5 +1,5 @@
-import { FC, memo } from 'react';
-import { SkillGroup as SkillGroupType } from '../../../data/dataDef';
+import { FC, memo } from "react";
+import { SkillGroup as SkillGroupType } from "../../../data/dataDef";
 
 interface SkillGroupProps {
   skillGroup: SkillGroupType;
@@ -17,7 +17,7 @@ const SkillGroup: FC<SkillGroupProps> = memo(({ skillGroup, delay = 0 }) => {
         {/* Fixed underline that doesn't extend beyond container */}
         <span className="absolute inset-x-0 -bottom-1 border-b-2 border-sage-green"></span>
       </div>
-      
+
       <div className="space-y-4 mt-6">
         {skillGroup.skills.map((skill, skillIndex) => (
           <div className="skill-item" key={`${skill.name}-${skillIndex}`}>
@@ -35,7 +35,7 @@ const SkillGroup: FC<SkillGroupProps> = memo(({ skillGroup, delay = 0 }) => {
               <div
                 className="skill-progress-bar h-2 bg-forest-green rounded-full"
                 data-width={`${(skill.level / (skill.max || 10)) * 100}%`}
-                style={{width: '0%'}}
+                style={{ width: "0%" }}
               ></div>
             </div>
           </div>
@@ -45,5 +45,5 @@ const SkillGroup: FC<SkillGroupProps> = memo(({ skillGroup, delay = 0 }) => {
   );
 });
 
-SkillGroup.displayName = 'SkillGroup';
+SkillGroup.displayName = "SkillGroup";
 export default SkillGroup;

@@ -1,24 +1,28 @@
-import { FC, memo, useState, useCallback, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import Page from './Layout/Page';
-import Footer from './Sections/Footer';
-import { SideNav } from './Sections/SideNav';
-import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
-import Socials from './Socials';
+import { FC, memo, useState, useCallback, useEffect } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Page from "./Layout/Page";
+import Footer from "./Sections/Footer";
+import { SideNav } from "./Sections/SideNav";
+import {
+  EnvelopeIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
+import Socials from "./Socials";
 
 // Use dynamic import with SSR set to true to ensure it's pre-rendered
-const Header = dynamic(() => import('./Sections/Header'), { ssr: true });
+const Header = dynamic(() => import("./Sections/Header"), { ssr: true });
 
 // Background image and profile pic
-const backgroundImage = '/images/contact/header-background.jpg';
-const profilePic = '/images/contact/profilepic.jpg';
+const backgroundImage = "/images/contact/header-background.jpg";
+const profilePic = "/images/contact/profilepic.jpg";
 
 const ContactPage: FC = memo(() => {
   const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,46 +34,54 @@ const ContactPage: FC = memo(() => {
   useEffect(() => {
     // Mark the page as loaded
     setIsLoaded(true);
-    
+
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     // Force animations to run
     setTimeout(() => {
-      const elements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
-      elements.forEach(el => {
-        el.classList.add('animate-fadeIn');
+      const elements = document.querySelectorAll(
+        ".animate-on-scroll, .animate-on-load",
+      );
+      elements.forEach((el) => {
+        el.classList.add("animate-fadeIn");
       });
     }, 100);
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
+    setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formState);
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormState({ name: '', email: '', message: '' });
+      // Simulate form submission
+      setTimeout(() => {
+        console.log("Form submitted:", formState);
+        setIsSubmitting(false);
+        setSubmitSuccess(true);
+        setFormState({ name: "", email: "", message: "" });
 
-      // Reset success message after 5 seconds
-      setTimeout(() => setSubmitSuccess(false), 5000);
-    }, 1500);
-  }, [formState]);
+        // Reset success message after 5 seconds
+        setTimeout(() => setSubmitSuccess(false), 5000);
+      }, 1500);
+    },
+    [formState],
+  );
 
-  const inputClasses = "px-4 py-3 border border-sage-green/30 focus:border-forest-green focus:ring-1 focus:ring-forest-green rounded-md bg-white/70 text-stone-800 w-full";
+  const inputClasses =
+    "px-4 py-3 border border-sage-green/30 focus:border-forest-green focus:ring-1 focus:ring-forest-green rounded-md bg-white/70 text-stone-800 w-full";
 
   // Add a loading state to ensure content appears
   if (!isLoaded) {
@@ -102,8 +114,10 @@ const ContactPage: FC = memo(() => {
         <div
           className="absolute inset-0 z-0"
           style={{
-            transform: `scale(${1 + scrollY * 0.0005}) translateY(${scrollY * 0.2}px)`,
-            transition: 'transform 0.1s ease-out'
+            transform: `scale(${1 + scrollY * 0.0005}) translateY(${
+              scrollY * 0.2
+            }px)`,
+            transition: "transform 0.1s ease-out",
           }}
         >
           <Image
@@ -135,11 +149,14 @@ const ContactPage: FC = memo(() => {
 
             {/* Right side - introduction */}
             <div className="rounded-xl bg-forest-green/50 p-8 text-left shadow-xl backdrop-blur-sm border border-sage-green/20">
-              <h1 className="animate-fadeIn text-4xl font-bold text-earth-tan sm:text-5xl lg:text-6xl">Let's Connect</h1>
+              <h1 className="animate-fadeIn text-4xl font-bold text-earth-tan sm:text-5xl lg:text-6xl">
+                Let's Connect
+              </h1>
               <div className="animate-fadeIn mt-6 text-stone-100">
                 <p className="mb-4">
-                  Whether you're interested in working together, have a question about my projects,
-                  or just want to say hello—I'd love to hear from you.
+                  Whether you're interested in working together, have a question
+                  about my projects, or just want to say hello—I'd love to hear
+                  from you.
                 </p>
               </div>
 
@@ -156,9 +173,21 @@ const ContactPage: FC = memo(() => {
         <div className="absolute inset-x-0 bottom-6 flex justify-center">
           <a
             className="animate-bounce rounded-full bg-earth-tan p-1 ring-sage-green ring-offset-2 ring-offset-forest-green/80 focus:outline-none focus:ring-2 sm:p-2 transition-all duration-300 hover:bg-sage-green shadow-lg"
-            href="#contact-form">
-            <svg className="h-5 w-5 bg-transparent sm:h-6 sm:w-6 text-forest-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            href="#contact-form"
+          >
+            <svg
+              className="h-5 w-5 bg-transparent sm:h-6 sm:w-6 text-forest-green"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
             </svg>
           </a>
         </div>
@@ -168,9 +197,12 @@ const ContactPage: FC = memo(() => {
         <div className="min-h-screen bg-white pb-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-forest-green mb-8 animate-fadeIn">Get in Touch</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-forest-green mb-8 animate-fadeIn">
+                Get in Touch
+              </h2>
               <p className="text-xl text-stone-700 mb-12 max-w-3xl animate-fadeIn">
-                I'm always interested in new opportunities, collaborations, and conversations.
+                I'm always interested in new opportunities, collaborations, and
+                conversations.
               </p>
 
               {/* Contact Content */}
@@ -178,7 +210,9 @@ const ContactPage: FC = memo(() => {
                 {/* Form Section */}
                 <div className="animate-fadeIn">
                   <div className="bg-white shadow-lg rounded-xl p-8 border border-sage-green/20">
-                    <h2 className="text-2xl font-bold text-forest-green mb-6">Send Me a Message</h2>
+                    <h2 className="text-2xl font-bold text-forest-green mb-6">
+                      Send Me a Message
+                    </h2>
 
                     {submitSuccess ? (
                       <div className="bg-sage-green/20 text-forest-green p-4 rounded-md mb-4">
@@ -188,7 +222,12 @@ const ContactPage: FC = memo(() => {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-stone-700 mb-1">Name</label>
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium text-stone-700 mb-1"
+                        >
+                          Name
+                        </label>
                         <input
                           type="text"
                           id="name"
@@ -202,7 +241,12 @@ const ContactPage: FC = memo(() => {
                       </div>
 
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1">Email</label>
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-stone-700 mb-1"
+                        >
+                          Email
+                        </label>
                         <input
                           type="email"
                           id="email"
@@ -216,7 +260,12 @@ const ContactPage: FC = memo(() => {
                       </div>
 
                       <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-1">Message</label>
+                        <label
+                          htmlFor="message"
+                          className="block text-sm font-medium text-stone-700 mb-1"
+                        >
+                          Message
+                        </label>
                         <textarea
                           id="message"
                           name="message"
@@ -236,9 +285,25 @@ const ContactPage: FC = memo(() => {
                       >
                         {isSubmitting ? (
                           <span className="flex items-center">
-                            <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            <svg
+                              className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                            >
+                              <circle
+                                className="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                strokeWidth="4"
+                              ></circle>
+                              <path
+                                className="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                              ></path>
                             </svg>
                             Sending...
                           </span>
@@ -253,14 +318,19 @@ const ContactPage: FC = memo(() => {
                 {/* Contact Info Section */}
                 <div className="animate-fadeIn">
                   <div className="bg-forest-green text-white shadow-lg rounded-xl p-8 h-full flex flex-col">
-                    <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+                    <h2 className="text-2xl font-bold mb-6">
+                      Contact Information
+                    </h2>
 
                     <div className="space-y-6 flex-grow">
                       <div className="flex items-start">
                         <EnvelopeIcon className="h-6 w-6 mr-3 flex-shrink-0" />
                         <div>
                           <p className="font-medium">Email</p>
-                          <a href="mailto:willfellhoelter@gmail.com" className="text-earth-tan hover:text-white transition-colors">
+                          <a
+                            href="mailto:willfellhoelter@gmail.com"
+                            className="text-earth-tan hover:text-white transition-colors"
+                          >
                             willfellhoelter@gmail.com
                           </a>
                         </div>
@@ -271,7 +341,9 @@ const ContactPage: FC = memo(() => {
                         <div>
                           <p className="font-medium">Location</p>
                           <p>Denver, Colorado</p>
-                          <p className="text-sm text-earth-tan mt-1">Available for remote work & relocation</p>
+                          <p className="text-sm text-earth-tan mt-1">
+                            Available for remote work & relocation
+                          </p>
                         </div>
                       </div>
 

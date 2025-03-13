@@ -1,14 +1,14 @@
-import 'tailwindcss/tailwind.css';
-import '../globalStyles.scss';
-import type { AppProps } from 'next/app';
-import { memo, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { AnimatePresence, motion } from 'framer-motion';
-import { resetAnimationClasses } from '../utils/animationUtils';
+import "tailwindcss/tailwind.css";
+import "../globalStyles.scss";
+import type { AppProps } from "next/app";
+import { memo, useEffect } from "react";
+import { useRouter } from "next/router";
+import { AnimatePresence, motion } from "framer-motion";
+import { resetAnimationClasses } from "../utils/animationUtils";
 
 const MyApp = memo(({ Component, pageProps }: AppProps) => {
   const router = useRouter();
-  
+
   useEffect(() => {
     // Setup route change start handler
     const handleRouteChangeStart = () => {
@@ -22,12 +22,12 @@ const MyApp = memo(({ Component, pageProps }: AppProps) => {
     const handleRouteChangeComplete = async () => {
       resetAnimationClasses();
       try {
-        const skillModule = await import('../utils/skillAnimations');
+        const skillModule = await import("../utils/skillAnimations");
         if (skillModule.default) {
           window.runSkillsAnimation = skillModule.default;
           skillModule.default();
         }
-        const { initPageAnimations } = await import('../utils/animationUtils');
+        const { initPageAnimations } = await import("../utils/animationUtils");
         initPageAnimations();
       } catch (error) {
         console.error("Error loading animations:", error);
@@ -37,26 +37,26 @@ const MyApp = memo(({ Component, pageProps }: AppProps) => {
     // Initial animation setup
     const initialSetup = async () => {
       try {
-        const skillModule = await import('../utils/skillAnimations');
+        const skillModule = await import("../utils/skillAnimations");
         if (skillModule.default) {
           window.runSkillsAnimation = skillModule.default;
           skillModule.default();
         }
-        const { initPageAnimations } = await import('../utils/animationUtils');
+        const { initPageAnimations } = await import("../utils/animationUtils");
         initPageAnimations();
       } catch (error) {
         console.error("Error in initial animation setup:", error);
       }
     };
-    
+
     initialSetup();
-    
-    router.events.on('routeChangeStart', handleRouteChangeStart);
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
-    
+
+    router.events.on("routeChangeStart", handleRouteChangeStart);
+    router.events.on("routeChangeComplete", handleRouteChangeComplete);
+
     return () => {
-      router.events.off('routeChangeStart', handleRouteChangeStart);
-      router.events.off('routeChangeComplete', handleRouteChangeComplete);
+      router.events.off("routeChangeStart", handleRouteChangeStart);
+      router.events.off("routeChangeComplete", handleRouteChangeComplete);
       if (window.animationCleanup) {
         window.animationCleanup();
       }
@@ -85,5 +85,5 @@ declare global {
   }
 }
 
-MyApp.displayName = 'MyApp';
+MyApp.displayName = "MyApp";
 export default MyApp;

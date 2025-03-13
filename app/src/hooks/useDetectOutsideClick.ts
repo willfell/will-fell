@@ -1,4 +1,4 @@
-import { useEffect, RefObject } from 'react';
+import { useEffect, RefObject } from "react";
 
 /**
  * Hook that detects clicks outside of the specified element
@@ -7,7 +7,7 @@ import { useEffect, RefObject } from 'react';
  */
 const useDetectOutsideClick = (
   ref: RefObject<HTMLElement>,
-  handler: () => void
+  handler: () => void,
 ): void => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
@@ -17,21 +17,21 @@ const useDetectOutsideClick = (
     };
 
     // Add event listener
-    document.addEventListener('mousedown', handleClickOutside);
-    
+    document.addEventListener("mousedown", handleClickOutside);
+
     // Add escape key listener
     const handleEscKey = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         handler();
       }
     };
-    
-    document.addEventListener('keydown', handleEscKey);
+
+    document.addEventListener("keydown", handleEscKey);
 
     // Clean up event listeners
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscKey);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscKey);
     };
   }, [ref, handler]);
 };
