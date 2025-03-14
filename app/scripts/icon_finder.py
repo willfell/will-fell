@@ -21,17 +21,34 @@ skill_icons = [
     # Programming languages
     {"name": "python", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/python.svg", "color": "000000"},
     {"name": "typescript", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/typescript.svg", "color": "000000"},
+    {"name": "javascript", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/javascript.svg", "color": "000000"},
     {"name": "bash", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/gnubash.svg", "color": "000000"},
     {"name": "java", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/openjdk.svg", "color": "000000"},
     {"name": "csharp", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/csharp.svg", "color": "000000"},
+    
+    # Frontend & Web Frameworks
     {"name": "nextjs", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/nextdotjs.svg", "color": "000000"},
     {"name": "flask", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/flask.svg", "color": "000000"},
+    {"name": "fastapi", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/fastapi.svg", "color": "000000"},
+    {"name": "angular", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/angular.svg", "color": "000000"},
     {"name": "tailwind", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/tailwindcss.svg", "color": "000000"},
     
-    # Infrastructure tools
+    # Infrastructure & IaC tools
     {"name": "terraform", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/terraform.svg", "color": "000000"},
+    {"name": "pulumi", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/pulumi.svg", "color": "000000"},
+    {"name": "cloudformation", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazonaws.svg", "color": "000000"},
     {"name": "docker", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/docker.svg", "color": "000000"},
     {"name": "kubernetes", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/kubernetes.svg", "color": "000000"},
+    {"name": "vagrant", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/vagrant.svg", "color": "000000"},
+    {"name": "packer", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/packer.svg", "color": "000000"},
+    
+    # Configuration Management
+    {"name": "ansible", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/ansible.svg", "color": "000000"},
+    {"name": "chef", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/chef.svg", "color": "000000"},
+    {"name": "puppet", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/puppet.svg", "color": "000000"},
+    
+    # Operating Systems
+    {"name": "linux", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/linux.svg", "color": "000000"},
     
     # Monitoring & Observability
     {"name": "newrelic", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/newrelic.svg", "color": "000000"},
@@ -41,6 +58,7 @@ skill_icons = [
     {"name": "splunk", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/splunk.svg", "color": "000000"},
     {"name": "grafana", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/grafana.svg", "color": "000000"},
     {"name": "opensearch", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/opensearch.svg", "color": "000000"},
+    {"name": "elasticsearch", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/elasticsearch.svg", "color": "000000"},
     
     # CI/CD tools
     {"name": "github-actions", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/githubactions.svg", "color": "000000"},
@@ -49,7 +67,6 @@ skill_icons = [
     {"name": "bitbucket", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/bitbucket.svg", "color": "000000"},
     {"name": "codepipeline", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/amazonaws.svg", "color": "000000"},
     {"name": "jenkins", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/jenkins.svg", "color": "000000"},
-    {"name": "ansible", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/ansible.svg", "color": "000000"},
 
     # Socials
     {"name": "strava", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/strava.svg", "color": "000000"},
@@ -63,7 +80,6 @@ skill_icons = [
 
     # Random
     {"name": "reddit", "url": "https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/reddit.svg", "color": "000000"},
-
 ]
 
 # Create custom SVG for problematic icons that don't have good simple-icons
@@ -72,6 +88,11 @@ custom_svgs = {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M8.954 20.574a1.4 1.4 0 01-1.401-1.4v-1.865H7.14a2.8 2.8 0 01-2.8-2.8V8.921a2.8 2.8 0 012.8-2.8h9.72a2.8 2.8 0 012.8 2.8v5.588a2.8 2.8 0 01-2.8 2.8h-.412v1.865a1.4 1.4 0 01-1.401 1.4zm-.467-12.52v9.255h7.028V8.054zM16.86 12.642h.58v1.866h-.58zM6.56 12.642h.58v1.866h-.58z"/>
         <path d="M10.355 4.626v2.8h3.29v-2.8z"/>
+    </svg>
+    """,
+    "cloudformation": """
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13.33 9.13c0 .1-.01.19-.03.26a.37.37 0 01-.2.22c-.07.03-.17.04-.29.04h-.54v-1.06h.55c.11 0 .2.01.27.04.07.02.13.07.18.15.05.08.07.18.07.34zm5.77.23c0 .14-.01.24-.04.31-.02.06-.05.12-.09.16-.04.04-.1.07-.17.09-.07.02-.16.03-.28.03h-.48V8.92h.43c.15 0 .26.01.34.03.08.02.14.05.18.09.04.04.07.1.09.18.02.07.02.16.02.28v.01zm-20.12.45h9.21v1.57H-1.02zm10.01 4.4h9.21v1.56H8.99zm-3.6-2.17h6.77v1.56H5.39zm16.18-4.4h.48c.12 0 .21.01.28.04.07.02.13.07.17.13.05.06.07.16.07.28 0 .08-.01.15-.03.2-.02.06-.05.1-.1.14a.46.46 0 01-.3.1h-.56zm-14.72.23c0 .2-.04.35-.1.46-.06.11-.18.2-.34.25l.54.9h-.6l-.47-.83h-.19v.83h-.5V9.11h.87c.16 0 .28.01.38.03.1.02.18.06.25.11.07.05.12.13.15.22.04.09.05.2.05.34zM-1.02 2v1.57h9.21v4.39h1.6V-1.69H-2.61V2zm0 20h9.21v1.57h1.6v-7.57h-1.6v4.43H-2.61V22zm23.59-5.79v7.79h-9.21v-1.57h-1.6v7.57h2.2c.62 0 1.04-.42 1.04-1.04v-11.15c0-.21.02-.37.05-.48.04-.12.1-.2.2-.25.09-.06.22-.09.4-.09h6.92zM24.2.27v10.92h-1.63V7.35h-9.18V5.78h9.18V1.3h-8.14V-.26h8.14c.62 0 1.04.42 1.04 1.04v20.73h-8.57v1.57h8.57v4.92H-2.61v-4.92h9.2v-1.57h-9.2V1.3H6.6V-.26H-2.61c-.63 0-1.04.42-1.04 1.04v26.44c0 .62.41 1.04 1.04 1.04h26.77c.62 0 1.04-.42 1.04-1.04V.27zm-17.14 12.41h-.63v-.83h.6c.13 0 .22.01.28.04.06.03.1.07.13.13.02.06.04.12.04.2 0 .06-.01.11-.02.16a.32.32 0 01-.13.17c-.06.04-.15.07-.27.07z"/>
     </svg>
     """
 }

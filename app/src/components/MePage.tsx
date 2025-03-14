@@ -288,10 +288,9 @@ const MePage: FC<MePageProps> = memo(({ galleryImages = [] }) => {
 
               <div className="animate-on-load mt-6 text-stone-100 max-w-3xl">
                 <p className="mb-4">
-                  I'm not going to lie I do love to work. Unless it's writing
-                  documentation then you'd rather see me at the DMV. However I do
-                  think that taking some time aside to prioritize getting outdoors
-                  and hanging out with family and friends is what this is all about.
+                  I'm not going to lie I do love to work, however I do think
+                  that taking some time aside to prioritize getting outdoors and
+                  hanging out with family and friends is what this is all about.
                 </p>
               </div>
             </div>
