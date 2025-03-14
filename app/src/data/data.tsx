@@ -148,12 +148,12 @@ export const skills: SkillGroup[] = [
       },
       {
         name: "Pulumi",
-        level: 9,
+        level: 10,
         logo: "/images/skills/pulumi.svg",
       },
       {
         name: "CloudFormation",
-        level: 9,
+        level: 10,
         logo: "/images/skills/cloudformation.svg",
       },
       {
@@ -163,12 +163,12 @@ export const skills: SkillGroup[] = [
       },
       {
         name: "Vagrant",
-        level: 8,
+        level: 10,
         logo: "/images/skills/vagrant.svg",
       },
       {
         name: "Packer",
-        level: 8,
+        level: 10,
         logo: "/images/skills/packer.svg",
       },
     ],
@@ -213,27 +213,27 @@ export const skills: SkillGroup[] = [
     skills: [
       {
         name: "Next.js",
-        level: 9,
+        level: 10,
         logo: "/images/skills/nextjs.svg",
       },
       {
         name: "Angular",
-        level: 8,
+        level: 10,
         logo: "/images/skills/angular.svg",
       },
       {
         name: "Flask",
-        level: 9,
+        level: 10,
         logo: "/images/skills/flask.svg",
       },
       {
         name: "FastAPI",
-        level: 9,
+        level: 10,
         logo: "/images/skills/fastapi.svg",
       },
       {
         name: "Tailwind CSS",
-        level: 9,
+        level: 10,
         logo: "/images/skills/tailwind.svg",
       },
     ],
@@ -273,12 +273,12 @@ export const skills: SkillGroup[] = [
       },
       {
         name: "Elasticsearch",
-        level: 9,
+        level: 10,
         logo: "/images/skills/elasticsearch.svg",
       },
       {
         name: "OpenSearch",
-        level: 9,
+        level: 10,
         logo: "/images/skills/opensearch.svg",
       },
     ],
@@ -293,12 +293,12 @@ export const skills: SkillGroup[] = [
       },
       {
         name: "Chef",
-        level: 9,
+        level: 10,
         logo: "/images/skills/chef.svg",
       },
       {
         name: "Puppet",
-        level: 8,
+        level: 10,
         logo: "/images/skills/puppet.svg",
       },
     ],
