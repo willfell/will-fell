@@ -146,6 +146,31 @@ export const skills: SkillGroup[] = [
         level: 10,
         logo: "/images/skills/gcp.svg",
       },
+      {
+        name: "Pulumi",
+        level: 9,
+        logo: "/images/skills/pulumi.svg",
+      },
+      {
+        name: "CloudFormation",
+        level: 9,
+        logo: "/images/skills/cloudformation.svg",
+      },
+      {
+        name: "Linux",
+        level: 10,
+        logo: "/images/skills/linux.svg",
+      },
+      {
+        name: "Vagrant",
+        level: 8,
+        logo: "/images/skills/vagrant.svg",
+      },
+      {
+        name: "Packer",
+        level: 8,
+        logo: "/images/skills/packer.svg",
+      },
     ],
   },
   {
@@ -157,9 +182,14 @@ export const skills: SkillGroup[] = [
         logo: "/images/skills/python.svg",
       },
       {
-        name: "TypeScript/JavaScript",
+        name: "TypeScript",
         level: 10,
         logo: "/images/skills/typescript.svg",
+      },
+      {
+        name: "JavaScript",
+        level: 10,
+        logo: "/images/skills/javascript.svg",
       },
       {
         name: "Bash",
@@ -175,6 +205,36 @@ export const skills: SkillGroup[] = [
         name: "C#/.NET",
         level: 10,
         logo: "/images/skills/csharp.svg",
+      },
+    ],
+  },
+  {
+    name: "Web Frameworks",
+    skills: [
+      {
+        name: "Next.js",
+        level: 9,
+        logo: "/images/skills/nextjs.svg",
+      },
+      {
+        name: "Angular",
+        level: 8,
+        logo: "/images/skills/angular.svg",
+      },
+      {
+        name: "Flask",
+        level: 9,
+        logo: "/images/skills/flask.svg",
+      },
+      {
+        name: "FastAPI",
+        level: 9,
+        logo: "/images/skills/fastapi.svg",
+      },
+      {
+        name: "Tailwind CSS",
+        level: 9,
+        logo: "/images/skills/tailwind.svg",
       },
     ],
   },
@@ -206,6 +266,41 @@ export const skills: SkillGroup[] = [
         level: 10,
         logo: "/images/skills/splunk.svg",
       },
+      {
+        name: "Grafana",
+        level: 10,
+        logo: "/images/skills/grafana.svg",
+      },
+      {
+        name: "Elasticsearch",
+        level: 9,
+        logo: "/images/skills/elasticsearch.svg",
+      },
+      {
+        name: "OpenSearch",
+        level: 9,
+        logo: "/images/skills/opensearch.svg",
+      },
+    ],
+  },
+  {
+    name: "Configuration Management",
+    skills: [
+      {
+        name: "Ansible",
+        level: 10,
+        logo: "/images/skills/ansible.svg",
+      },
+      {
+        name: "Chef",
+        level: 9,
+        logo: "/images/skills/chef.svg",
+      },
+      {
+        name: "Puppet",
+        level: 8,
+        logo: "/images/skills/puppet.svg",
+      },
     ],
   },
   {
@@ -235,6 +330,11 @@ export const skills: SkillGroup[] = [
         name: "AWS CodePipeline",
         level: 10,
         logo: "/images/skills/codepipeline.svg",
+      },
+      {
+        name: "Jenkins",
+        level: 10,
+        logo: "/images/skills/jenkins.svg",
       },
     ],
   },
@@ -639,83 +739,80 @@ export const portfolioItems: PortfolioItem[] = [
   },
 
   {
-    title: "Real-time Monitoring Dashboard",
+    title: "AWS CloudWatch to NewRelic Migration",
     description:
-      "Comprehensive observability solution for tracking system health and performance across the organization.",
+      "Enterprise observability platform migration enhancing alerting capabilities and cross-team visibility.",
     url: "#",
-    image: lendflowLogo,
+    image: projectCanaryLogo,
     isPassionProject: false,
-    location: "Lendflow",
-    date: "2021-2023",
+    location: "Project Canary",
+    date: "2023",
     summary:
-      "Orchestrated a complete overhaul of the organization's monitoring infrastructure, implementing a centralized observability platform that provided real-time insights into system health, performance metrics, and business KPIs.",
+      "Led the migration from AWS CloudWatch to NewRelic for monitoring and alerting, implementing enhanced NRQL queries for intelligent alerts. Created customized dashboards for multiple teams that improved communication around performance bottlenecks in shared platform services.",
     techStack: [
-      "Python",
-      "Terraform",
-      "OpenSearch",
+      "NewRelic",
       "AWS CloudWatch",
-      "Grafana",
-      "Prometheus",
+      "Terraform",
+      "NRQL",
+      "Observability",
     ],
     techIcons: [
-      "/images/skills/python.svg",
-      "/images/skills/terraform.svg",
+      "/images/skills/newrelic.svg",
       "/images/skills/aws.svg",
+      "/images/skills/terraform.svg",
       "/images/skills/cloudwatch.svg",
-      "/images/skills/prometheus.svg",
-      "/images/skills/opensearch.svg",
-      "/images/skills/grafana.svg",
     ],
-    how: "Integrated data sources from various applications and services into a unified logging and metrics pipeline. Created custom dashboards that provided both technical and business insights, with automated alerting for critical issues.",
+    how: "Designed and implemented a comprehensive migration strategy from CloudWatch to NewRelic, focusing on creating advanced NRQL queries that enabled more intelligent alerting. Developed tailored dashboards in Terraform for different teams that visualized critical metrics of shared platform services for all environments, fostering better cross-team communication and quicker resolution of performance bottlenecks.",
   },
 
   {
-    title: "Automated Client Billing API",
+    title: "Automated Client Billing",
     description:
-      "Flask-based API integration that streamlined the client invoicing process.",
+      "Python based integration that streamlined the client invoicing process.",
     url: "#",
     image: lendflowLogo,
     isPassionProject: false,
     location: "Lendflow",
     date: "2022",
     summary:
-      "Developed an API solution that automated the client billing process, eliminating manual invoicing steps and ensuring accurate, timely billing for all clients. This reduced accounting workload while improving accuracy.",
-    techStack: ["Python", "Flask", "AWS Lambda", "PostgreSQL", "Stripe API"],
+      "Developed scheduled solution that automated the client billing process, eliminating manual invoicing steps and ensuring accurate, timely billing for all clients. This reduced accounting workload while improving accuracy.",
+    techStack: ["Python", "Flask", "AWS Lambda", "MySQL"],
     techIcons: [
       "/images/skills/python.svg",
       "/images/skills/flask.svg",
       "/images/skills/aws.svg",
     ],
-    how: "Created a Flask API that integrated with internal usage tracking systems and external payment processors. The system automatically calculated usage-based billing, generated invoices, and processed payments according to client contract terms.",
+    how: "Created a python application that integrated with internal usage tracking systems (MySQL) and external payment processors. The system automatically calculated usage-based billing, generated invoices, and processed payments according to client contract terms.",
   },
-
   {
-    title: "Azure Cloud Migration",
+    title: "Chef to Ansible Migration",
     description:
-      "Led comprehensive migration from on-premises infrastructure to Azure Cloud for multiple teams.",
+      "Enterprise-wide migration of 100+ production servers from Chef to Ansible for improved configuration management.",
     url: "#",
     image: mcgLogo,
     isPassionProject: false,
     location: "MCG",
-    date: "2020-2021",
+    date: "2021",
     summary:
-      "Orchestrated a large-scale migration from legacy on-premises infrastructure to Azure Cloud, carefully planning and executing the transition to ensure zero downtime for critical healthcare applications.",
+      "Led the migration of over 100 production servers from Chef to Ansible, enabling easier team collaboration through playbooks. This transition facilitated the implementation of Datadog for alerts and critical metrics based on organizational priorities, along with configuring log pipelining to Datadog.",
     techStack: [
-      "PowerShell",
-      "Terraform",
       "Ansible",
-      "Azure",
-      "Docker",
-      "Jenkins",
+      "Chef",
+      "Datadog",
+      "Linux",
+      "Windows",
+      "Python",
+      "Bash",
     ],
     techIcons: [
-      "/images/skills/terraform.svg",
       "/images/skills/ansible.svg",
-      "/images/skills/azure.svg",
-      "/images/skills/docker.svg",
-      "/images/skills/jenkins.svg",
+      "/images/skills/chef.svg",
+      "/images/skills/datadog.svg",
+      "/images/skills/linux.svg",
+      "/images/skills/python.svg",
+      "/images/skills/bash.svg",
     ],
-    how: "Developed a phased migration strategy that involved infrastructure assessment, application dependency mapping, and carefully orchestrated cutover procedures. Created automation scripts to ensure consistent environment setup and configuration in the cloud.",
+    how: "Architected and executed a phased migration strategy that maintained production stability while transitioning servers from Chef to Ansible. Developed reusable playbooks that simplified configuration management and enabled wider team participation. Integrated Datadog monitoring with custom alert thresholds and implemented log pipelining for enhanced observability.",
   },
 
   {
