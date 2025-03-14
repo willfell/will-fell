@@ -156,8 +156,7 @@ const ContactPage: FC = memo(() => {
               <div className="animate-fadeIn mt-6 text-stone-100">
                 <p className="mb-4">
                   Whether you're interested in working together, have a question
-                  about my projects, or just want to say hello—I'd love to hear
-                  from you.
+                  about my projects, or just want to say hello—Feel free to hit me up.
                 </p>
               </div>
 
