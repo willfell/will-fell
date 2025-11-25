@@ -1,0 +1,173 @@
+#!/usr/bin/env node
+/**
+ * Image Optimization CLI for Will Fellhoelter Portfolio
+ *
+ * Generates optimized WebP and AVIF versions of all images.
+ * Original files are preserved.
+ *
+ * Usage: yarn images:optimize
+ */
+
+const fs = require('fs');
+const path = require('path');
+const { glob } = require('glob');
+
+const ROOT_DIR = path.resolve(__dirname, '../..');
+const IMAGES_DIR = path.join(ROOT_DIR, 'public/images');
+
+// ANSI colors
+const colors = {
+  green: (text) => `\x1b[32m${text}\x1b[0m`,
+  yellow: (text) => `\x1b[33m${text}\x1b[0m`,
+  red: (text) => `\x1b[31m${text}\x1b[0m`,
+  cyan: (text) => `\x1b[36m${text}\x1b[0m`,
+  dim: (text) => `\x1b[2m${text}\x1b[0m`,
+  bold: (text) => `\x1b[1m${text}\x1b[0m`,
+};
+
+// Quality settings for optimization
+const WEBP_QUALITY = 82;
+const AVIF_QUALITY = 65;
+
+async function getSourceImages() {
+  const pattern = path.join(IMAGES_DIR, '**/*.{jpg,jpeg,png,JPG,JPEG,PNG}');
+  const files = await glob(pattern, { nodir: true });
+  // Exclude already-optimized files
+  return files.filter((f) => !f.endsWith('.webp') && !f.endsWith('.avif'));
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+async function optimizeImage(sharp, inputPath) {
+  const results = [];
+  const dir = path.dirname(inputPath);
+  const ext = path.extname(inputPath);
+  const basename = path.basename(inputPath, ext);
+
+  try {
+    const image = sharp(inputPath);
+    const metadata = await image.metadata();
+    const originalSize = fs.statSync(inputPath).size;
+
+    // Generate WebP version
+    const webpPath = path.join(dir, `${basename}.webp`);
+    if (!fs.existsSync(webpPath)) {
+      await sharp(inputPath).webp({ quality: WEBP_QUALITY }).toFile(webpPath);
+
+      const webpSize = fs.statSync(webpPath).size;
+      const savings = ((1 - webpSize / originalSize) * 100).toFixed(0);
+      results.push({
+        output: webpPath,
+        format: 'WebP',
+        size: webpSize,
+        savings: `${savings}%`,
+      });
+    }
+
+    // Generate AVIF version
+    const avifPath = path.join(dir, `${basename}.avif`);
+    if (!fs.existsSync(avifPath)) {
+      await sharp(inputPath).avif({ quality: AVIF_QUALITY }).toFile(avifPath);
+
+      const avifSize = fs.statSync(avifPath).size;
+      const savings = ((1 - avifSize / originalSize) * 100).toFixed(0);
+      results.push({
+        output: avifPath,
+        format: 'AVIF',
+        size: avifSize,
+        savings: `${savings}%`,
+      });
+    }
+
+    return {
+      input: inputPath,
+      originalSize,
+      width: metadata.width,
+      height: metadata.height,
+      outputs: results,
+    };
+  } catch (error) {
+    return {
+      input: inputPath,
+      error: error.message,
+    };
+  }
+}
+
+async function main() {
+  console.log(colors.bold('\n=== Will Fellhoelter Image Optimizer ===\n'));
+
+  // Check if sharp is available
+  let sharp;
+  try {
+    sharp = require('sharp');
+  } catch (error) {
+    console.log(colors.yellow('Sharp is not installed. Installing...'));
+    console.log(colors.dim('Run: yarn install'));
+    console.log('');
+    process.exit(1);
+  }
+
+  const sourceImages = await getSourceImages();
+  console.log(`Found ${sourceImages.length} source images to optimize\n`);
+
+  let totalOriginalSize = 0;
+  let totalOptimizedSize = 0;
+  let newFilesCreated = 0;
+  let errors = 0;
+
+  for (const imagePath of sourceImages) {
+    const relativePath = path.relative(ROOT_DIR, imagePath);
+    process.stdout.write(`Processing ${colors.cyan(relativePath)}... `);
+
+    const result = await optimizeImage(sharp, imagePath);
+
+    if (result.error) {
+      console.log(colors.red(`Error: ${result.error}`));
+      errors++;
+      continue;
+    }
+
+    totalOriginalSize += result.originalSize;
+
+    if (result.outputs.length === 0) {
+      console.log(colors.dim('(already optimized)'));
+    } else {
+      const outputInfo = result.outputs
+        .map((o) => `${o.format}: ${colors.green(o.savings)} smaller`)
+        .join(', ');
+      console.log(outputInfo);
+      newFilesCreated += result.outputs.length;
+
+      for (const output of result.outputs) {
+        totalOptimizedSize += output.size;
+      }
+    }
+  }
+
+  // Summary
+  console.log(colors.bold('\n=== Summary ==='));
+  console.log(`Source images: ${sourceImages.length}`);
+  console.log(`New files created: ${newFilesCreated}`);
+  console.log(`Total original size: ${formatFileSize(totalOriginalSize)}`);
+
+  if (totalOptimizedSize > 0) {
+    const totalSavings = ((1 - totalOptimizedSize / totalOriginalSize) * 100).toFixed(0);
+    console.log(`Average savings: ${colors.green(totalSavings + '%')}`);
+  }
+
+  if (errors > 0) {
+    console.log(colors.red(`Errors: ${errors}`));
+  }
+
+  console.log(colors.green('\nOptimization complete!'));
+}
+
+main().catch((err) => {
+  console.error(colors.red('Error:'), err.message);
+  process.exit(1);
+});

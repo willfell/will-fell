@@ -3,20 +3,10 @@ import {
   BuildingOffice2Icon,
   CalendarIcon,
   MapIcon,
+  ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
 
-import balancedBriefImage from "../images/passion-projects/balanced-brief.png";
-import bezosWatchImage from "../images/passion-projects/bezos-watch.webp";
-import willProject from "../images/passion-projects/will-and-obi.jpg";
-import universityLogo from "../images/wsu-logo.png";
-import formlLogo from "../images/forml-logo.png";
-import projectCanaryLogo from "../images/project-canary-logo.png";
-import lendflowLogo from "../images/lendflow-logo.png";
-import mcgLogo from "../images/mcg-logo.png";
-import cernerLogo from "../images/cerner-logo.png";
-import heroImage from "../images/header-background.jpg";
-import profilepic from "../images/aboutmepic.jpg";
-import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
+import { getImageUrl } from "../utils/imageUrl";
 import {
   About,
   ContactSection,
@@ -85,14 +75,14 @@ export const heroData: Hero = {
       Icon: ArrowDownTrayIcon,
     },
   ],
-  imageSrc: heroImage,
+  imageSrc: getImageUrl("/images/hero/header-background.jpg"),
 };
 
 /**
  * About section
  */
 export const aboutData: About = {
-  profileImageSrc: profilepic,
+  profileImageSrc: getImageUrl("/images/about/aboutmepic.jpg"),
   description: `DevOps/Full Stack Engineer with 6+ years of experience designing and operating developer-centric 
   infrastructure and automation solutions. Passionate about building self-service platforms, optimizing developer 
   velocity, and enhancing developer workflows. Proficient with containerized solutions, Terraform, CI/CD, and cloud 
@@ -119,57 +109,57 @@ export const skills: SkillGroup[] = [
       {
         name: "AWS",
         level: 10,
-        logo: "/images/skills/aws.svg",
+        logo: getImageUrl("/images/skills/aws.svg"),
       },
       {
         name: "Terraform",
         level: 10,
-        logo: "/images/skills/terraform.svg",
+        logo: getImageUrl("/images/skills/terraform.svg"),
       },
       {
         name: "Docker",
         level: 10,
-        logo: "/images/skills/docker.svg",
+        logo: getImageUrl("/images/skills/docker.svg"),
       },
       {
         name: "Kubernetes",
         level: 10,
-        logo: "/images/skills/kubernetes.svg",
+        logo: getImageUrl("/images/skills/kubernetes.svg"),
       },
       {
         name: "Azure",
         level: 10,
-        logo: "/images/skills/azure.svg",
+        logo: getImageUrl("/images/skills/azure.svg"),
       },
       {
         name: "GCP",
         level: 10,
-        logo: "/images/skills/gcp.svg",
+        logo: getImageUrl("/images/skills/gcp.svg"),
       },
       {
         name: "Pulumi",
         level: 10,
-        logo: "/images/skills/pulumi.svg",
+        logo: getImageUrl("/images/skills/pulumi.svg"),
       },
       {
         name: "CloudFormation",
         level: 10,
-        logo: "/images/skills/cloudformation.svg",
+        logo: getImageUrl("/images/skills/cloudformation.svg"),
       },
       {
         name: "Linux",
         level: 10,
-        logo: "/images/skills/linux.svg",
+        logo: getImageUrl("/images/skills/linux.svg"),
       },
       {
         name: "Vagrant",
         level: 10,
-        logo: "/images/skills/vagrant.svg",
+        logo: getImageUrl("/images/skills/vagrant.svg"),
       },
       {
         name: "Packer",
         level: 10,
-        logo: "/images/skills/packer.svg",
+        logo: getImageUrl("/images/skills/packer.svg"),
       },
     ],
   },
@@ -179,32 +169,32 @@ export const skills: SkillGroup[] = [
       {
         name: "Python",
         level: 10,
-        logo: "/images/skills/python.svg",
+        logo: getImageUrl("/images/skills/python.svg"),
       },
       {
         name: "TypeScript",
         level: 10,
-        logo: "/images/skills/typescript.svg",
+        logo: getImageUrl("/images/skills/typescript.svg"),
       },
       {
         name: "JavaScript",
         level: 10,
-        logo: "/images/skills/javascript.svg",
+        logo: getImageUrl("/images/skills/javascript.svg"),
       },
       {
         name: "Bash",
         level: 10,
-        logo: "/images/skills/bash.svg",
+        logo: getImageUrl("/images/skills/bash.svg"),
       },
       {
         name: "Java",
         level: 10,
-        logo: "/images/skills/java.svg",
+        logo: getImageUrl("/images/skills/java.svg"),
       },
       {
         name: "C#/.NET",
         level: 10,
-        logo: "/images/skills/csharp.svg",
+        logo: getImageUrl("/images/skills/csharp.svg"),
       },
     ],
   },
@@ -214,27 +204,27 @@ export const skills: SkillGroup[] = [
       {
         name: "Next.js",
         level: 10,
-        logo: "/images/skills/nextjs.svg",
+        logo: getImageUrl("/images/skills/nextjs.svg"),
       },
       {
         name: "Angular",
         level: 10,
-        logo: "/images/skills/angular.svg",
+        logo: getImageUrl("/images/skills/angular.svg"),
       },
       {
         name: "Flask",
         level: 10,
-        logo: "/images/skills/flask.svg",
+        logo: getImageUrl("/images/skills/flask.svg"),
       },
       {
         name: "FastAPI",
         level: 10,
-        logo: "/images/skills/fastapi.svg",
+        logo: getImageUrl("/images/skills/fastapi.svg"),
       },
       {
         name: "Tailwind CSS",
         level: 10,
-        logo: "/images/skills/tailwind.svg",
+        logo: getImageUrl("/images/skills/tailwind.svg"),
       },
     ],
   },
@@ -244,42 +234,42 @@ export const skills: SkillGroup[] = [
       {
         name: "New Relic",
         level: 10,
-        logo: "/images/skills/newrelic.svg",
+        logo: getImageUrl("/images/skills/newrelic.svg"),
       },
       {
         name: "Prometheus",
         level: 10,
-        logo: "/images/skills/prometheus.svg",
+        logo: getImageUrl("/images/skills/prometheus.svg"),
       },
       {
         name: "Datadog",
         level: 10,
-        logo: "/images/skills/datadog.svg",
+        logo: getImageUrl("/images/skills/datadog.svg"),
       },
       {
         name: "AWS CloudWatch",
         level: 10,
-        logo: "/images/skills/cloudwatch.svg",
+        logo: getImageUrl("/images/skills/cloudwatch.svg"),
       },
       {
         name: "Splunk",
         level: 10,
-        logo: "/images/skills/splunk.svg",
+        logo: getImageUrl("/images/skills/splunk.svg"),
       },
       {
         name: "Grafana",
         level: 10,
-        logo: "/images/skills/grafana.svg",
+        logo: getImageUrl("/images/skills/grafana.svg"),
       },
       {
         name: "Elasticsearch",
         level: 10,
-        logo: "/images/skills/elasticsearch.svg",
+        logo: getImageUrl("/images/skills/elasticsearch.svg"),
       },
       {
         name: "OpenSearch",
         level: 10,
-        logo: "/images/skills/opensearch.svg",
+        logo: getImageUrl("/images/skills/opensearch.svg"),
       },
     ],
   },
@@ -289,17 +279,17 @@ export const skills: SkillGroup[] = [
       {
         name: "Ansible",
         level: 10,
-        logo: "/images/skills/ansible.svg",
+        logo: getImageUrl("/images/skills/ansible.svg"),
       },
       {
         name: "Chef",
         level: 10,
-        logo: "/images/skills/chef.svg",
+        logo: getImageUrl("/images/skills/chef.svg"),
       },
       {
         name: "Puppet",
         level: 10,
-        logo: "/images/skills/puppet.svg",
+        logo: getImageUrl("/images/skills/puppet.svg"),
       },
     ],
   },
@@ -309,32 +299,32 @@ export const skills: SkillGroup[] = [
       {
         name: "GitHub Actions",
         level: 10,
-        logo: "/images/skills/github-actions.svg",
+        logo: getImageUrl("/images/skills/github-actions.svg"),
       },
       {
         name: "GitOps",
         level: 10,
-        logo: "/images/skills/gitops.svg",
+        logo: getImageUrl("/images/skills/gitops.svg"),
       },
       {
         name: "ArgoCD",
         level: 10,
-        logo: "/images/skills/argocd.svg",
+        logo: getImageUrl("/images/skills/argocd.svg"),
       },
       {
         name: "Bitbucket Pipelines",
         level: 10,
-        logo: "/images/skills/bitbucket.svg",
+        logo: getImageUrl("/images/skills/bitbucket.svg"),
       },
       {
         name: "AWS CodePipeline",
         level: 10,
-        logo: "/images/skills/codepipeline.svg",
+        logo: getImageUrl("/images/skills/codepipeline.svg"),
       },
       {
         name: "Jenkins",
         level: 10,
-        logo: "/images/skills/jenkins.svg",
+        logo: getImageUrl("/images/skills/jenkins.svg"),
       },
     ],
   },
@@ -348,7 +338,7 @@ export const education: TimelineItem[] = [
     date: "2014-2018",
     location: "Wichita State University",
     title: "Management Information Systems",
-    imageSrc: universityLogo,
+    imageSrc: getImageUrl("/images/logos/wsu-logo.png"),
     content: (
       <p>
         Earned a degree in Management Information Systems at Wichita State
@@ -363,7 +353,7 @@ export const experience: TimelineItem[] = [
     date: "July 2024 - Present",
     location: "Forml (Remote)",
     title: "Senior Full Stack Engineer",
-    imageSrc: formlLogo,
+    imageSrc: getImageUrl("/images/logos/forml-logo.png"),
     content: (
       <ul className="list-disc pl-8">
         <li>
@@ -395,7 +385,7 @@ export const experience: TimelineItem[] = [
     date: "May 2023 - July 2024",
     location: "Project Canary, Denver",
     title: "DevOps Engineer",
-    imageSrc: projectCanaryLogo,
+    imageSrc: getImageUrl("/images/logos/project-canary-logo.png"),
     content: (
       <ul className="list-disc pl-8">
         <li>
@@ -427,7 +417,7 @@ export const experience: TimelineItem[] = [
     date: "August 2021 - May 2023",
     location: "Lendflow (Remote)",
     title: "DevSecOps Engineer",
-    imageSrc: lendflowLogo,
+    imageSrc: getImageUrl("/images/logos/lendflow-logo.png"),
     content: (
       <ul className="list-disc pl-8">
         <li>
@@ -458,7 +448,7 @@ export const experience: TimelineItem[] = [
     date: "February 2020 - August 2021",
     location: "MCG (Remote)",
     title: "DevOps Engineer",
-    imageSrc: mcgLogo,
+    imageSrc: getImageUrl("/images/logos/mcg-logo.png"),
     content: (
       <ul className="list-disc pl-8">
         <li>
@@ -485,7 +475,7 @@ export const experience: TimelineItem[] = [
     date: "September 2018 - August 2021",
     location: "Cerner, Kansas City",
     title: "Systems Engineer",
-    imageSrc: cernerLogo,
+    imageSrc: getImageUrl("/images/logos/cerner-logo.png"),
     content: (
       <ul className="list-disc pl-8">
         <li>
@@ -574,17 +564,17 @@ export const contact: ContactSection = {
 export const socialLinks: Social[] = [
   {
     label: "Github",
-    logo: "/images/skills/github.svg",
+    logo: getImageUrl("/images/skills/github.svg"),
     href: "https://github.com/willfell?tab=repositories",
   },
   {
     label: "LinkedIn",
-    logo: "/images/skills/linkedin.svg",
+    logo: getImageUrl("/images/skills/linkedin.svg"),
     href: "https://linkedin.com/in/will-fellhoelter-1aa17312b",
   },
   {
     label: "Strava",
-    logo: "/images/skills/strava.svg",
+    logo: getImageUrl("/images/skills/strava.svg"),
     href: "https://www.strava.com/athletes/112909908",
   },
 ];
@@ -596,7 +586,7 @@ export const portfolioItems: PortfolioItem[] = [
       "An automated news aggregator that delivers non-biased content",
     url: "https://github.com/willfell/balanced_brief",
     githubUrl: "https://github.com/willfell/balanced_brief",
-    image: balancedBriefImage,
+    image: getImageUrl("/images/passion-projects/balanced-brief.png"),
     why: "I needed an automated way of sending me news I wanted, that wasn't biased",
     how: "Built a Python-based system that fetches news from various sources, processes it with OpenAI to remove bias, and delivers personalized content through email. The system runs on AWS ECS and integrates with Reddit to discover trending topics. The frontend site is still available at balancedbrief.com - but functionality on the daily jobs has been removed for now. I intend on bringing it back in the future with some major infrastructure changes, and utilizing a different email service. SES is difficult and AWS will not allow me to email to anybody who signs up.",
     techStack: [
@@ -615,14 +605,14 @@ export const portfolioItems: PortfolioItem[] = [
       "Reddit API",
     ],
     techIcons: [
-      "/images/skills/python.svg",
-      "/images/skills/typescript.svg",
-      "/images/skills/aws.svg",
-      "/images/skills/docker.svg",
-      "/images/skills/codepipeline.svg",
-      "/images/skills/s3.svg",
-      "/images/skills/ecs.svg",
-      "/images/skills/reddit.svg",
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/typescript.svg"),
+      getImageUrl("/images/skills/aws.svg"),
+      getImageUrl("/images/skills/docker.svg"),
+      getImageUrl("/images/skills/codepipeline.svg"),
+      getImageUrl("/images/skills/s3.svg"),
+      getImageUrl("/images/skills/ecs.svg"),
+      getImageUrl("/images/skills/reddit.svg"),
     ],
     isPassionProject: true,
   },
@@ -631,7 +621,7 @@ export const portfolioItems: PortfolioItem[] = [
     description: "A one stop shop for providing security based alerts in AWS",
     url: "https://github.com/willfell/bezos-watch",
     githubUrl: "https://github.com/willfell/bezos-watch",
-    image: bezosWatchImage,
+    image: getImageUrl("/images/passion-projects/bezos-watch.webp"),
     why: "I love AWS, but when it comes to security they do a bad job at having too many services for it, and provide little to no support when it comes to managing them. I figured having a one stop shop to get notifications via Slack on suspicious AWS API calls would help me sleep at night.",
     how: "I created a solution for by leveraging a couple of services from AWS. It utilizes Cloudtrail, AWS Event Bridge, Cloudwatch, and Lambda. When you run terraform with the stack, it will set everything up, all you have to do is supply a slack channel and slack api key and when there's an event that occurs, a metric filter on the cloudwatch log group will invoke the lambda containing the event. Lambda then goes through, filters the logs for the event, and submits that information to slack.",
     techStack: [
@@ -643,9 +633,9 @@ export const portfolioItems: PortfolioItem[] = [
       "AWS CloudFormation",
     ],
     techIcons: [
-      "/images/skills/python.svg",
-      "/images/skills/terraform.svg",
-      "/images/skills/aws.svg",
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/terraform.svg"),
+      getImageUrl("/images/skills/aws.svg"),
     ],
     isPassionProject: true,
   },
@@ -654,7 +644,7 @@ export const portfolioItems: PortfolioItem[] = [
     description: "Makes me look pretty",
     url: "https://github.com/willfell/will-fell",
     githubUrl: "https://github.com/willfell/will-fell",
-    image: willProject,
+    image: getImageUrl("/images/passion-projects/will-and-obi.jpg"),
     why: "It's a little corny to say your passionate about your self, but I'm passionate about my work and the skills that I've learned along the journey. I am oddly passionate about good UI, and I wanted to learn nextjs, so I figured making a site about me and what I've worked on wouldn't be a bad thing to put some time into.",
     how: "I searched around for examples of portfolio websites for inspiration and found a couple that I liked. Decided to go ahead and make a fresh nextjs project. I read a little bit of documentation, but decided to have Claude teach me the majority of it, and utilize it to help me with styling. I've utilized Cloudfront as a frontend deploymeent strategy in the past, so I combined that with Terraform and Github Actions to make a pretty simple deploy process along with it.",
     techStack: [
@@ -667,13 +657,13 @@ export const portfolioItems: PortfolioItem[] = [
       "GitHub Actions",
     ],
     techIcons: [
-      "/images/skills/typescript.svg",
-      "/images/skills/nextjs.svg",
-      "/images/skills/tailwind.svg",
-      "/images/skills/github-actions.svg",
-      "/images/skills/terraform.svg",
-      "/images/skills/aws.svg",
-      "/images/skills/s3.svg",
+      getImageUrl("/images/skills/typescript.svg"),
+      getImageUrl("/images/skills/nextjs.svg"),
+      getImageUrl("/images/skills/tailwind.svg"),
+      getImageUrl("/images/skills/github-actions.svg"),
+      getImageUrl("/images/skills/terraform.svg"),
+      getImageUrl("/images/skills/aws.svg"),
+      getImageUrl("/images/skills/s3.svg"),
     ],
     isPassionProject: true,
   },
@@ -682,7 +672,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Created a UI tool for developers and QA to instantly create and manage their own isolated test environments with automated cleanup.",
     url: "https://github.com/willfell?tab=repositories",
-    image: projectCanaryLogo,
+    image: getImageUrl("/images/logos/project-canary-logo.png"),
     isPassionProject: false,
     location: "Project Canary",
     date: "2023-2024",
@@ -699,12 +689,12 @@ export const portfolioItems: PortfolioItem[] = [
       "GitHub Actions",
     ],
     techIcons: [
-      "/images/skills/typescript.svg",
-      "/images/skills/python.svg",
-      "/images/skills/terraform.svg",
-      "/images/skills/aws.svg",
-      "/images/skills/github-actions.svg",
-      "/images/skills/docker.svg",
+      getImageUrl("/images/skills/typescript.svg"),
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/terraform.svg"),
+      getImageUrl("/images/skills/aws.svg"),
+      getImageUrl("/images/skills/github-actions.svg"),
+      getImageUrl("/images/skills/docker.svg"),
     ],
     how: "Developed a React frontend that communicates with an AWS Lambda API, which orchestrates the creation of isolated environments using Terraform. Each environment is automatically cleaned up after a set time period to save costs.",
   },
@@ -714,7 +704,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "AI-enhanced knowledge base using Retrieval Augmented Generation for searching across corporate documents.",
     url: "#",
-    image: projectCanaryLogo,
+    image: getImageUrl("/images/logos/project-canary-logo.png"),
     isPassionProject: false,
     location: "Project Canary",
     date: "2023-2024",
@@ -730,10 +720,10 @@ export const portfolioItems: PortfolioItem[] = [
       "Vector Database",
     ],
     techIcons: [
-      "/images/skills/python.svg",
-      "/images/skills/flask.svg",
-      "/images/skills/typescript.svg",
-      "/images/skills/aws.svg",
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/flask.svg"),
+      getImageUrl("/images/skills/typescript.svg"),
+      getImageUrl("/images/skills/aws.svg"),
     ],
     how: "Created a system that ingests documents from various sources, chunks and embeds them using OpenAI, stores them in a vector database, and retrieves relevant information using RAG techniques when users make queries. The interface allows for conversational interaction with company knowledge.",
   },
@@ -743,7 +733,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Enterprise observability platform migration enhancing alerting capabilities and cross-team visibility.",
     url: "#",
-    image: projectCanaryLogo,
+    image: getImageUrl("/images/logos/project-canary-logo.png"),
     isPassionProject: false,
     location: "Project Canary",
     date: "2023",
@@ -757,10 +747,10 @@ export const portfolioItems: PortfolioItem[] = [
       "Observability",
     ],
     techIcons: [
-      "/images/skills/newrelic.svg",
-      "/images/skills/aws.svg",
-      "/images/skills/terraform.svg",
-      "/images/skills/cloudwatch.svg",
+      getImageUrl("/images/skills/newrelic.svg"),
+      getImageUrl("/images/skills/aws.svg"),
+      getImageUrl("/images/skills/terraform.svg"),
+      getImageUrl("/images/skills/cloudwatch.svg"),
     ],
     how: "Designed and implemented a comprehensive migration strategy from CloudWatch to NewRelic, focusing on creating advanced NRQL queries that enabled more intelligent alerting. Developed tailored dashboards in Terraform for different teams that visualized critical metrics of shared platform services for all environments, fostering better cross-team communication and quicker resolution of performance bottlenecks.",
   },
@@ -770,7 +760,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Python based integration that streamlined the client invoicing process.",
     url: "#",
-    image: lendflowLogo,
+    image: getImageUrl("/images/logos/lendflow-logo.png"),
     isPassionProject: false,
     location: "Lendflow",
     date: "2022",
@@ -778,9 +768,9 @@ export const portfolioItems: PortfolioItem[] = [
       "Developed scheduled solution that automated the client billing process, eliminating manual invoicing steps and ensuring accurate, timely billing for all clients. This reduced accounting workload while improving accuracy.",
     techStack: ["Python", "Flask", "AWS Lambda", "MySQL"],
     techIcons: [
-      "/images/skills/python.svg",
-      "/images/skills/flask.svg",
-      "/images/skills/aws.svg",
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/flask.svg"),
+      getImageUrl("/images/skills/aws.svg"),
     ],
     how: "Created a python application that integrated with internal usage tracking systems (MySQL) and external payment processors. The system automatically calculated usage-based billing, generated invoices, and processed payments according to client contract terms.",
   },
@@ -789,7 +779,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "Enterprise-wide migration of 100+ production servers from Chef to Ansible for improved configuration management.",
     url: "#",
-    image: mcgLogo,
+    image: getImageUrl("/images/logos/mcg-logo.png"),
     isPassionProject: false,
     location: "MCG",
     date: "2021",
@@ -805,12 +795,12 @@ export const portfolioItems: PortfolioItem[] = [
       "Bash",
     ],
     techIcons: [
-      "/images/skills/ansible.svg",
-      "/images/skills/chef.svg",
-      "/images/skills/datadog.svg",
-      "/images/skills/linux.svg",
-      "/images/skills/python.svg",
-      "/images/skills/bash.svg",
+      getImageUrl("/images/skills/ansible.svg"),
+      getImageUrl("/images/skills/chef.svg"),
+      getImageUrl("/images/skills/datadog.svg"),
+      getImageUrl("/images/skills/linux.svg"),
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/bash.svg"),
     ],
     how: "Architected and executed a phased migration strategy that maintained production stability while transitioning servers from Chef to Ansible. Developed reusable playbooks that simplified configuration management and enabled wider team participation. Integrated Datadog monitoring with custom alert thresholds and implemented log pipelining for enhanced observability.",
   },
@@ -820,7 +810,7 @@ export const portfolioItems: PortfolioItem[] = [
     description:
       "AWX-powered UI for scheduling data restoration jobs and managing ephemeral environments.",
     url: "#",
-    image: cernerLogo,
+    image: getImageUrl("/images/logos/cerner-logo.png"),
     isPassionProject: false,
     location: "Cerner",
     date: "2018-2020",
@@ -828,11 +818,11 @@ export const portfolioItems: PortfolioItem[] = [
       "Created a self-service portal that enabled teams to manage their own data restoration needs without requiring DevOps intervention. This improved team autonomy while reducing operational overhead.",
     techStack: ["Python", "JavaScript", "AWX", "Ansible", "Jenkins", "vSphere"],
     techIcons: [
-      "/images/skills/python.svg",
-      "/images/skills/typescript.svg",
-      "/images/skills/ansible.svg",
-      "/images/skills/jenkins.svg",
-      "/images/skills/bash.svg",
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/typescript.svg"),
+      getImageUrl("/images/skills/ansible.svg"),
+      getImageUrl("/images/skills/jenkins.svg"),
+      getImageUrl("/images/skills/bash.svg"),
     ],
     how: "Built a web interface that integrated with AWX to provide a user-friendly way to schedule and manage data restoration jobs. The system automated the complex backend processes while presenting a simple interface to users.",
   },
