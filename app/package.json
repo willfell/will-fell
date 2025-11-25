@@ -12,7 +12,9 @@
     "copy-resume": "cp -r src/assets/WillFellhoelterResume.pdf out/WillFellhoelterResume.pdf",
     "export": "yarn next export",
     "lint": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "images:validate": "node scripts/images/validate.js",
+    "images:optimize": "node scripts/images/optimize.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.16",
@@ -28,6 +30,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "glob": "^10.0.0",
+    "sharp": "^0.33.0",
     "@next/eslint-plugin-next": "^14.0.3",
     "@tailwindcss/forms": "^0.5.4",
     "@tailwindcss/typography": "^0.5.9",

@@ -18,12 +18,14 @@ const About: FC = memo(() => {
         {/* LEFT COLUMN – IMAGE */}
         {profileImageSrc && (
           <div className="mt-4 flex w-full items-center justify-center md:mt-0 md:w-1/2 md:justify-center">
-            <div className="group relative h-140 w-140 overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105 flex items-center justify-center">
+            <div className="group relative h-96 w-96 overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
               <Image
                 alt="about-me"
                 src={profileImageSrc}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
                 priority
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>

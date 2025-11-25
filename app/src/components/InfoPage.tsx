@@ -15,8 +15,10 @@ import {
   ArrowPathIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import backgroundPic from "../images/info/background.jpg";
-import personalPicTwo from "../images/info/personal-2.jpg";
+import { getImageUrl } from "../utils/imageUrl";
+
+const backgroundPic = getImageUrl("/images/info/background.jpg");
+const personalPicTwo = getImageUrl("/images/info/personal-2.jpg");
 
 const InfoPage: FC = memo(() => {
   // Add CSS for animations directly in the component

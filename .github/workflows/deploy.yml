@@ -21,6 +21,14 @@ jobs:
         run: yarn install
         working-directory: app
 
+      - name: Validate image references
+        run: yarn images:validate
+        working-directory: app
+
+      - name: Optimize images (WebP/AVIF)
+        run: yarn images:optimize
+        working-directory: app
+
       - name: Build Next.js
         run: yarn build
         working-directory: app
@@ -45,14 +53,22 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Sync files to S3
+      - name: Sync images to S3 (with long cache headers)
         run: |
-          aws s3 sync out s3://${{ secrets.S3_BUCKET_NAME }} --delete
+          aws s3 sync out/images s3://${{ secrets.S3_BUCKET_NAME }}/images \
+            --cache-control "public, max-age=31536000, immutable"
         working-directory: app
 
-      - name: Invalidate CloudFront Cache
+      - name: Sync app files to S3 (excluding images)
+        run: |
+          aws s3 sync out s3://${{ secrets.S3_BUCKET_NAME }} \
+            --exclude "images/*" \
+            --delete
+        working-directory: app
+
+      - name: Invalidate CloudFront Cache (HTML and assets only)
         run: |
           aws cloudfront create-invalidation \
             --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
+            --paths "/*.html" "/index.html" "/_next/*" "/*.pdf"
         working-directory: app

@@ -5,11 +5,12 @@ import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Page from "./Layout/Page";
 import Footer from "./Sections/Footer";
 import { SideNav } from "./Sections/SideNav";
+import { getImageUrl } from "../utils/imageUrl";
 
 // Import Header dynamically to ensure it works properly
 const Header = dynamic(() => import("./Sections/Header"), { ssr: false });
 
-const backgroundImage = "/images/life/hobbies/background.jpg";
+const backgroundImage = getImageUrl("/images/life/hobbies/background.jpg");
 
 interface MePageProps {
   galleryImages?: string[];
@@ -370,7 +371,7 @@ const MePage: FC<MePageProps> = memo(({ galleryImages = [] }) => {
                         {/* Absolute positioning with proper object-fit */}
                         <div className="absolute inset-0">
                           <Image
-                            src={imagePath}
+                            src={getImageUrl(imagePath)}
                             alt={`Gallery Image ${index + 1}`}
                             fill
                             loading={index < 9 ? "eager" : "lazy"}
@@ -429,7 +430,7 @@ const MePage: FC<MePageProps> = memo(({ galleryImages = [] }) => {
               <div className="w-full h-full relative flex items-center justify-center">
                 <div className="relative w-full h-full">
                   <Image
-                    src={lightboxImage}
+                    src={getImageUrl(lightboxImage)}
                     alt="Expanded view"
                     fill
                     className="object-contain"

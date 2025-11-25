@@ -5,7 +5,7 @@ import { FC, memo, useEffect, useRef, useState } from "react";
 import { heroData, SectionId } from "../../data/data";
 import Section from "../Layout/Section";
 import Socials from "../Socials";
-import profilepic from "../../images/profilepic.jpg";
+import { getImageUrl } from "../../utils/imageUrl";
 
 const Hero: FC = memo(() => {
   const { imageSrc, name, description, actions } = heroData;
@@ -73,9 +73,9 @@ const Hero: FC = memo(() => {
           <Image
             alt={`${name}-image`}
             className="h-full w-full object-cover"
-            placeholder="blur"
             priority
             src={imageSrc}
+            fill
           />
         </div>
 
@@ -128,7 +128,7 @@ const Hero: FC = memo(() => {
             >
               <Image
                 alt="Profile picture"
-                src={profilepic}
+                src={getImageUrl("/images/about/profilepic.jpg")}
                 fill
                 className="object-cover"
               />
