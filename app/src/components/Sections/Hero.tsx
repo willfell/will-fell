@@ -6,6 +6,7 @@ import { heroData, SectionId } from "../../data/data";
 import Section from "../Layout/Section";
 import Socials from "../Socials";
 import { getImageUrl } from "../../utils/imageUrl";
+import { trackEvent } from "../../utils/analytics";
 
 const Hero: FC = memo(() => {
   const { imageSrc, name, description, actions } = heroData;
@@ -109,6 +110,7 @@ const Hero: FC = memo(() => {
                       href={href}
                       key={text}
                       style={{ transitionDelay: `${400 + index * 100}ms` }}
+                      onClick={() => trackEvent("Hero CTA Click", { button: text })}
                       {...(download ? { download: "" } : {})}
                     >
                       {text}
