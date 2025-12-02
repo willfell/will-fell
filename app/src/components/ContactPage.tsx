@@ -11,6 +11,7 @@ import {
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
 import Socials from "./Socials";
+import { trackEvent } from "../utils/analytics";
 
 // Use dynamic import with SSR set to true to ensure it's pre-rendered
 const Header = dynamic(() => import("./Sections/Header"), { ssr: true });
@@ -66,6 +67,7 @@ const ContactPage: FC = memo(() => {
     async (e: React.FormEvent) => {
       e.preventDefault();
       setIsSubmitting(true);
+      trackEvent("Contact Form Submit");
 
       // Simulate form submission
       setTimeout(() => {
@@ -223,6 +225,7 @@ const ContactPage: FC = memo(() => {
                         <a
                           href="mailto:willfellhoelter@gmail.com"
                           className="text-forest-green underline"
+                          onClick={() => trackEvent("Email Click")}
                         >
                           willfellhoelter@gmail.com
                         </a>
@@ -345,6 +348,7 @@ const ContactPage: FC = memo(() => {
                           <a
                             href="mailto:willfellhoelter@gmail.com"
                             className="text-earth-tan hover:text-white transition-colors"
+                            onClick={() => trackEvent("Email Click")}
                           >
                             willfellhoelter@gmail.com
                           </a>

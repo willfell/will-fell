@@ -1,5 +1,6 @@
 import { FC, memo } from "react";
 import { socialLinks } from "../data/data";
+import { trackEvent } from "../utils/analytics";
 
 const Socials: FC = memo(() => {
   return (
@@ -12,6 +13,7 @@ const Socials: FC = memo(() => {
           key={label}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackEvent("Social Click", { platform: label })}
         >
           <img
             src={logo}

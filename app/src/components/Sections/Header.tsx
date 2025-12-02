@@ -2,6 +2,7 @@ import { FC, memo, useEffect, useState } from "react";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { trackEvent } from "../../utils/analytics";
 
 export const headerID = "headerNav";
 
@@ -151,6 +152,7 @@ const Header: FC = memo(() => {
                     ? "text-white hover:text-earth-tan"
                     : "text-forest-green hover:text-sage-green"
                 }`}
+                onClick={() => trackEvent("Download Click", { file: item.name })}
               >
                 {item.name}
                 <ArrowTopRightOnSquareIcon className="ml-1 h-4 w-4" />
@@ -168,6 +170,7 @@ const Header: FC = memo(() => {
                       ? "text-white hover:text-earth-tan"
                       : "text-stone-700 hover:text-forest-green"
                 }`}
+                onClick={() => trackEvent("Nav Click", { page: item.name })}
               >
                 {item.name}
               </Link>
