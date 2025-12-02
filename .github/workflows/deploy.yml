@@ -21,6 +21,28 @@ jobs:
         run: yarn install
         working-directory: app
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Download cached optimized images from S3
+        run: |
+          echo "Downloading cached images and manifest from S3..."
+          aws s3 sync s3://${{ secrets.S3_BUCKET_NAME }}/images ./public/images \
+            --exclude "*" \
+            --include "*.webp" \
+            --include "*.avif" \
+            --include ".image-manifest.json" \
+            --only-show-errors || echo "No cached images found (first deploy?)"
+
+          CACHED_COUNT=$(find ./public/images \( -name "*.webp" -o -name "*.avif" \) 2>/dev/null | wc -l)
+          echo "Downloaded $CACHED_COUNT cached optimized images"
+        working-directory: app
+        continue-on-error: true
+
       - name: Validate image references
         run: yarn images:validate
         working-directory: app
@@ -45,13 +67,6 @@ jobs:
           fi
           ls -la out
         working-directory: app
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Sync images to S3 (with long cache headers)
         run: |
