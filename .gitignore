@@ -87,6 +87,12 @@ web_modules/
 .next
 out
 
+# Image optimization manifest (synced via S3, not git)
+.image-manifest.json
+
+# Archived/unused images (for review, not deployed)
+app/public/images/_archive/
+
 # Nuxt.js build / generate output
 .nuxt
 dist

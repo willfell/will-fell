@@ -14,7 +14,8 @@
     "lint": "eslint . --fix",
     "format": "prettier --write .",
     "images:validate": "node scripts/images/validate.js",
-    "images:optimize": "node scripts/images/optimize.js"
+    "images:optimize": "node scripts/images/optimize.js",
+    "images:archive": "node scripts/images/archive-orphans.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.16",
