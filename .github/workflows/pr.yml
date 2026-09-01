@@ -1,31 +1,19 @@
-name: Validate Build
+name: pr
 
 on:
   pull_request:
-    branches:
-      - '*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate-build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
-
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: yarn install
-        working-directory: app
-
-      - name: Validate image references
-        run: yarn images:validate
-        working-directory: app
-
-      - name: Validate Next.js Build
-        run: yarn build
-        working-directory: app
+    uses: willfell/lab.actions/.github/workflows/nextjs-site-check.yml@v1.6.0
+  lint:
+    uses: willfell/lab.actions/.github/workflows/actionlint.yml@v1.6.0
+    permissions:
+      contents: read
