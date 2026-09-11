@@ -12,8 +12,8 @@ concurrency:
 
 jobs:
   validate-build:
-    uses: willfell/lab.actions/.github/workflows/nextjs-site-check.yml@v1.6.0
+    uses: willfell/wac.lab.actions/.github/workflows/nextjs-site-check.yml@v1.6.0
   lint:
-    uses: willfell/lab.actions/.github/workflows/actionlint.yml@v1.6.0
+    uses: willfell/wac.lab.actions/.github/workflows/actionlint.yml@v1.6.0
     permissions:
       contents: read
