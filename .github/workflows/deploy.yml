@@ -16,7 +16,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    uses: willfell/wac.lab.actions/.github/workflows/nextjs-site-deploy.yml@v1.12.1
+    uses: willfell/wac.lab.actions/.github/workflows/nextjs-site-deploy.yml@v1.12.2
     with:
       runner: will-fell
       role_arn: ${{ vars.AWS_ROLE_ARN }}
