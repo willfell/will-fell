@@ -12,11 +12,11 @@ concurrency:
 
 jobs:
   validate-build:
-    uses: willfell/wac.lab.actions/.github/workflows/nextjs-site-check.yml@v1.12.0
+    uses: willfell/wac.lab.actions/.github/workflows/nextjs-site-check.yml@v1.12.1
     with:
       runner: will-fell
   lint:
-    uses: willfell/wac.lab.actions/.github/workflows/actionlint.yml@v1.12.0
+    uses: willfell/wac.lab.actions/.github/workflows/actionlint.yml@v1.12.1
     with:
       runner: will-fell
     permissions:
