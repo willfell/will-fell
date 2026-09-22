@@ -1,0 +1,11 @@
+{
+  "name": "will-fell",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "resume:build": "node resume/build.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}

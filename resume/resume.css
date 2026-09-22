@@ -1,0 +1,217 @@
+:root {
+  --accent: #2f9e5b;
+  --ink: #1f2933;
+  --muted: #5b6770;
+  --rule: #2a2f36;
+  --dash: #c9ced4;
+  --side-width: 34%;
+  --gutter: 0.32in;
+}
+
+@page {
+  size: Letter;
+  margin: 0.42in 0.45in;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  font-size: 9.1pt;
+  line-height: 1.34;
+  color: var(--ink);
+  background: #fff;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+  margin: 0;
+}
+
+.header {
+  margin-bottom: 0.14in;
+}
+
+.name {
+  font-size: 24pt;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--accent);
+  line-height: 1.05;
+}
+
+.title {
+  font-size: 11.5pt;
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: 0.04in;
+}
+
+.contact {
+  margin-top: 0.06in;
+  font-size: 7.8pt;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.contact span + span::before {
+  content: "\2022";
+  color: var(--accent);
+  margin: 0 0.5em;
+}
+
+h2 {
+  font-size: 12.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  border-bottom: 1.6px solid var(--rule);
+  padding-bottom: 0.03in;
+  margin-bottom: 0.08in;
+}
+
+.side {
+  float: right;
+  width: var(--side-width);
+}
+
+.main {
+  margin-right: calc(var(--side-width) + var(--gutter));
+}
+
+.side section {
+  margin-bottom: 0.16in;
+}
+
+.side section:last-child {
+  margin-bottom: 0;
+}
+
+.summary {
+  text-align: left;
+}
+
+.skill {
+  padding: 0.05in 0;
+  border-bottom: 1.2px dashed var(--dash);
+}
+
+.skill:last-child {
+  border-bottom: 0;
+}
+
+.skill h3,
+.item h3 {
+  font-size: 9.2pt;
+  font-weight: 500;
+}
+
+.skill h3 {
+  color: var(--accent);
+  margin-bottom: 0.02in;
+}
+
+.item {
+  margin-bottom: 0.08in;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
+
+.item h3 {
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.015in;
+}
+
+.item p {
+  color: var(--muted);
+}
+
+.meta {
+  font-size: 8pt;
+  color: var(--muted);
+}
+
+.meta.accent {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.job {
+  margin-bottom: 0.13in;
+  break-inside: auto;
+}
+
+.job h4 {
+  font-size: 11pt;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.company {
+  font-size: 9.5pt;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 0.015in;
+}
+
+.job .meta {
+  margin: 0.02in 0 0.03in;
+}
+
+.blurb {
+  color: var(--muted);
+  margin-bottom: 0.04in;
+}
+
+.role {
+  margin-top: 0.06in;
+}
+
+.role h4 {
+  font-size: 10.5pt;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  position: relative;
+  padding-left: 0.15in;
+  margin-bottom: 0.025in;
+  break-inside: avoid;
+}
+
+li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0.03in;
+  color: var(--muted);
+}
+
+h2,
+h3,
+h4 {
+  break-after: avoid;
+}
