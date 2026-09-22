@@ -419,7 +419,7 @@ export const experience: TimelineItem[] = [
     ),
   },
   {
-    date: "May 2023 - July 2024",
+    date: "May 2023 - August 2024",
     location: "Project Canary, Denver",
     title: "DevOps Engineer",
     imageSrc: getImageUrl("/images/logos/project-canary-logo.png"),
@@ -482,7 +482,7 @@ export const experience: TimelineItem[] = [
     ),
   },
   {
-    date: "February 2020 - August 2021",
+    date: "March 2020 - August 2021",
     location: "MCG (Remote)",
     title: "DevOps Engineer",
     imageSrc: getImageUrl("/images/logos/mcg-logo.png"),
