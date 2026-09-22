@@ -1,7 +1,6 @@
 import {
   AcademicCapIcon,
   BuildingOffice2Icon,
-  CalendarIcon,
   MapIcon,
   ArrowDownTrayIcon,
 } from "@heroicons/react/24/outline";
@@ -24,9 +23,9 @@ import {
  * Page meta data
  */
 export const homePageMeta: HomepageMeta = {
-  title: "Will Fellhoelter - DevOps & Full Stack Engineer",
+  title: "Will Fellhoelter - Principal Software Engineer",
   description:
-    "Portfolio website for Will Fellhoelter, a DevOps and Full Stack Engineer with over 6 years of experience",
+    "Portfolio for Will Fellhoelter, Principal Software Engineer focused on agentic AI infrastructure, MCP, and Kubernetes at scale.",
 };
 
 /**
@@ -55,9 +54,9 @@ export const heroData: Hero = {
     <>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
         I'm a Denver-based{" "}
-        <strong className="text-stone-100">DevOps & Full Stack Engineer</strong>{" "}
-        with over 6 years of experience designing and operating
-        developer-centric infrastructure and automation solutions.
+        <strong className="text-stone-100">Principal Software Engineer</strong>{" "}
+        building agentic AI platforms and Kubernetes infrastructure at scale,
+        with 8 years across platform, DevOps, and full stack.
       </p>
     </>
   ),
@@ -83,17 +82,17 @@ export const heroData: Hero = {
  */
 export const aboutData: About = {
   profileImageSrc: getImageUrl("/images/about/aboutmepic.jpg"),
-  description: `DevOps/Full Stack Engineer with 6+ years of experience designing and operating developer-centric 
-  infrastructure and automation solutions. Passionate about building self-service platforms, optimizing developer 
-  velocity, and enhancing developer workflows. Proficient with containerized solutions, Terraform, CI/CD, and cloud 
-  automation at scale, with a strong focus on reliability, security, and observability.`,
+  description: `Principal Engineer with 8 years across platform, DevOps, and full stack, now focused on agentic AI 
+  infrastructure. Built the MCP mesh connecting 250+ tools to every team at Accuris, run 100+ microservices across 
+  6 regions on Kubernetes, and standardized deployments for 1,000+ repos. Former first engineering hire at an AI 
+  startup with a track record of working directly with clients to turn requirements into shipped product. Strongest 
+  at the intersection of customer problems, system design, and fast execution with agents.`,
   aboutItems: [
     { label: "Location", text: "Denver, CO", Icon: MapIcon },
-    { label: "Age", text: "28", Icon: CalendarIcon },
     { label: "Study", text: "Wichita State University", Icon: AcademicCapIcon },
     {
       label: "Employment",
-      text: "Forml, Senior Full Stack Engineer",
+      text: "Accuris, Principal Software Engineer",
       Icon: BuildingOffice2Icon,
     },
   ],
@@ -104,8 +103,24 @@ export const aboutData: About = {
  */
 export const skills: SkillGroup[] = [
   {
+    name: "AI & Agent Platforms",
+    skills: [
+      { name: "MCP", level: 10 },
+      { name: "AgentGateway", level: 10 },
+      { name: "Claude Code", level: 10 },
+      { name: "GitHub Copilot", level: 10 },
+      { name: "AWS Bedrock", level: 10 },
+      { name: "Databricks", level: 10 },
+    ],
+  },
+  {
     name: "Infrastructure & Platforms",
     skills: [
+      {
+        name: "Kubernetes",
+        level: 10,
+        logo: getImageUrl("/images/skills/kubernetes.svg"),
+      },
       {
         name: "AWS",
         level: 10,
@@ -120,11 +135,6 @@ export const skills: SkillGroup[] = [
         name: "Docker",
         level: 10,
         logo: getImageUrl("/images/skills/docker.svg"),
-      },
-      {
-        name: "Kubernetes",
-        level: 10,
-        logo: getImageUrl("/images/skills/kubernetes.svg"),
       },
       {
         name: "Azure",
@@ -150,16 +160,6 @@ export const skills: SkillGroup[] = [
         name: "Linux",
         level: 10,
         logo: getImageUrl("/images/skills/linux.svg"),
-      },
-      {
-        name: "Vagrant",
-        level: 10,
-        logo: getImageUrl("/images/skills/vagrant.svg"),
-      },
-      {
-        name: "Packer",
-        level: 10,
-        logo: getImageUrl("/images/skills/packer.svg"),
       },
     ],
   },
@@ -281,16 +281,6 @@ export const skills: SkillGroup[] = [
         level: 10,
         logo: getImageUrl("/images/skills/ansible.svg"),
       },
-      {
-        name: "Chef",
-        level: 10,
-        logo: getImageUrl("/images/skills/chef.svg"),
-      },
-      {
-        name: "Puppet",
-        level: 10,
-        logo: getImageUrl("/images/skills/puppet.svg"),
-      },
     ],
   },
   {
@@ -326,6 +316,8 @@ export const skills: SkillGroup[] = [
         level: 10,
         logo: getImageUrl("/images/skills/jenkins.svg"),
       },
+      { name: "Helm", level: 10 },
+      { name: "Kargo", level: 10 },
     ],
   },
 ];
@@ -350,33 +342,78 @@ export const education: TimelineItem[] = [
 
 export const experience: TimelineItem[] = [
   {
-    date: "July 2024 - Present",
+    date: "March 2026 - Present",
+    location: "Accuris (Remote)",
+    title: "Principal Software Engineer",
+    imageSrc: getImageUrl("/images/logos/accuris-logo.png"),
+    content: (
+      <ul className="list-disc pl-8">
+        <li>
+          Built and launched the MCP mesh on AgentGateway, giving engineering,
+          product, and cross-functional teams governed access to 250+ tools with
+          Entra ID auth and centralized observability
+        </li>
+        <li>
+          Designed and shipped multiple production MCP servers exposing internal
+          systems to AI agents through natural language
+        </li>
+        <li>
+          Operate 100+ microservices on multi-region Kubernetes across 6
+          regions; led the multi-region expansion of compute and data tiers for
+          multiple core services
+        </li>
+        <li>
+          Standardized deployment patterns across 1,000+ repositories with
+          template-driven Kubernetes and CI/CD
+        </li>
+        <li>
+          Own architecture and cost management across 70+ AWS accounts,
+          consulting with teams on design and security
+        </li>
+        <li>
+          Build and operate CDC pipelines from PostgreSQL into Databricks for
+          mission-critical data
+        </li>
+      </ul>
+    ),
+  },
+  {
+    date: "April 2025 - March 2026",
+    location: "Accuris (Remote)",
+    title: "Senior Software Engineer",
+    imageSrc: getImageUrl("/images/logos/accuris-logo.png"),
+    content: (
+      <ul className="list-disc pl-8">
+        <li>
+          Led the migration of 1,000+ repositories to GitHub and consolidated CI
+          onto GitHub Actions with shared reusable workflows
+        </li>
+        <li>
+          Built the first internal MCP servers and the plugin library that
+          standardized how teams use AI day to day
+        </li>
+      </ul>
+    ),
+  },
+  {
+    date: "August 2024 - April 2025",
     location: "Forml (Remote)",
     title: "Senior Full Stack Engineer",
     imageSrc: getImageUrl("/images/logos/forml-logo.png"),
     content: (
       <ul className="list-disc pl-8">
         <li>
-          Lead end-to-end development of a robust, full-stack platform
-          leveraging Python, Angular, AWS, Redis, and PostgreSQL as the first
-          engineering hire
+          First engineering hire. Worked directly with founders and enterprise
+          clients to scope requirements, build quarterly roadmaps, and ship the
+          platform end to end (Python, Angular, AWS, PostgreSQL)
         </li>
         <li>
-          Create sophisticated API integrations and system architectures,
-          enabling the platform to support twice the user base within two months
+          Built one-click on-prem deployment for enterprise clients, cutting
+          onboarding from 3 days to 4 hours
         </li>
         <li>
-          Collaborate closely with founders and clients to craft quarterly
-          roadmaps, ensuring product vision aligns seamlessly with technical
-          execution
-        </li>
-        <li>
-          Design and maintain secure, high-performance external APIs using AWS,
-          Terraform, and Python
-        </li>
-        <li>
-          Engineer streamlined, one-click deployment solutions for on-premise
-          clients, reducing onboarding time from 3 days to just 4 hours
+          Scaled the platform to 2x users in 2 months through API and
+          architecture work, earning promotion to Senior
         </li>
       </ul>
     ),
@@ -472,7 +509,7 @@ export const experience: TimelineItem[] = [
     ),
   },
   {
-    date: "September 2018 - August 2021",
+    date: "October 2018 - March 2020",
     location: "Cerner, Kansas City",
     title: "Systems Engineer",
     imageSrc: getImageUrl("/images/logos/cerner-logo.png"),
@@ -581,6 +618,29 @@ export const socialLinks: Social[] = [
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    title: "Sauce",
+    description:
+      "An agentic operating loop for Obsidian. Notes become node-based work graphs that agents like Claude Code and Codex execute in isolated workers, with scheduling, retries, handoffs between agents, and a persistent task store. Started as a loop-based forward deployment mechanism, rebuilt around graphs. Versioned vault platform shipped via Homebrew, MIT.",
+    url: "https://github.com/willfell/sauce",
+    githubUrl: "https://github.com/willfell/sauce",
+    image: getImageUrl("/images/skills/obsidian.svg"),
+    techStack: [
+      "Claude Code",
+      "Agents",
+      "Graph Execution",
+      "TypeScript",
+      "Obsidian",
+      "Homebrew",
+    ],
+    why: "I kept rebuilding the same setup in every Obsidian vault: Templater scripts, Dataview views, plugin configs, folder conventions, none of it versioned, all of it lost the next time sync ate a file. Then agents got good enough to do real work and I wanted them working out of the vault I already live in, not out of a terminal or yet another app. Sauce makes the vault setup a real piece of software you install and upgrade with Homebrew, and makes the vault itself the control plane for agent execution.",
+    how: "A task starts as a note. Sauce turns it into a graph of typed nodes with edges that define flow, retries, and handoffs between agents. A dispatcher scheduled through launchd on an always-on machine picks up ready nodes and hands each to an isolated worker (a Claude Code or Codex session in its own git worktree). Workers write results and status back into the vault, the graph advances, and review happens in Obsidian. Mechanisms and blueprints ship through the same versioned install, so every vault gets the same loop.",
+    techIcons: [
+      getImageUrl("/images/skills/obsidian.svg"),
+      getImageUrl("/images/skills/typescript.svg"),
+    ],
+    isPassionProject: true,
+  },
+  {
     title: "Balanced Brief",
     description:
       "An automated news aggregator that delivers non-biased content",
@@ -666,6 +726,74 @@ export const portfolioItems: PortfolioItem[] = [
       getImageUrl("/images/skills/s3.svg"),
     ],
     isPassionProject: true,
+  },
+  {
+    title: "MCP Mesh on AgentGateway",
+    description:
+      "Governed agent tooling platform connecting 250+ tools to developers, product, and cross-functional teams with Entra ID auth and centralized observability.",
+    url: "#",
+    image: getImageUrl("/images/logos/accuris-logo.png"),
+    isPassionProject: false,
+    location: "Accuris",
+    date: "2025-2026",
+    techStack: [
+      "MCP",
+      "AgentGateway",
+      "Entra ID",
+      "Kubernetes",
+      "Python",
+      "TypeScript",
+    ],
+    techIcons: [
+      getImageUrl("/images/skills/kubernetes.svg"),
+      getImageUrl("/images/skills/python.svg"),
+      getImageUrl("/images/skills/typescript.svg"),
+    ],
+  },
+  {
+    title: "Multi-Region Kubernetes",
+    description:
+      "Expanded compute and data tiers to 6 regions for multiple core services running 100+ microservices.",
+    url: "#",
+    image: getImageUrl("/images/logos/accuris-logo.png"),
+    isPassionProject: false,
+    location: "Accuris",
+    date: "2025-2026",
+    techStack: ["Kubernetes", "EKS", "ArgoCD", "Terraform", "AWS"],
+    techIcons: [
+      getImageUrl("/images/skills/kubernetes.svg"),
+      getImageUrl("/images/skills/argocd.svg"),
+      getImageUrl("/images/skills/terraform.svg"),
+      getImageUrl("/images/skills/aws.svg"),
+    ],
+  },
+  {
+    title: "GitHub Migration at Scale",
+    description:
+      "Migrated 1,000+ repositories to GitHub and standardized CI/CD on GitHub Actions with reusable workflows and templated Kubernetes deployments.",
+    url: "#",
+    image: getImageUrl("/images/logos/accuris-logo.png"),
+    isPassionProject: false,
+    location: "Accuris",
+    date: "2025-2026",
+    techStack: ["GitHub Actions", "Kubernetes", "Helm", "Azure DevOps"],
+    techIcons: [
+      getImageUrl("/images/skills/github-actions.svg"),
+      getImageUrl("/images/skills/kubernetes.svg"),
+      getImageUrl("/images/skills/azure.svg"),
+    ],
+  },
+  {
+    title: "CDC Pipelines to Databricks",
+    description:
+      "Change data capture from PostgreSQL into Databricks for mission-critical data.",
+    url: "#",
+    image: getImageUrl("/images/logos/accuris-logo.png"),
+    isPassionProject: false,
+    location: "Accuris",
+    date: "2025-2026",
+    techStack: ["PostgreSQL", "Databricks", "Lakeflow", "AWS"],
+    techIcons: [getImageUrl("/images/skills/aws.svg")],
   },
   {
     title: "Self-Service Ephemeral Environments",
