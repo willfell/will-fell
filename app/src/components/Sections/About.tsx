@@ -34,7 +34,11 @@ const About: FC = memo(() => {
         {/* RIGHT COLUMN */}
         <div className="flex flex-col md:w-1/2 md:pl-10">
           <h2 className="mb-4 text-3xl font-bold text-stone-black">About Me</h2>
-          <p className="mb-6 text-stone-black">{description}</p>
+          {description.split(/\n\s*\n/).map((paragraph, idx) => (
+            <p key={idx} className="mb-4 text-stone-black">
+              {paragraph}
+            </p>
+          ))}
 
           {/* ABOUT ITEMS – single column */}
           <ul className="space-y-4">

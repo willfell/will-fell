@@ -25,7 +25,7 @@ import {
 export const homePageMeta: HomepageMeta = {
   title: "Will Fellhoelter - Principal Software Engineer",
   description:
-    "Portfolio for Will Fellhoelter, Principal Software Engineer focused on agentic AI infrastructure, MCP, and Kubernetes at scale.",
+    "Portfolio for Will Fellhoelter, Principal Software Engineer. Eight years across the stack, lately agentic AI infrastructure, MCP, and Kubernetes at scale.",
 };
 
 /**
@@ -55,8 +55,9 @@ export const heroData: Hero = {
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
         I'm a Denver-based{" "}
         <strong className="text-stone-100">Principal Software Engineer</strong>{" "}
-        building agentic AI platforms and Kubernetes infrastructure at scale,
-        with 8 years across platform, DevOps, and full stack.
+        with eight years across the stack, from data and application code to
+        the Kubernetes underneath. Lately that points at agentic AI
+        infrastructure at scale.
       </p>
     </>
   ),
@@ -82,11 +83,11 @@ export const heroData: Hero = {
  */
 export const aboutData: About = {
   profileImageSrc: getImageUrl("/images/about/aboutmepic.jpg"),
-  description: `Principal Engineer with 8 years across platform, DevOps, and full stack, now focused on agentic AI 
-  infrastructure. Built the MCP mesh connecting 250+ tools to every team at Accuris, run 100+ microservices across 
-  6 regions on Kubernetes, and standardized deployments for 1,000+ repos. Former first engineering hire at an AI 
-  startup with a track record of working directly with clients to turn requirements into shipped product. Strongest 
-  at the intersection of customer problems, system design, and fast execution with agents.`,
+  description: `Eight years across the stack: data, application logic, deploys, the Kubernetes underneath, the alerting on top. I usually end up wherever the gap is between what a client needs and what actually ships.
+
+Lately that's agentic AI infrastructure. At Accuris I built the MCP mesh connecting 250+ tools to every team, handle operations for 100+ microservices across 6 regions, and run a few of my own the wider org depends on. I help map out the work standardizing CI/CD across 1,000+ repos. Most of it is making the agentic workflows developers already use hang together, from one person's setup out to the org.
+
+Before that, first engineering hire at an AI startup, working with founders and enterprise clients.`,
   aboutItems: [
     { label: "Location", text: "Denver, CO", Icon: MapIcon },
     { label: "Study", text: "Wichita State University", Icon: AcademicCapIcon },
@@ -363,8 +364,9 @@ export const experience: TimelineItem[] = [
           multiple core services
         </li>
         <li>
-          Standardized deployment patterns across 1,000+ repositories with
-          template-driven Kubernetes and CI/CD
+          Help map out and drive the projects standardizing deployment
+          patterns and CI/CD across 1,000+ repositories with template-driven
+          Kubernetes
         </li>
         <li>
           Own architecture and cost management across 70+ AWS accounts,
@@ -753,7 +755,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     title: "Multi-Region Kubernetes",
     description:
-      "Expanded compute and data tiers to 6 regions for multiple core services running 100+ microservices.",
+      "Expanded compute and data tiers to 6 regions for multiple core services, part of the 100+ microservices I handle operations for.",
     url: "#",
     image: getImageUrl("/images/logos/accuris-logo.png"),
     isPassionProject: false,
@@ -770,7 +772,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     title: "GitHub Migration at Scale",
     description:
-      "Migrated 1,000+ repositories to GitHub and standardized CI/CD on GitHub Actions with reusable workflows and templated Kubernetes deployments.",
+      "Led the migration of 1,000+ repositories to GitHub and helped map out the CI/CD standardization on GitHub Actions with reusable workflows and templated Kubernetes deployments.",
     url: "#",
     image: getImageUrl("/images/logos/accuris-logo.png"),
     isPassionProject: false,
