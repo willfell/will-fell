@@ -755,7 +755,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     title: "Multi-Region Kubernetes",
     description:
-      "Expanded compute and data tiers to 6 regions for multiple core services, part of the 100+ microservices I handle operations for.",
+      "Expanded compute and data tiers to 6 regions for multiple core services across a 100+ microservice platform.",
     url: "#",
     image: getImageUrl("/images/logos/accuris-logo.png"),
     isPassionProject: false,
