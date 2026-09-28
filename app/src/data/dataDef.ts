@@ -38,6 +38,7 @@ export interface Role {
   employer: string;
   title: string;
   line: string;
+  bullets: string[];
 }
 
 export interface Social {
