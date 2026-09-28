@@ -21,4 +21,5 @@ const Icon: FC<IconProps> = memo(
   ),
 );
 
+Icon.displayName = "Icon";
 export default Icon;

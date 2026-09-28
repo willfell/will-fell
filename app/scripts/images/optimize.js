@@ -135,7 +135,7 @@ async function main() {
   let sharp;
   try {
     sharp = require('sharp');
-  } catch (error) {
+  } catch {
     console.log(colors.yellow('Sharp is not installed. Installing...'));
     console.log(colors.dim('Run: yarn install'));
     console.log('');
