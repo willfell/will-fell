@@ -191,11 +191,11 @@ Social icons are inline SVG components, not image files. The company logos are n
 
 ## Resume
 
-The served resume is the PDF Will supplied on 2026-09-28 (sha256 `e59ef541…dbaf`, 2 pages, 71 KB), not the one built from `resume/index.html`. It is committed to both `app/public/WillFellhoelterResume.pdf` and `app/src/assets/WillFellhoelterResume.pdf`, because the deploy's `yarn copy-resume` postbuild step overwrites the former with the latter.
+The served resume is the PDF Will supplied on 2026-09-28 (sha256 `ee0c9243…44ef`, 2 pages, 71 KB), not the one built from `resume/index.html`. It is committed to both `app/public/WillFellhoelterResume.pdf` and `app/src/assets/WillFellhoelterResume.pdf`, because the deploy's `yarn copy-resume` postbuild step overwrites the former with the latter.
 
 Because the PDF is now produced outside the repo, the HTML build in `resume/` no longer describes what is served and running it would overwrite the real PDF with stale content. This change deletes `resume/` and the root `resume:build` script. The HTML source remains in history at `2246376` if it is ever wanted again. The root `playwright` dev dependency stays; the verification screenshots use it.
 
-Two lines in the supplied PDF differ from the corrections in the 2026-09-25 content-ownership doc: "Run 100+ microservices" (the doc says "operate") and "Drive the standardization of deployment and CI/CD across 1,000+ repositories" (the doc says "help map out"). The site's own copy keeps the corrected wording. The PDF ships as supplied; changing it means changing it at its source, which is not in this repo.
+The PDF's wording matches the corrections in the 2026-09-25 content-ownership doc ("operations for" and "Help map out", never "run" or a solo claim); Will revised it on 2026-09-28 to close the gap. The PDF ships as supplied; any further change happens at its source, which is not in this repo. It splits Forml into two dated entries where the site keeps one combined line, which is Will's earlier ruling for the site.
 
 ## Phase 2: `/sauce`
 
@@ -223,7 +223,7 @@ All of these pass before the PR opens:
 8. Word count of the rendered `<main>` text ≤ 400.
 9. Every link on the page resolves: the PDF, GitHub, LinkedIn, Strava, the Sauce repo, the site repo.
 10. The `pr` workflow's `validate-build` and `lint` jobs pass on the PR.
-11. `out/WillFellhoelterResume.pdf` after `yarn build && yarn copy-resume` has sha256 `e59ef541c24fb78eeba19f838381d80c80db811442729d4838c66338d4d4dbaf`.
+11. `out/WillFellhoelterResume.pdf` after `yarn build && yarn copy-resume` has sha256 `ee0c9243f632798e01287555ce940188ed21459eebd4c26bd81eb6a45fb144ef`.
 
 ## Out of scope, tracked elsewhere
 

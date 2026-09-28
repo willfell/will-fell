@@ -18,7 +18,7 @@
 - Copy is verbatim from the spec. Two wording rules never bend: "operations for 100+ microservices" (never "run"), "helping map out … CI/CD across 1,000+ repos" (never a solo claim). The Sauce description is the existing `portfolioItems[0].description` text, unchanged.
 - Colour tokens: `cream #F7F4EE` (new), `stone-black #2A2A2A`, `forest-green #5E6746`, `sage-green #7D8A69`, `earth-tan #DBBB9C`, `canyon-tan #E4D5B7`, `deep-forest #3A4428`. No gradients, overlays, shadows, `hover:scale`, or underline-bar decorations.
 - Motion budget: one CSS fade-and-rise on the hero at load (500ms), disabled under `prefers-reduced-motion`. No `opacity-0`, `animate-on-scroll`, `animate-on-load`, `framer-motion`.
-- Gates (all must pass before the PR opens): `yarn compile`, `yarn lint`, `yarn images:validate`, `yarn build`, `npm run site:verify` (height ≤ 2,600px at 1280 wide, `<main>` ≤ 400 words, six required links, no dead routes in `out/`, no animation classes, no horizontal overflow at 390px, PDF sha256 `e59ef541c24fb78eeba19f838381d80c80db811442729d4838c66338d4d4dbaf`).
+- Gates (all must pass before the PR opens): `yarn compile`, `yarn lint`, `yarn images:validate`, `yarn build`, `npm run site:verify` (height ≤ 2,600px at 1280 wide, `<main>` ≤ 400 words, six required links, no dead routes in `out/`, no animation classes, no horizontal overflow at 390px, PDF sha256 `ee0c9243f632798e01287555ce940188ed21459eebd4c26bd81eb6a45fb144ef`).
 - Commit messages end with the attribution block from the session (`Co-Authored-By` and `Claude-Session` lines). No comments in YAML/JSON/HCL config files.
 - One deliberate deviation from the spec's token table, for contrast: muted text on cream and on canyon-tan uses Tailwind `stone-600` instead of `sage-green` (`#7D8A69` on `#F7F4EE` is 3.3:1, below AA for small text). `sage-green` is not used for text anywhere. Footer secondary text is `earth-tan/80` on `deep-forest` for the same reason.
 
@@ -63,7 +63,7 @@ const MAX_HEIGHT = 2600;
 const MAX_WORDS = 400;
 const PHONE_WIDTH = 390;
 const PDF_SHA256 =
-  "e59ef541c24fb78eeba19f838381d80c80db811442729d4838c66338d4d4dbaf";
+  "ee0c9243f632798e01287555ce940188ed21459eebd4c26bd81eb6a45fb144ef";
 const REQUIRED_LINKS = [
   "/WillFellhoelterResume.pdf",
   "https://github.com/willfell",
@@ -1183,7 +1183,7 @@ Expected: `npm ERR! Missing script: "resume:build"`.
 shasum -a 256 app/public/WillFellhoelterResume.pdf app/src/assets/WillFellhoelterResume.pdf
 ```
 
-Expected: both lines start with `e59ef541c24fb78eeba19f838381d80c80db811442729d4838c66338d4d4dbaf`.
+Expected: both lines start with `ee0c9243f632798e01287555ce940188ed21459eebd4c26bd81eb6a45fb144ef`.
 
 - [ ] **Step 3: Commit**
 
