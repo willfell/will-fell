@@ -21,7 +21,7 @@ Decisions Will made on 2026-09-28, all locked:
 
 ## Non-goals
 
-- No change to Terraform, the GitHub Actions workflows, the resume build, Plausible, or the domain.
+- No change to Terraform, the GitHub Actions workflows, Plausible, or the domain.
 - No redirects for `/education`, `/site-info`, `/info` and `/contact`. They had no inbound links worth preserving; a static export on S3 will serve CloudFront's error behaviour for them.
 - No contact form. No CMS. No new dependencies.
 - No change to any Sauce copy. The card reuses the existing description verbatim.
@@ -189,6 +189,14 @@ Everything else moves to `app/public/images/_archive/` via the existing `yarn im
 
 Social icons are inline SVG components, not image files. The company logos are not used. `app/public/favicon.ico` and `site.webmanifest` stay.
 
+## Resume
+
+The served resume is the PDF Will supplied on 2026-09-28 (sha256 `e59ef541…dbaf`, 2 pages, 71 KB), not the one built from `resume/index.html`. It is committed to both `app/public/WillFellhoelterResume.pdf` and `app/src/assets/WillFellhoelterResume.pdf`, because the deploy's `yarn copy-resume` postbuild step overwrites the former with the latter.
+
+Because the PDF is now produced outside the repo, the HTML build in `resume/` no longer describes what is served and running it would overwrite the real PDF with stale content. This change deletes `resume/` and the root `resume:build` script. The HTML source remains in history at `2246376` if it is ever wanted again. The root `playwright` dev dependency stays; the verification screenshots use it.
+
+Two lines in the supplied PDF differ from the corrections in the 2026-09-25 content-ownership doc: "Run 100+ microservices" (the doc says "operate") and "Drive the standardization of deployment and CI/CD across 1,000+ repositories" (the doc says "help map out"). The site's own copy keeps the corrected wording. The PDF ships as supplied; changing it means changing it at its source, which is not in this repo.
+
 ## Phase 2: `/sauce`
 
 Not built in this change. Gated on Will saying the Sauce README is stable. The structure is fixed now so the later work is copy only:
@@ -215,6 +223,7 @@ All of these pass before the PR opens:
 8. Word count of the rendered `<main>` text ≤ 250.
 9. Every link on the page resolves: the PDF, GitHub, LinkedIn, Strava, the Sauce repo, the site repo.
 10. The `pr` workflow's `validate-build` and `lint` jobs pass on the PR.
+11. `out/WillFellhoelterResume.pdf` after `yarn build && yarn copy-resume` has sha256 `e59ef541c24fb78eeba19f838381d80c80db811442729d4838c66338d4d4dbaf`.
 
 ## Out of scope, tracked elsewhere
 
