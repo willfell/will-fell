@@ -13,4 +13,5 @@ const GithubIcon: FC<IconProps> = memo((props) => (
   </Icon>
 ));
 
+GithubIcon.displayName = "GithubIcon";
 export default GithubIcon;

@@ -1,31 +1,91 @@
-import { ChevronUpIcon } from "@heroicons/react/24/solid";
-import { FC, memo } from "react";
+import { FC, memo, useRef, useState } from "react";
 
-import { SectionId } from "../../data/data";
-import Socials from "../Socials";
+import { contactEmail, socialLinks } from "../../data/data";
+import { trackEvent } from "../../utils/analytics";
 
-const currentYear = new Date().getFullYear();
+const Footer: FC = memo(() => {
+  const [copied, setCopied] = useState(false);
+  const emailRef = useRef<HTMLAnchorElement>(null);
 
-const Footer: FC = memo(() => (
-  <div className="relative bg-deep-forest px-4 pb-6 pt-12 sm:px-8 sm:pb-8 sm:pt-14">
-    <div className="absolute inset-x-0 -top-4 flex justify-center sm:-top-6">
-      <a
-        className="rounded-full bg-earth-tan p-1 ring-sage-green ring-offset-2 ring-offset-forest-green/80 focus:outline-none focus:ring-2 sm:p-2 transition-all duration-300 hover:bg-sage-green hover:scale-110 shadow-lg"
-        href={`/#${SectionId.Hero}`}
-      >
-        <ChevronUpIcon className="h-6 w-6 bg-transparent sm:h-8 sm:w-8 text-forest-green" />
-      </a>
-    </div>
-    <div className="flex flex-col items-center gap-y-6">
-      <div className="flex gap-x-4 text-earth-tan">
-        <Socials />
+  // When the clipboard is refused, leave the address selected so one
+  // keystroke copies it.
+  const selectEmail = () => {
+    const el = emailRef.current;
+    const selection = window.getSelection();
+    if (!el || !selection) return;
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  };
+
+  const copyEmail = async () => {
+    trackEvent("Email Click");
+    try {
+      await navigator.clipboard.writeText(contactEmail);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+      selectEmail();
+    }
+  };
+
+  return (
+    <footer className="bg-deep-forest px-4 py-12 text-earth-tan lg:px-8">
+      <div className="mx-auto flex max-w-screen-lg flex-wrap items-center justify-between gap-x-8 gap-y-6">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <span className="flex items-center gap-2 font-mono text-sm">
+            <a
+              className="select-all hover:underline underline-offset-4"
+              href={`mailto:${contactEmail}`}
+              onClick={() => trackEvent("Email Click")}
+              ref={emailRef}
+            >
+              {contactEmail}
+            </a>
+            <button
+              aria-label="Copy email address"
+              className="rounded border border-earth-tan/60 px-2 py-0.5 text-xs transition-colors hover:bg-earth-tan hover:text-deep-forest"
+              onClick={copyEmail}
+              type="button"
+            >
+              {copied ? "copied" : "copy"}
+            </button>
+          </span>
+          <ul className="flex items-center gap-4">
+            {socialLinks.map(({ label, href, Icon }) => (
+              <li key={label}>
+                <a
+                  aria-label={label}
+                  className="block transition-colors hover:text-cream"
+                  href={href}
+                  onClick={() => trackEvent("Social Click", { platform: label })}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <Icon className="h-5 w-5" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="font-mono text-xs text-earth-tan/80">
+          <a
+            className="hover:underline underline-offset-4"
+            href="https://github.com/willfell/will-fell"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            source
+          </a>{" "}
+          · © <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
+          Will Fellhoelter
+        </p>
       </div>
-      <span className="text-sm text-sage-green">
-        © Copyright {currentYear} Will Fellhoelter
-      </span>
-    </div>
-  </div>
-));
+    </footer>
+  );
+});
 
 Footer.displayName = "Footer";
 export default Footer;

@@ -1,47 +1,34 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { memo, PropsWithChildren } from "react";
+
 import { HomepageMeta } from "../../data/dataDef";
 
+// One page, one URL: removed routes fall through to index.html in
+// production, and they must not canonicalise to themselves.
+const SITE_URL = "https://willfellhoelter.com/";
+
 const Page: NextPage<PropsWithChildren<HomepageMeta>> = memo(
-  ({ children, title, description }) => {
-    const { asPath: pathname } = useRouter();
+  ({ children, title, description }) => (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta content={description} name="description" />
+        <link href={SITE_URL} key="canonical" rel="canonical" />
 
-    return (
-      <>
-        <Head>
-          <title>{title}</title>
-          <meta content={description} name="description" />
+        <link href="/favicon.ico" rel="icon" sizes="any" />
+        <link href="/site.webmanifest" rel="manifest" />
 
-          {/* several domains list the same content, make sure google knows we mean this one. */}
-          <link
-            href={`https://willfellhoelter.com${pathname}`}
-            key="canonical"
-            rel="canonical"
-          />
+        <meta content={title} property="og:title" />
+        <meta content={description} property="og:description" />
+        <meta content={SITE_URL} property="og:url" />
 
-          <link href="/favicon.ico" rel="icon" sizes="any" />
-          <link href="/icon.svg" rel="icon" type="image/svg+xml" />
-          <link href="/apple-touch-icon.png" rel="apple-touch-icon" />
-          <link href="/site.webmanifest" rel="manifest" />
-
-          {/* Open Graph : https://ogp.me/ */}
-          <meta content={title} property="og:title" />
-          <meta content={description} property="og:description" />
-          <meta
-            content={`https://willfellhoelter.com${pathname}`}
-            property="og:url"
-          />
-
-          {/* Twitter: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup */}
-          <meta content={title} name="twitter:title" />
-          <meta content={description} name="twitter:description" />
-        </Head>
-        {children}
-      </>
-    );
-  },
+        <meta content={title} name="twitter:title" />
+        <meta content={description} name="twitter:description" />
+      </Head>
+      {children}
+    </>
+  ),
 );
 
 Page.displayName = "Page";

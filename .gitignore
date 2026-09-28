@@ -92,6 +92,7 @@ out
 
 # Archived/unused images (for review, not deployed)
 app/public/images/_archive/
+app/.screenshots/
 
 # Nuxt.js build / generate output
 .nuxt

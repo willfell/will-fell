@@ -22,7 +22,7 @@ jobs:
       role_arn: ${{ vars.AWS_ROLE_ARN }}
       aws_region: ${{ vars.AWS_REGION }}
       postbuild_command: yarn copy-resume
-      invalidation_paths: /*.html /index.html /_next/* /*.pdf
+      invalidation_paths: /*
     secrets:
       s3_bucket: ${{ secrets.S3_BUCKET_NAME }}
       cloudfront_distribution_id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}

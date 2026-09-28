@@ -1,11 +1,8 @@
 {
-  "name": "react-resume-template",
-  "short_name": "react-resume-template",
-  "icons": [
-    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
-    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
-  ],
-  "theme_color": "#515455",
-  "background_color": "#515455",
-  "display": "standalone"
+  "name": "Will Fellhoelter",
+  "short_name": "Will Fellhoelter",
+  "icons": [{ "src": "/favicon.ico", "sizes": "any" }],
+  "theme_color": "#5E6746",
+  "background_color": "#F7F4EE",
+  "display": "browser"
 }
