@@ -49,7 +49,7 @@ Will Fellhoelter                     Work   Experience   Resume ↓
 
 ## Home page
 
-Five bands. Every band is visible at rest. Nothing is 100vh. At 1280×800 the page ends inside the third screen (height ≤ 2,600px). Word count on the page, excluding the nav and footer, ≤ 250.
+Five bands. Every band is visible at rest. Nothing is 100vh. At 1280×800 the page ends inside the third screen (height ≤ 2,600px). Word count on the page, excluding the nav and footer, ≤ 400 (the copy below totals about 370; the frozen Sauce blurb alone is 52).
 
 ### 1. Hero
 
@@ -220,7 +220,7 @@ All of these pass before the PR opens:
 5. `grep -rn "opacity-0\|animate-on-scroll\|animate-on-load" app/src` returns nothing.
 6. `ls app/public/images` shows one file.
 7. Playwright screenshot of `out/index.html` at 1280×800 and 390×844, attached to the PR. Total page height at 1280 wide ≤ 2,600px.
-8. Word count of the rendered `<main>` text ≤ 250.
+8. Word count of the rendered `<main>` text ≤ 400.
 9. Every link on the page resolves: the PDF, GitHub, LinkedIn, Strava, the Sauce repo, the site repo.
 10. The `pr` workflow's `validate-build` and `lint` jobs pass on the PR.
 11. `out/WillFellhoelterResume.pdf` after `yarn build && yarn copy-resume` has sha256 `e59ef541c24fb78eeba19f838381d80c80db811442729d4838c66338d4d4dbaf`.
