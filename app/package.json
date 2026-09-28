@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "build": "yarn compile && yarn next build",
+    "build": "yarn compile && yarn lint:check && yarn next build",
     "clean": "rm -rf build-tsc .next",
     "compile": "yarn run -T tsc --build --verbose",
     "dev": "yarn compile && yarn next dev",
@@ -12,6 +12,7 @@
     "copy-resume": "cp -r src/assets/WillFellhoelterResume.pdf out/WillFellhoelterResume.pdf",
     "export": "yarn next export",
     "lint": "eslint . --fix",
+    "lint:check": "eslint .",
     "format": "prettier --write .",
     "images:validate": "node scripts/images/validate.js",
     "images:optimize": "node scripts/images/optimize.js",

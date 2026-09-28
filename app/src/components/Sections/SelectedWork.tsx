@@ -17,6 +17,7 @@ const SelectedWork: FC = memo(() => (
           <p className="leading-relaxed">{description}</p>
           {href && (
             <a
+              aria-label={`${title} on GitHub`}
               className="mt-auto pt-2 font-medium text-deep-forest underline underline-offset-4 hover:text-forest-green"
               href={href}
               onClick={() => trackEvent("Project Click", { project: title })}

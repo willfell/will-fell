@@ -11,7 +11,7 @@ const About: FC = memo(() => (
   >
     <div className="mx-auto max-w-screen-lg">
       <h2 className="sr-only">About</h2>
-      <p className="max-w-prose text-lg leading-relaxed">
+      <p className="max-w-prose text-[17px] leading-relaxed">
         {aboutData.description}
       </p>
     </div>

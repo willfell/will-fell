@@ -1,10 +1,23 @@
-import { FC, memo, useState } from "react";
+import { FC, memo, useRef, useState } from "react";
 
 import { contactEmail, socialLinks } from "../../data/data";
 import { trackEvent } from "../../utils/analytics";
 
 const Footer: FC = memo(() => {
   const [copied, setCopied] = useState(false);
+  const emailRef = useRef<HTMLAnchorElement>(null);
+
+  // When the clipboard is refused, leave the address selected so one
+  // keystroke copies it.
+  const selectEmail = () => {
+    const el = emailRef.current;
+    const selection = window.getSelection();
+    if (!el || !selection) return;
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  };
 
   const copyEmail = async () => {
     trackEvent("Email Click");
@@ -14,6 +27,7 @@ const Footer: FC = memo(() => {
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);
+      selectEmail();
     }
   };
 
@@ -26,6 +40,7 @@ const Footer: FC = memo(() => {
               className="select-all hover:underline underline-offset-4"
               href={`mailto:${contactEmail}`}
               onClick={() => trackEvent("Email Click")}
+              ref={emailRef}
             >
               {contactEmail}
             </a>
@@ -64,7 +79,8 @@ const Footer: FC = memo(() => {
           >
             source
           </a>{" "}
-          · © {new Date().getFullYear()} Will Fellhoelter
+          · © <span suppressHydrationWarning>{new Date().getFullYear()}</span>{" "}
+          Will Fellhoelter
         </p>
       </div>
     </footer>
