@@ -136,6 +136,77 @@ async function main() {
       );
     }
 
+    const monoLoaded = await page.evaluate(() =>
+      Array.from(document.fonts).some(
+        (f) => f.family.replace(/["']/g, "") === "Fira Code" && f.status === "loaded",
+      ),
+    );
+    check(monoLoaded, "Fira Code never loaded; mono labels are falling back");
+
+    const clippedSvgs = await page.evaluate(() =>
+      Array.from(document.querySelectorAll("svg"))
+        .map((svg) => {
+          const box = svg.getBBox();
+          const view = svg.viewBox.baseVal;
+          const inside =
+            box.x >= view.x - 0.5 &&
+            box.y >= view.y - 0.5 &&
+            box.x + box.width <= view.x + view.width + 0.5 &&
+            box.y + box.height <= view.y + view.height + 0.5;
+          const owner = svg.closest("a");
+          return inside ? null : (owner && owner.getAttribute("aria-label")) || "unlabelled svg";
+        })
+        .filter(Boolean),
+    );
+    check(
+      clippedSvgs.length === 0,
+      `svg drawing extends past its viewBox (clipped): ${clippedSvgs.join(", ")}`,
+    );
+
+    const contrast = await page.evaluate(() => {
+      const parse = (css) => {
+        const m = css.match(/rgba?\(([^)]+)\)/);
+        if (!m) return null;
+        const [r, g, b, a = "1"] = m[1].split(",").map((v) => v.trim());
+        return { r: +r, g: +g, b: +b, a: +a };
+      };
+      const background = (el) => {
+        for (let node = el; node; node = node.parentElement) {
+          const c = parse(getComputedStyle(node).backgroundColor);
+          if (c && c.a > 0) return c;
+        }
+        return { r: 255, g: 255, b: 255, a: 1 };
+      };
+      const luminance = ({ r, g, b }) => {
+        const lin = (v) => {
+          const s = v / 255;
+          return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+        };
+        return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+      };
+      const ratio = (el) => {
+        const fg = parse(getComputedStyle(el).color);
+        const bg = background(el);
+        const blended = {
+          r: fg.a * fg.r + (1 - fg.a) * bg.r,
+          g: fg.a * fg.g + (1 - fg.a) * bg.g,
+          b: fg.a * fg.b + (1 - fg.a) * bg.b,
+        };
+        const [hi, lo] = [luminance(blended), luminance(bg)].sort((x, y) => y - x);
+        return (hi + 0.05) / (lo + 0.05);
+      };
+      const targets = {
+        "sauce link": document.querySelector('#work a[href*="sauce"]'),
+        "footer source line": document.querySelector('footer a[href*="will-fell"]'),
+      };
+      return Object.entries(targets).map(([name, el]) =>
+        el ? { name, ratio: Math.round(ratio(el) * 100) / 100 } : { name, ratio: 0 },
+      );
+    });
+    for (const { name, ratio } of contrast) {
+      check(ratio >= 4.5, `${name} contrast ${ratio}:1 is below AA 4.5:1`);
+    }
+
     fs.mkdirSync(SHOTS, { recursive: true });
     await page.screenshot({
       path: path.join(SHOTS, "home-1280.png"),

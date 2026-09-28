@@ -21,11 +21,11 @@ Decisions Will made on 2026-09-28, all locked:
 
 ## Non-goals
 
-- No change to Terraform, the GitHub Actions workflows, Plausible, or the domain.
+- No change to Terraform, Plausible, or the domain. The one workflow change is the CloudFront invalidation in `deploy.yml`, see Deploy below.
 - No redirects for `/education`, `/site-info`, `/info` and `/contact`. They had no inbound links worth preserving; a static export on S3 will serve CloudFront's error behaviour for them.
 - No contact form. No CMS. No new dependencies.
 - No change to any Sauce copy. The card reuses the existing description verbatim.
-- The public-repo hygiene work (GPS EXIF in tracked photos, the two public `docs/` files) is a separate task that Will ordered ahead of this one. This spec removes most of the GPS-tagged photos as a side effect but does not rewrite history.
+- The public-repo hygiene work (GPS EXIF in tracked photos, the two public `docs/` files) is a separate task that Will ordered ahead of this one. This spec removes most of the GPS-tagged photos from the tree, but does not rewrite history and does not remove them from the live bucket, see Deploy below.
 
 ## Structure
 
@@ -185,7 +185,14 @@ Dependencies removed from `app/package.json`: `framer-motion`, `react-icons`, `t
 
 `app/public/images` goes from 65 files to one: `about/profilepic.jpg` (800×800, verified to carry no EXIF). It remains the hero photo.
 
-Everything else moves to `app/public/images/_archive/` via the existing `yarn images:archive`, which is already git-ignored and not deployed. `yarn images:validate` must pass with zero broken references and zero orphans after the move. The archived files are then removed from the tree in the same commit so the deploy stops shipping them; the archive folder is only a local safety net.
+Everything else moves to `app/public/images/_archive/` via the existing `yarn images:archive`, which is already git-ignored and not deployed. `yarn images:validate` must pass with zero broken references and zero orphans after the move. The archived files are then removed from the tree in the same commit; git history holds the originals, so the local archive folder is deleted too.
+
+## Deploy
+
+Two facts about the shared `nextjs-site-deploy` workflow shape what this change does in production:
+
+1. The app sync runs with `--delete` and CloudFront caches the root under `/`, which the old invalidation list (`/*.html /index.html /_next/* /*.pdf`) never named. An edge holding the old `/` would serve old HTML whose chunks no longer exist, for up to the 3,600s default TTL. `deploy.yml` now invalidates `/*`. This is the one workflow change in this spec.
+2. The images sync runs without `--delete`, and the workflow restores the previously optimised `.webp`/`.avif` variants from the bucket before every build. Removing files from the tree therefore does not remove them from the live site: the 81 deleted images, GPS EXIF included, remain reachable at their old URLs until their keys are deleted from the bucket by hand. That deletion is a production operation for Will, tracked with the hygiene work; the command is `aws s3 rm s3://<bucket>/images/ --recursive --exclude "about/profilepic.*"`.
 
 Social icons are inline SVG components, not image files. The company logos are not used. `app/public/favicon.ico` and `site.webmanifest` stay.
 
