@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "resume:build": "node resume/build.js"
+    "site:verify": "node scripts/verify-site.js"
   },
   "devDependencies": {
     "playwright": "^1.55.0"
