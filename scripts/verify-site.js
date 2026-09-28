@@ -329,6 +329,70 @@ async function laterYearChecks(browser, origin) {
   await context.close();
 }
 
+// Each role is one line at rest and expands to its resume bullets on demand.
+async function rolesChecks(browser, origin) {
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await routeSiteOrigin(context, new Set());
+  const page = await context.newPage();
+  await page.goto(`${origin}/`, { waitUntil: "networkidle" });
+
+  const rest = await page.evaluate(() => {
+    const roles = Array.from(document.querySelectorAll("#experience details"));
+    return {
+      count: roles.length,
+      bullets: roles.map((d) => d.querySelectorAll("li").length),
+      openAtRest: roles.filter((d) => d.open).length,
+      visibleBullets: Array.from(document.querySelectorAll("#experience details li")).filter(
+        (li) => li.checkVisibility(),
+      ).length,
+    };
+  });
+  check(rest.count === 7, `experience has ${rest.count} expandable roles, expected 7`);
+  check(
+    rest.bullets.length > 0 && rest.bullets.every((n) => n >= 2),
+    `every role needs at least two bullets; counts are [${rest.bullets.join(", ")}]`,
+  );
+  check(
+    rest.openAtRest === 0 && rest.visibleBullets === 0,
+    `roles must be closed at rest; ${rest.openAtRest} open, ${rest.visibleBullets} bullets visible`,
+  );
+
+  if (rest.count > 0) {
+    await page.locator("#experience summary").first().click();
+    const opened = await page.evaluate(() => {
+      const d = document.querySelector("#experience details");
+      return {
+        open: d.open,
+        visible: Array.from(d.querySelectorAll("li")).filter((li) => li.checkVisibility())
+          .length,
+      };
+    });
+    check(
+      opened.open && opened.visible === rest.bullets[0],
+      `clicking the first role shows ${opened.visible} of ${rest.bullets[0]} bullets`,
+    );
+  }
+
+  const text = await page.evaluate(() => document.body.textContent);
+  check(!/\b(run|ran|running) 100\+/i.test(text), 'page says "run 100+"; the wording is "operate"');
+  check(
+    !/Entra ID|AgentGateway/.test(text),
+    "page names Entra ID or AgentGateway; the site keeps Accuris specifics generic",
+  );
+  await context.close();
+
+  const phone = await browser.newContext({ viewport: { width: 320, height: 844 } });
+  await routeSiteOrigin(phone, new Set());
+  const small = await phone.newPage();
+  await small.goto(`${origin}/`, { waitUntil: "networkidle" });
+  await small.evaluate(() =>
+    document.querySelectorAll("#experience details").forEach((d) => (d.open = true)),
+  );
+  const expandedWidth = await small.evaluate(() => document.documentElement.scrollWidth);
+  check(expandedWidth <= 320, `horizontal overflow at 320px with every role open: ${expandedWidth}`);
+  await phone.close();
+}
+
 async function noScriptChecks(browser, origin) {
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
@@ -389,6 +453,7 @@ async function main() {
     const summary = await desktopChecks(browser, origin);
     await phoneChecks(browser, origin);
     await laterYearChecks(browser, origin);
+    await rolesChecks(browser, origin);
     await noScriptChecks(browser, origin);
     await clipboardChecks(browser, origin);
     console.log(
