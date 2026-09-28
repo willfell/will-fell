@@ -1,8 +1,7 @@
 import { FC, memo } from "react";
 
-export interface IconProps extends React.HTMLAttributes<SVGSVGElement> {
+export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   svgRef?: React.Ref<SVGSVGElement>;
-  transform?: string;
 }
 
 const Icon: FC<IconProps> = memo(

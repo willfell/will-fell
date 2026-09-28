@@ -37,7 +37,7 @@ export default function Document() {
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="dns-prefetch" href="https://plausible.io" />
       </Head>
-      <body className="bg-stone-50">
+      <body>
         <Main />
         <NextScript />
       </body>
