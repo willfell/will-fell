@@ -126,6 +126,7 @@ function warn(message) {
 // Node puts the network reason (ECONNREFUSED, ENOTFOUND, a certificate error)
 // in error.cause; "fetch failed" alone is not diagnosable in a CI log.
 function describe(error) {
+  if (!(error instanceof Error)) return String(error);
   const cause = error.cause && (error.cause.code || error.cause.message);
   return cause ? `${error.message} (${cause})` : error.message;
 }
@@ -152,8 +153,12 @@ async function main() {
     return;
   }
   if (process.env.GITHUB_CONTRIBUTIONS_SKIP === "1") {
-    for (const p of existing.problems) warn(`github:fetch skipped, but the committed snapshot is unusable: ${p}`);
-    if (existing.problems.length) process.exit(1);
+    if (existing.problems.length) {
+      console.error(
+        `github:fetch skipped, but the committed snapshot is unusable: ${existing.problems.join("; ")}`,
+      );
+      process.exit(1);
+    }
     console.log("github:fetch skipped (GITHUB_CONTRIBUTIONS_SKIP=1)");
     return;
   }

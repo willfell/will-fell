@@ -16,7 +16,7 @@ A page to show my portfolio and provide some form of contact, you can see it on 
 - One dark page: hero, numbers, how Will works, selected work, roles that expand to their resume bullets, positions, GitHub activity, contact
 - GitHub contribution calendar fetched at build time from the public profile into `app/src/data/github-contributions.json` (`yarn github:fetch`); the committed snapshot is the fallback whenever GitHub is unreachable. The window slides daily, so `yarn build` rewrites that file whenever the calendar moved: commit it to refresh the fallback, or `git checkout -- app/src/data/github-contributions.json` to drop it. The deploy can skip the fetch by passing `build_env: GITHUB_CONTRIBUTIONS_SKIP=1` to the shared workflow
 - Resume download (the PDF is produced outside the repo; commit it to both `app/public/` and `app/src/assets/`)
-- Static export, responsive, one hero fade and nothing else moving
+- Static export, responsive; the only motion is a hero fade, smooth anchor scrolling and the roles' plus turning, all off under reduced motion
 - Deployed by GitHub Actions on every merge to `main`
 
 ## Verification

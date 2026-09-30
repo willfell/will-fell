@@ -65,7 +65,12 @@ const GitHubActivity: FC = memo(() => (
       </a>
     </div>
     <figure className="flex flex-col gap-3.5">
-      <div className="overflow-x-auto pb-1.5 [direction:rtl]">
+      <div
+        aria-label="Contribution heatmap, scrolls sideways"
+        className="overflow-x-auto pb-1.5 [direction:rtl]"
+        role="region"
+        tabIndex={0}
+      >
         <div
           aria-label={`Contribution heatmap for the last 12 months, one square per day, darker to brighter by activity: ${total} contributions in all`}
           className="flex w-full min-w-max justify-between gap-[3px] [direction:ltr]"

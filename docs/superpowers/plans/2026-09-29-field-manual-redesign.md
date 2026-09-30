@@ -17,10 +17,10 @@
 - Copy rules that never bend: "Operate 100+" / "operations for", never "run 100+"; "Help map out", never a solo claim about the 1,000+ repos; "K8s", never "Kubernetes"; "SSO" and "one gateway", never "Entra ID" or "AgentGateway"; the Sauce blurb is the frozen text. `scripts/verify-site.js` pins all four.
 - Tailwind 3.3.5: `[text-wrap:balance]`, `[text-wrap:pretty]`, `[font-stretch:115%]`, `[direction:rtl]` are arbitrary properties; `h-3 w-3`, never `size-3`.
 - Colour tokens are the spec's table, added to `tailwind.config.js` in Task 3 and used only by name. No hex in components.
-- Motion budget: the existing `.hero-enter` fade only.
+- Motion budget: the existing `.hero-enter` fade, smooth anchor scrolling, and the roles' plus glyph turning; all off under `prefers-reduced-motion`.
 - `yarn build` runs `yarn github:fetch` first (Task 2). Offline, set `GITHUB_CONTRIBUTIONS_SKIP=1` so the committed snapshot is used.
 - Gates before the PR opens: `yarn compile`, `yarn lint:check`, `yarn images:validate`, `yarn github:fetch --check`, `yarn build && yarn copy-resume`, `npm run site:verify`.
-- Commit on this branch (`claude/personal-website-redesign-8e0916`) after each task. Every commit message ends with a blank line and `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`. Do not push or open the PR without Will's go-ahead (Task 6 asks).
+- Commit on this branch (`claude/personal-website-redesign-8e0916`) after each task. Every commit message ends with a blank line and the `Co-Authored-By:` line of the session that made it (the commits carry Sonnet 5.5 and Opus 5.5). Do not push or open the PR without Will's go-ahead (Task 6 asks).
 
 ## Review Focus
 
@@ -387,6 +387,7 @@ function warn(message) {
 // Node puts the network reason (ECONNREFUSED, ENOTFOUND, a certificate error)
 // in error.cause; "fetch failed" alone is not diagnosable in a CI log.
 function describe(error) {
+  if (!(error instanceof Error)) return String(error);
   const cause = error.cause && (error.cause.code || error.cause.message);
   return cause ? `${error.message} (${cause})` : error.message;
 }
@@ -413,8 +414,12 @@ async function main() {
     return;
   }
   if (process.env.GITHUB_CONTRIBUTIONS_SKIP === "1") {
-    for (const p of existing.problems) warn(`github:fetch skipped, but the committed snapshot is unusable: ${p}`);
-    if (existing.problems.length) process.exit(1);
+    if (existing.problems.length) {
+      console.error(
+        `github:fetch skipped, but the committed snapshot is unusable: ${existing.problems.join("; ")}`,
+      );
+      process.exit(1);
+    }
     console.log("github:fetch skipped (GITHUB_CONTRIBUTIONS_SKIP=1)");
     return;
   }
@@ -1955,7 +1960,12 @@ const GitHubActivity: FC = memo(() => (
       </a>
     </div>
     <figure className="flex flex-col gap-3.5">
-      <div className="overflow-x-auto pb-1.5 [direction:rtl]">
+      <div
+        aria-label="Contribution heatmap, scrolls sideways"
+        className="overflow-x-auto pb-1.5 [direction:rtl]"
+        role="region"
+        tabIndex={0}
+      >
         <div
           aria-label={`Contribution heatmap for the last 12 months, one square per day, darker to brighter by activity: ${total} contributions in all`}
           className="flex w-full min-w-max justify-between gap-[3px] [direction:ltr]"
@@ -2298,9 +2308,14 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ---
 ### Task 5: README and the full gate run
 
+Executed 2026-09-30 as two commits: `site: close the review follow-ups on the snapshot script and contact` (the script, Contact, stylelint, .gitignore, a snapshot whose only change was `fetchedAt`) and `docs: describe the Field Manual page and its gates` (README and the three docs). Task 2's code block above was re-synced from the repo afterwards and already contains follow-ups (a) to (d) below; a third commit, `site: final review follow-ups`, then applied the whole-branch review's minors (fatal paths log as errors, `describe()` tolerates non-Error values, the heatmap scroll box is a named focusable region, and the README and spec describe all three motions).
+
 **Files:**
 - Modify: `README.md`
 - Modify: `.gitignore` (add `app/src/data/github-contributions.json.tmp`, the fetch script's atomic-write scratch file, so an interrupted run never leaves an untracked file to commit by accident)
+- Modify: `app/src/components/Sections/Contact.tsx` (clear the reset timer right before arming a new one)
+- Modify: `app/src/data/github-contributions.json` only if the gate runs refreshed it
+- Commit: the three untracked docs (`docs/linkedin-updates-2026-09-29.md`, this plan, the spec)
 - Modify: `app/stylelint.config.js`: add `"function-no-unknown": [true, { ignoreFunctions: ["theme"] }]` to `rules`, so Tailwind's build-time `theme()` calls in `globalStyles.scss` stop reading as unknown functions (stylelint is not wired to any gate, but `npx stylelint src/globalStyles.scss` should be clean).
 - Modify: `app/scripts/github/fetch-contributions.js`, four small follow-ups from the Task 2 review, each a few lines: (a) in `write()`, wrap the two statements in `try { … } finally { fs.rmSync(tmp, { force: true }); }` so a failed rename never leaves the scratch file; (b) in `warn()`, escape the annotation text for GitHub Actions with `.replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A")` before prefixing `::warning title=github:fetch::`; (c) in the `GITHUB_CONTRIBUTIONS_SKIP === "1"` branch, `process.exit(1)` after the warnings when `existing.problems.length` is non-zero, matching the fetch-failure rule that an unusable fallback fails the build; (d) in both failure messages, append the underlying cause when Node provides one: `const reason = error.cause?.code || error.cause?.message; … ${error.message}${reason ? ` (${reason})` : ""}` so `fetch failed` becomes `fetch failed (ENOTFOUND)`. After editing: `yarn lint:check`, `yarn github:fetch --check`, and rerun Task 2's Step 4 commands (404, SKIP=1, SKIP=1 with a corrupted file now exits 1) before committing with the README change.
 
@@ -2314,7 +2329,7 @@ In `README.md`, replace the `## Features` list with:
 - One dark page: hero, numbers, how Will works, selected work, roles that expand to their resume bullets, positions, GitHub activity, contact
 - GitHub contribution calendar fetched at build time from the public profile into `app/src/data/github-contributions.json` (`yarn github:fetch`); the committed snapshot is the fallback whenever GitHub is unreachable. The window slides daily, so `yarn build` rewrites that file whenever the calendar moved: commit it to refresh the fallback, or `git checkout -- app/src/data/github-contributions.json` to drop it. The deploy can skip the fetch by passing `build_env: GITHUB_CONTRIBUTIONS_SKIP=1` to the shared workflow
 - Resume download (the PDF is produced outside the repo; commit it to both `app/public/` and `app/src/assets/`)
-- Static export, responsive, one hero fade and nothing else moving
+- Static export, responsive; the only motion is a hero fade, smooth anchor scrolling and the roles' plus turning, all off under reduced motion
 - Deployed by GitHub Actions on every merge to `main`
 ```
 
