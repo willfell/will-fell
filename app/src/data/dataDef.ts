@@ -15,32 +15,16 @@ export interface HeroAction {
 }
 
 export interface Hero {
-  headline: string;
-  emphasis: string;
+  name: string;
   lede: string;
   imageSrc: string;
   imageAlt: string;
   currently: { lead: string; rest: string }[];
 }
 
-export interface Stat {
-  value: string;
-  label: string;
-}
-
 export interface Intro {
   heading: string;
   lede: string;
-}
-
-export interface Step {
-  title: string;
-  body: string;
-  example: string;
-}
-
-export interface HowIWork extends Intro {
-  steps: Step[];
 }
 
 export interface FlowNode {
@@ -53,6 +37,7 @@ export interface FeaturedWork {
   context: string;
   title: string;
   description: string;
+  link?: { href: string; text: string };
   flowLabel: string;
   flow: FlowNode[];
 }
@@ -67,16 +52,13 @@ export interface WorkItem {
   context: string;
   title: string;
   description: string;
-  metric?: Metric;
-  install?: string[];
-  href?: string;
-  hrefText?: string;
-  hrefLabel?: string;
+  metric: Metric;
 }
 
 export interface Role {
   dates: string;
   employer: string;
+  logo: string;
   title: string;
   line: string;
   bullets: string[];
@@ -85,12 +67,32 @@ export interface Role {
 export interface Education {
   year: string;
   school: string;
+  logo: string;
   degree: string;
 }
 
-export interface Position {
-  title: string;
-  body: string;
+export interface Screenshot {
+  src: string;
+  alt: string;
+  caption: string;
+  width: number;
+  height: number;
+}
+
+export interface Project {
+  name: string;
+  context: string;
+  logo: string;
+  description: string;
+  flowTitle: string;
+  flowLabel: string;
+  flow: FlowNode[];
+  install: string[];
+  href: string;
+  hrefText: string;
+  hrefLabel: string;
+  phoneShot: Screenshot;
+  wideShot: Screenshot;
 }
 
 export interface Repo {

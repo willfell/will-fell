@@ -5,14 +5,15 @@ import { trackEvent } from "../../utils/analytics";
 import { DownloadGlyph, PlusGlyph } from "../Icon/Glyphs";
 import Section from "../Layout/Section";
 import SectionHeader from "../Layout/SectionHeader";
+import Logo from "./Logo";
 
 const dateClass = "w-[180px] shrink-0 whitespace-nowrap font-mono text-[13px] text-muted";
-const nameClass =
-  "flex min-w-0 flex-[1_1_200px] flex-wrap items-baseline gap-x-3.5 gap-y-0.5";
+const orgClass = "flex min-w-0 flex-[1_1_240px] items-center gap-3 md:gap-4";
+const nameClass = "flex min-w-0 flex-1 flex-wrap items-baseline gap-x-3.5 gap-y-0.5";
 const employerClass = "text-[21px] font-[750] tracking-[-0.015em] [font-stretch:115%]";
 
 const Roles: FC = memo(() => (
-  <Section className="border-t border-line" sectionId="experience">
+  <Section sectionId="experience">
     <div className="flex flex-col gap-10">
       <SectionHeader
         action={
@@ -28,10 +29,10 @@ const Roles: FC = memo(() => (
         }
         heading={experienceHeading}
         label="Experience"
-        number="03"
+        number="01"
       />
       <ol className="border-t border-paper">
-        {roles.map(({ dates, employer, title, line, bullets }) => (
+        {roles.map(({ dates, employer, logo, title, line, bullets }) => (
           <li className="border-b border-line" key={`${employer}-${title}`}>
             <details
               className="group"
@@ -42,11 +43,14 @@ const Roles: FC = memo(() => (
             >
               <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-6 gap-y-2 py-[22px] [&::-webkit-details-marker]:hidden">
                 <span className={dateClass}>{dates}</span>
-                <span className={nameClass}>
-                  <span className={employerClass}>{employer}</span>
-                  <span className="text-[17px]">{title}</span>
-                  <span className="basis-full text-[15px] leading-normal text-muted">
-                    {line}
+                <span className={orgClass}>
+                  <Logo src={logo} />
+                  <span className={nameClass}>
+                    <span className={employerClass}>{employer}</span>
+                    <span className="text-[17px]">{title}</span>
+                    <span className="basis-full text-[15px] leading-normal text-muted">
+                      {line}
+                    </span>
                   </span>
                 </span>
                 <span
@@ -69,11 +73,14 @@ const Roles: FC = memo(() => (
             </details>
           </li>
         ))}
-        <li className="flex flex-wrap items-baseline gap-x-6 gap-y-2 py-[22px]">
+        <li className="flex flex-wrap items-center gap-x-6 gap-y-2 py-[22px]">
           <span className={dateClass}>{education.year}</span>
-          <span className={nameClass}>
-            <span className={employerClass}>{education.school}</span>
-            <span className="text-[17px]">{education.degree}</span>
+          <span className={orgClass}>
+            <Logo src={education.logo} />
+            <span className={nameClass}>
+              <span className={employerClass}>{education.school}</span>
+              <span className="text-[17px]">{education.degree}</span>
+            </span>
           </span>
         </li>
       </ol>

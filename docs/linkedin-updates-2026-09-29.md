@@ -62,3 +62,7 @@ The PDF is produced outside the repo. Carry section 1's bullets and section 2's 
 - Role names on the site now follow LinkedIn: forml; MCG Health, Cloud / DevOps Engineer; Cerner Corporation, System Engineer.
 - The two factual corrections hold everywhere: "operations for" 100+ microservices, never "run"; "help map out" CI/CD across 1,000+ repos, never a solo claim.
 - Accuris stays Remote on the site and resume and Hybrid on LinkedIn; forml stays one combined entry on the site and split on LinkedIn (both Will's 2026-09-26 rulings).
+
+## 7. Site changes since (2026-10-01), for consistency
+
+The site now writes "MCP Mesh" with a capital M and names AgentGateway on the work card and in the Principal role's first bullet. LinkedIn's Principal description already says "MCP mesh on AgentGateway"; changing "mesh" to "Mesh" there is optional and cosmetic. The Principal role's one-liner on the site dropped "70+ AWS accounts"; the bullet about the accounts stays on both.
