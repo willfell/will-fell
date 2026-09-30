@@ -103,15 +103,31 @@ function sameCalendar(a, b) {
 }
 
 // Write beside the file and rename, so an interrupted write never leaves a
-// truncated snapshot behind.
+// truncated snapshot behind; a failed rename leaves no scratch file either.
 function write(snapshot) {
   const tmp = `${OUT}.tmp`;
-  fs.writeFileSync(tmp, JSON.stringify(snapshot, null, 2) + "\n");
-  fs.renameSync(tmp, OUT);
+  try {
+    fs.writeFileSync(tmp, JSON.stringify(snapshot, null, 2) + "\n");
+    fs.renameSync(tmp, OUT);
+  } finally {
+    fs.rmSync(tmp, { force: true });
+  }
 }
 
 function warn(message) {
-  console.warn(process.env.GITHUB_ACTIONS ? `::warning title=github:fetch::${message}` : message);
+  if (!process.env.GITHUB_ACTIONS) {
+    console.warn(message);
+    return;
+  }
+  const escaped = message.replace(/%/g, "%25").replace(/\r/g, "%0D").replace(/\n/g, "%0A");
+  console.warn(`::warning title=github:fetch::${escaped}`);
+}
+
+// Node puts the network reason (ECONNREFUSED, ENOTFOUND, a certificate error)
+// in error.cause; "fetch failed" alone is not diagnosable in a CI log.
+function describe(error) {
+  const cause = error.cause && (error.cause.code || error.cause.message);
+  return cause ? `${error.message} (${cause})` : error.message;
 }
 
 async function fetchSnapshot() {
@@ -136,7 +152,8 @@ async function main() {
     return;
   }
   if (process.env.GITHUB_CONTRIBUTIONS_SKIP === "1") {
-    for (const p of existing.problems) warn(`github:fetch skipped, but the committed snapshot has a problem: ${p}`);
+    for (const p of existing.problems) warn(`github:fetch skipped, but the committed snapshot is unusable: ${p}`);
+    if (existing.problems.length) process.exit(1);
     console.log("github:fetch skipped (GITHUB_CONTRIBUTIONS_SKIP=1)");
     return;
   }
@@ -151,16 +168,16 @@ async function main() {
   } catch (error) {
     if (existing.problems.length) {
       console.error(
-        `github:fetch failed (${error.message}) and the committed snapshot is unusable: ` +
+        `github:fetch failed (${describe(error)}) and the committed snapshot is unusable: ` +
           existing.problems.join("; "),
       );
       process.exit(1);
     }
-    warn(`github:fetch failed, keeping the snapshot from ${existing.snapshot.fetchedAt}: ${error.message}`);
+    warn(`github:fetch failed, keeping the snapshot from ${existing.snapshot.fetchedAt}: ${describe(error)}`);
   }
 }
 
 main().catch((error) => {
-  console.error(`github:fetch crashed: ${error.message}`);
+  console.error(`github:fetch crashed: ${describe(error)}`);
   process.exit(1);
 });

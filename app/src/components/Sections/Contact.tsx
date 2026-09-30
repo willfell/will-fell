@@ -31,11 +31,11 @@ const Contact: FC = memo(() => {
   };
 
   const copyEmail = async () => {
-    window.clearTimeout(resetTimer.current);
     trackEvent("Email Click");
     try {
       await navigator.clipboard.writeText(contactEmail);
       setCopied(true);
+      window.clearTimeout(resetTimer.current);
       resetTimer.current = window.setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);

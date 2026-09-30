@@ -93,6 +93,7 @@ out
 # Archived/unused images (for review, not deployed)
 app/public/images/_archive/
 app/.screenshots/
+app/src/data/github-contributions.json.tmp
 
 # Nuxt.js build / generate output
 .nuxt
