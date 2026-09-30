@@ -13,7 +13,7 @@ import { homePageMeta } from "../data/data";
 const Home: FC = memo(() => (
   <Page {...homePageMeta}>
     <Nav />
-    <main>
+    <main className="bg-grid">
       <Hero />
       <Roles />
       <SelectedWork />

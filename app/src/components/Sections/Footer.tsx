@@ -43,7 +43,7 @@ const Footer: FC = memo(() => {
   };
 
   return (
-    <footer className="border-t border-line-soot bg-soot text-muted">
+    <footer className="snap-end border-t border-line-soot bg-soot text-muted">
       <div className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-x-6 gap-y-2 px-5 py-3 font-mono text-xs md:px-8 xl:px-12">
         <p>
           © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Will

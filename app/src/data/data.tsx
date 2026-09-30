@@ -34,6 +34,7 @@ export const navLinks: NavLink[] = [
 
 export const heroData: Hero = {
   name: "Will Fellhoelter",
+  backgroundSrc: getImageUrl("/images/hero/mountains.jpg"),
   lede: "Eight years across the stack: data, application logic, deploys, the K8s underneath, the alerting on top. I usually end up in the gap between what a client needs and what actually ships, and closing it starts with listening, so what gets built is what was needed. Lately that work points at agentic AI: MCP servers, plugin libraries, and the knowledge bases agents work from.",
   imageSrc: getImageUrl("/images/about/profilepic.jpg"),
   imageAlt: "Will Fellhoelter laughing, in sunglasses, against a blue sky",
@@ -150,6 +151,7 @@ export const roles: Role[] = [
     dates: "Aug 2024 – Apr 2025",
     employer: "forml",
     logo: getImageUrl("/images/logos/forml-logo.png"),
+    logoTone: "white",
     title: "Senior Full Stack Engineer",
     line: "First engineering hire, on-prem deploys",
     bullets: [

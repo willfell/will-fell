@@ -32,8 +32,8 @@ const Roles: FC = memo(() => (
         number="01"
       />
       <ol className="border-t border-paper">
-        {roles.map(({ dates, employer, logo, title, line, bullets }) => (
-          <li className="border-b border-line" key={`${employer}-${title}`}>
+        {roles.map(({ dates, employer, logo, logoTone, title, line, bullets }) => (
+          <li className="reveal border-b border-line" key={`${employer}-${title}`}>
             <details
               className="group"
               onToggle={(e) =>
@@ -44,7 +44,7 @@ const Roles: FC = memo(() => (
               <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-6 gap-y-2 py-[22px] [&::-webkit-details-marker]:hidden">
                 <span className={dateClass}>{dates}</span>
                 <span className={orgClass}>
-                  <Logo src={logo} />
+                  <Logo src={logo} tone={logoTone} />
                   <span className={nameClass}>
                     <span className={employerClass}>{employer}</span>
                     <span className="text-[17px]">{title}</span>
@@ -73,7 +73,7 @@ const Roles: FC = memo(() => (
             </details>
           </li>
         ))}
-        <li className="flex flex-wrap items-center gap-x-6 gap-y-2 py-[22px]">
+        <li className="reveal flex flex-wrap items-center gap-x-6 gap-y-2 py-[22px]">
           <span className={dateClass}>{education.year}</span>
           <span className={orgClass}>
             <Logo src={education.logo} />

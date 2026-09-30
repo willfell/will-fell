@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC, Fragment, memo } from "react";
+import { CSSProperties, FC, Fragment, memo } from "react";
 
 import { FlowNode } from "../../data/dataDef";
 import { FlowArrowGlyph } from "../Icon/Glyphs";
@@ -17,9 +17,10 @@ const Flow: FC<{ label: string; nodes: FlowNode[] }> = memo(({ label, nodes }) =
         {i > 0 && <FlowArrowGlyph className="rotate-90 self-center md:rotate-0" />}
         <div
           className={classNames(
-            "flex flex-col gap-2 border p-3.5 md:min-h-[124px] md:flex-1",
+            "reveal flex flex-col gap-2 border p-3.5 md:min-h-[124px] md:flex-1",
             highlight ? "border-paper bg-paper text-ink" : "border-line-mid bg-ink",
           )}
+          style={{ "--i": i } as CSSProperties}
         >
           <span className="text-base font-bold [font-stretch:110%]">{title}</span>
           <span

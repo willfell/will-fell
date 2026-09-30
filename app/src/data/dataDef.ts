@@ -16,6 +16,7 @@ export interface HeroAction {
 
 export interface Hero {
   name: string;
+  backgroundSrc: string;
   lede: string;
   imageSrc: string;
   imageAlt: string;
@@ -59,6 +60,7 @@ export interface Role {
   dates: string;
   employer: string;
   logo: string;
+  logoTone?: "white";
   title: string;
   line: string;
   bullets: string[];

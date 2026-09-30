@@ -6,7 +6,7 @@ import { trackEvent } from "../../utils/analytics";
 import { DownloadGlyph } from "../Icon/Glyphs";
 
 const Nav: FC = memo(() => (
-  <header className="border-b border-line bg-ink">
+  <header className="absolute inset-x-0 top-0 z-20 border-b border-paper/10">
     <nav
       aria-label="Site"
       className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-x-7 px-5 py-2 md:px-8 md:py-3.5 xl:px-12"
