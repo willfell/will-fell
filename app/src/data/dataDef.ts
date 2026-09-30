@@ -15,7 +15,6 @@ export interface HeroAction {
 }
 
 export interface Hero {
-  eyebrow: string;
   headline: string;
   emphasis: string;
   lede: string;

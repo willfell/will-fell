@@ -36,7 +36,6 @@ export const navLinks: NavLink[] = [
 ];
 
 export const heroData: Hero = {
-  eyebrow: "Open to new roles · Denver or remote",
   headline: "I end up wherever the gap is between what a client needs and",
   emphasis: "what actually ships.",
   lede: "Eight years across the stack: data, application logic, deploys, the K8s underneath, the alerting on top. Most of it starts with listening, so what gets built is what was actually needed. Lately that points at agentic AI: MCP servers, plugin libraries, and the knowledge bases agents work from.",
