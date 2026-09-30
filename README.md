@@ -13,15 +13,16 @@ A page to show my portfolio and provide some form of contact, you can see it on 
 
 ## Features
 
-- One page: who Will is, three selected works, one line per role, contact in the footer
+- One dark page: hero, numbers, how Will works, selected work, roles that expand to their resume bullets, positions, GitHub activity, contact
+- GitHub contribution calendar fetched at build time from the public profile into `app/src/data/github-contributions.json` (`yarn github:fetch`); the committed snapshot is the fallback whenever GitHub is unreachable. The window slides daily, so `yarn build` rewrites that file whenever the calendar moved: commit it to refresh the fallback, or `git checkout -- app/src/data/github-contributions.json` to drop it. The deploy can skip the fetch by passing `build_env: GITHUB_CONTRIBUTIONS_SKIP=1` to the shared workflow
 - Resume download (the PDF is produced outside the repo; commit it to both `app/public/` and `app/src/assets/`)
-- Static export, responsive, no scroll-triggered animation
+- Static export, responsive, one hero fade and nothing else moving
 - Deployed by GitHub Actions on every merge to `main`
 
 ## Verification
 
-From `app/`: `yarn images:validate && yarn build && yarn copy-resume`. `yarn build` type-checks and runs `yarn lint:check` (eslint without `--fix`) before `next build`, so CI's build step is also the lint gate; `yarn lint` is the autofixing variant for local use.
-From the repo root: `npm run site:verify` renders `app/out/` in Playwright and checks page height, word count, required links, dead routes and the resume checksum. Screenshots land in `app/.screenshots/`.
+From `app/`: `yarn images:validate && yarn github:fetch --check && yarn build && yarn copy-resume`. `yarn build` refreshes the GitHub snapshot first (skip it offline with `GITHUB_CONTRIBUTIONS_SKIP=1`), then type-checks and runs `yarn lint:check` (eslint without `--fix`) before `next build`, so CI's build step is also the lint gate; `yarn lint` is the autofixing variant for local use.
+From the repo root: `npm run site:verify` renders `app/out/` in Playwright and checks page height, word count, required links, fonts, contrast, the roles, the GitHub band against the snapshot, dead routes and the resume checksum. Screenshots land in `app/.screenshots/`.
 
 ## Hosting and Deployment
 
