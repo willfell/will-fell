@@ -14,6 +14,7 @@ const Page: NextPage<PropsWithChildren<HomepageMeta>> = memo(
       <Head>
         <title>{title}</title>
         <meta content={description} name="description" />
+        <meta content="#121513" name="theme-color" />
         <link href={SITE_URL} key="canonical" rel="canonical" />
 
         <link href="/favicon.ico" rel="icon" sizes="any" />

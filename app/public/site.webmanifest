@@ -2,7 +2,7 @@
   "name": "Will Fellhoelter",
   "short_name": "Will Fellhoelter",
   "icons": [{ "src": "/favicon.ico", "sizes": "any" }],
-  "theme_color": "#5E6746",
-  "background_color": "#F7F4EE",
+  "theme_color": "#121513",
+  "background_color": "#121513",
   "display": "browser"
 }
