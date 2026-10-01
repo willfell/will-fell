@@ -523,6 +523,60 @@ async function githubChecks(browser, origin) {
   await phone.close();
 }
 
+// Sections reveal as they scroll in and snap flush near their tops. Content
+// must never end up stuck hidden: it starts hidden below the fold, is fully
+// shown once scrolled through, the footer stays reachable despite snapping,
+// and with reduced motion everything is shown from the start.
+async function motionChecks(browser, origin) {
+  const readState = () =>
+    Array.from(document.querySelectorAll(".reveal, .reveal-sweep")).map((el) => {
+      const s = getComputedStyle(el);
+      return { opacity: Number(s.opacity), clip: s.clipPath, id: el.closest("[id]")?.id };
+    });
+  const hidden = (els) =>
+    els.filter((e) => e.opacity < 0.99 || (e.clip !== "none" && !/^inset\((\s*0(px|%)?\s*)+\)$/.test(e.clip)));
+
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await routeSiteOrigin(context, new Set());
+  const page = await context.newPage();
+  await page.goto(`${origin}/`, { waitUntil: "networkidle" });
+  const atLoad = await page.evaluate(readState);
+  check(atLoad.length >= 20, `only ${atLoad.length} elements reveal on scroll`);
+  check(
+    hidden(atLoad).some((e) => e.id === "github"),
+    "the GitHub band is fully shown before it is scrolled to; the scroll reveal is not running",
+  );
+  const step = await page.evaluate(() => Math.round(window.innerHeight / 3));
+  for (let y = 0; ; y += step) {
+    const at = await page.evaluate((top) => {
+      window.scrollTo({ top, behavior: "instant" });
+      return window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 1;
+    }, y);
+    await page.waitForTimeout(60);
+    if (at) break;
+  }
+  await page.waitForTimeout(700);
+  const after = hidden(await page.evaluate(readState));
+  check(
+    after.length === 0,
+    `${after.length} revealed elements are still hidden after scrolling through, first in #${after[0] && after[0].id}`,
+  );
+  const footerShown = await page.evaluate(() => {
+    const r = document.querySelector("footer").getBoundingClientRect();
+    return r.top < window.innerHeight && r.bottom <= window.innerHeight + 1;
+  });
+  check(footerShown, "the footer cannot be scrolled into view; snapping pulls the page back up");
+  await context.close();
+
+  const calm = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" });
+  await routeSiteOrigin(calm, new Set());
+  const still = await calm.newPage();
+  await still.goto(`${origin}/`, { waitUntil: "networkidle" });
+  const calmHidden = hidden(await still.evaluate(readState));
+  check(calmHidden.length === 0, `with reduced motion ${calmHidden.length} elements start hidden`);
+  await calm.close();
+}
+
 async function noScriptChecks(browser, origin) {
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
@@ -594,6 +648,7 @@ async function main() {
     await laterYearChecks(browser, origin);
     await rolesChecks(browser, origin);
     await githubChecks(browser, origin);
+    await motionChecks(browser, origin);
     await noScriptChecks(browser, origin);
     await clipboardChecks(browser, origin);
     console.log(

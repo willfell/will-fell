@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FC, memo } from "react";
+import { CSSProperties, FC, memo } from "react";
 
 import { githubHref, repos } from "../../data/data";
 import snapshot from "../../data/github-contributions.json";
@@ -38,13 +38,12 @@ const dayTitle = (date: string, count: number) => {
 
 const GitHubActivity: FC = memo(() => (
   <Section
-    band="pine"
     innerClassName="flex flex-col gap-9 pb-16 pt-14 md:pb-24 md:pt-20 xl:pb-[120px] xl:pt-[88px]"
     sectionId="github"
   >
-    <Eyebrow band="pine" label="GitHub" number="04" />
+    <Eyebrow label="GitHub" number="04" />
     <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-      <h2 className="flex flex-col gap-3">
+      <h2 className="reveal flex flex-col gap-3">
         <span
           className="text-[64px] font-[750] leading-[0.88] tracking-[-0.045em] [font-stretch:125%] md:text-[104px] xl:text-[136px]"
           data-total=""
@@ -54,7 +53,7 @@ const GitHubActivity: FC = memo(() => (
         <span className="text-[19px] text-paper-2">contributions in the last year</span>
       </h2>
       <a
-        className="inline-flex min-h-[48px] items-center gap-2 border border-paper px-5 font-mono text-sm text-paper"
+        className="reveal inline-flex min-h-[48px] items-center gap-2 border border-paper px-5 font-mono text-sm text-paper"
         href={githubHref}
         onClick={() => trackEvent("Social Click", { platform: "GitHub" })}
         rel="noopener noreferrer"
@@ -67,7 +66,7 @@ const GitHubActivity: FC = memo(() => (
     <figure className="flex flex-col gap-3.5">
       <div
         aria-label="Contribution heatmap, scrolls sideways"
-        className="overflow-x-auto pb-1.5 [direction:rtl]"
+        className="reveal-sweep overflow-x-auto pb-1.5 [direction:rtl]"
         role="region"
         tabIndex={0}
       >
@@ -78,7 +77,7 @@ const GitHubActivity: FC = memo(() => (
         >
           <div
             aria-hidden="true"
-            className="sticky left-0 z-[1] flex shrink-0 flex-col gap-[3px] bg-pine pr-2 font-mono text-[11px] leading-[15px] text-muted"
+            className="sticky left-0 z-[1] flex shrink-0 flex-col gap-[3px] bg-ink pr-2 font-mono text-[11px] leading-[15px] text-muted"
           >
             <span className="h-4" />
             {WEEKDAYS.map((day, i) => (
@@ -116,10 +115,11 @@ const GitHubActivity: FC = memo(() => (
       </figcaption>
     </figure>
     <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
-      {repos.map(({ name, href, description, meta }) => (
+      {repos.map(({ name, href, description, meta }, i) => (
         <li
-          className="flex flex-col gap-2.5 border border-line-pine bg-surface-pine p-[22px]"
+          className="reveal flex flex-col gap-2.5 border border-line-mid bg-surface p-[22px]"
           key={name}
+          style={{ "--i": i } as CSSProperties}
         >
           <a
             className="inline-flex min-h-[28px] items-center gap-1.5 font-mono text-[15px] font-semibold text-paper"

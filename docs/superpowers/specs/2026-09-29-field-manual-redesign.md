@@ -17,6 +17,16 @@ Will's direction after the first deploy: less said about him by him, more of the
 | Footer | Email with Copy (moved from the contact band), LinkedIn, GitHub, Site source |
 | Gate | Strava no longer required; the copy button is checked in the footer; the Sauce link in `#projects`; every role and the school must show a logo that loads |
 
+## Revision 2026-10-01 (b): mountains, motion, one grid
+
+| Change | Now |
+|---|---|
+| Hero | The old mountain-lake photo (`app/public/images/hero/mountains.jpg`, re-encoded, all metadata stripped; it never carried GPS) fills the hero behind a shade that is heaviest on the left and at the top, settles in on load, drifts with a slow parallax, and fades to ink at the bottom with the grid coming in over it. The nav floats over it. The photo card stays |
+| Grid | One continuous 32px grid on `<main>` behind every section after the hero; sections are transparent. GitHub leaves the pine band for the same ink ground |
+| Logos | Brand colour, no tiles, except forml, which renders one-tone white (its mark is solid black). Wichita State uses its white-outlined mascot |
+| Motion | Scroll-driven CSS only (`animation-timeline: view()`): eyebrows draw their rule in, headings, rows, cards and flow steps rise and fade in (siblings staggered by `--i`), the heatmap sweeps in left to right. Sections snap flush near their tops (`scroll-snap-type: y proximity`), and the footer is a snap point so the page end stays reachable. All of it sits under `prefers-reduced-motion: no-preference` and `@supports (animation-timeline: view())`, in longhand properties, because cssnano's declaration sorting otherwise moves the `animation` shorthand after `animation-timeline` and silently resets it |
+| Gate | `motionChecks`: reveals are hidden below the fold at load (so the effect runs), all fully shown after scrolling through, the footer reachable despite snapping, and nothing hidden under reduced motion |
+
 ## Purpose
 
 willfellhoelter.com exists so a hiring manager or recruiter leaves knowing three things: Will listens first and then ships across whatever layer the outcome needs; he has done that at scale (the MCP mesh, observability for 400+ services, 1,000+ repos, 70+ AWS accounts) with teams, not alone; and he has a point of view on how agents should be used inside a team. The 2026-09-28 "three screens" site said the first thing and buried the other two: the numbers sat inside one paragraph, GitHub was a footer icon, and nothing on the page argued for anything.

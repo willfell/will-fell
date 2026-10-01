@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import { CSSProperties, FC, memo } from "react";
 
 import { featuredWork, selectedWorkIntro, workItems } from "../../data/data";
 import { WorkItem } from "../../data/dataDef";
@@ -11,7 +11,7 @@ import Flow from "./Flow";
 const contextClass = "font-mono text-xs uppercase tracking-[0.08em] text-muted";
 
 const WorkCard: FC<WorkItem> = memo(({ context, title, description, metric }) => (
-    <article className="flex h-full flex-col gap-3.5 border border-line-mid p-7">
+    <article className="flex h-full flex-col gap-3.5 border border-line-mid bg-ink p-7">
       <p className={contextClass}>{context}</p>
       <h3 className="text-[26px] font-[750] leading-[1.1] tracking-[-0.02em] [font-stretch:115%] [text-wrap:balance]">
         {title}
@@ -46,7 +46,7 @@ const SelectedWork: FC = memo(() => (
       />
       {featuredWork.map(({ context, title, description, link, flowLabel, flow }) => (
         <article
-          className="flex flex-wrap items-center gap-x-14 gap-y-8 border border-line-mid bg-surface p-6 md:p-8 xl:p-10"
+          className="reveal flex flex-wrap items-center gap-x-14 gap-y-8 border border-line-mid bg-surface p-6 md:p-8 xl:p-10"
           key={title}
         >
           <div className="flex min-w-0 flex-[1_1_340px] flex-col gap-3.5">
@@ -74,8 +74,8 @@ const SelectedWork: FC = memo(() => (
         </article>
       ))}
       <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {workItems.map((item) => (
-          <li key={item.title}>
+        {workItems.map((item, i) => (
+          <li className="reveal" key={item.title} style={{ "--i": i } as CSSProperties}>
             <WorkCard {...item} />
           </li>
         ))}
