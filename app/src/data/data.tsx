@@ -5,13 +5,11 @@ import {
   Hero,
   HeroAction,
   HomepageMeta,
-  HowIWork,
   Intro,
   NavLink,
-  Position,
+  Project,
   Repo,
   Role,
-  Stat,
   WorkItem,
 } from "./dataDef";
 
@@ -25,26 +23,24 @@ export const resumeHref = "/WillFellhoelterResume.pdf";
 export const contactEmail = "willfellhoelter@gmail.com";
 export const githubHref = "https://github.com/willfell";
 export const linkedInHref = "https://linkedin.com/in/will-fellhoelter-1aa17312b";
-export const stravaHref = "https://www.strava.com/athletes/112909908";
 export const siteRepoHref = "https://github.com/willfell/will-fell";
 
 export const navLinks: NavLink[] = [
-  { href: "#work", text: "Work" },
   { href: "#experience", text: "Experience" },
-  { href: "#positions", text: "Positions" },
+  { href: "#work", text: "Work" },
+  { href: "#projects", text: "Projects" },
   { href: "#github", text: "GitHub" },
 ];
 
 export const heroData: Hero = {
-  headline: "I end up wherever the gap is between what a client needs and",
-  emphasis: "what actually ships.",
-  lede: "Eight years across the stack: data, application logic, deploys, the K8s underneath, the alerting on top. Most of it starts with listening, so what gets built is what was actually needed. Lately that points at agentic AI: MCP servers, plugin libraries, and the knowledge bases agents work from.",
+  name: "Will Fellhoelter",
+  lede: "Eight years across the stack: data, application logic, deploys, the K8s underneath, the alerting on top. I usually end up in the gap between what a client needs and what actually ships, and closing it starts with listening, so what gets built is what was needed. Lately that work points at agentic AI: MCP servers, plugin libraries, and the knowledge bases agents work from.",
   imageSrc: getImageUrl("/images/about/profilepic.jpg"),
   imageAlt: "Will Fellhoelter laughing, in sunglasses, against a blue sky",
   currently: [
     {
       lead: "Principal Software Engineer at Accuris.",
-      rest: "Agentic AI development, operations, K8s. Jack of all trades and master of none.",
+      rest: "Agentic AI development, Operations, K8s. Jack of all trades and master of none.",
     },
     {
       lead: "Building Sauce.",
@@ -59,43 +55,6 @@ export const heroLinks: HeroAction[] = [
   { href: `mailto:${contactEmail}`, text: "Email" },
 ];
 
-export const stats: Stat[] = [
-  { value: "8", label: "Years across the stack" },
-  { value: "250+", label: "Tools behind the org’s MCP gateway" },
-  { value: "100+", label: "Microservices in operations, 6 regions" },
-  { value: "1,000+", label: "Repositories moved to GitHub" },
-  { value: "70+", label: "AWS accounts reviewed for architecture and cost" },
-];
-
-export const statsCaption = "Accuris, 2025 to now. All of it with a team.";
-
-export const howIWork: HowIWork = {
-  heading: "Defined, communicated, delivered.",
-  lede: "It starts with listening: understanding what someone actually needs, then using the engineering to get there without the misunderstandings that derail most projects. Then making it repeatable, so the next team doesn’t start from zero.",
-  steps: [
-    {
-      title: "Defined",
-      body: "Sit with the people who need the thing. Listen more than talk. Pin down what done looks like before anyone writes code.",
-      example: "forml → first engineering hire, scoping with founders and enterprise clients",
-    },
-    {
-      title: "Communicated",
-      body: "Say it back in plain language, argue the approach while it’s still cheap, and keep the decision where everyone can find it.",
-      example: "Accuris → design reviews with teams across 70+ AWS accounts",
-    },
-    {
-      title: "Delivered",
-      body: "Data, application code, deploys, the K8s underneath, the alerting on top. Whatever layer the outcome needs.",
-      example: "forml → one-click on-prem installs, onboarding from 3 days to 4 hours",
-    },
-    {
-      title: "Repeatable",
-      body: "Turn the one-off into the pattern: an MCP server, a plugin, a template, a note an agent can read.",
-      example: "Accuris → the plugin library and MCP mesh teams use every day",
-    },
-  ],
-};
-
 export const selectedWorkIntro: Intro = {
   heading: "Work I’d point you to.",
   lede: "Agent tooling for a whole org, observability for hundreds of services, installs on someone else’s hardware. Built with platform, product, and engineering teams along the way.",
@@ -104,16 +63,17 @@ export const selectedWorkIntro: Intro = {
 export const featuredWork: FeaturedWork[] = [
   {
     context: "Accuris · 2025–2026 · With the platform team",
-    title: "MCP mesh",
+    title: "MCP Mesh",
     description:
-      "Governed agent tooling for the whole org: 250+ tools behind one gateway, SSO, central observability. Built the first internal MCP servers and the plugin library, then, with the platform team, the mesh every team uses. Our own servers for New Relic and PagerDuty live inside it instead of paid vendor connectors.",
+      "Governed agent tooling for the whole org. AgentGateway, the open-source gateway for MCP and agent traffic, runs on K8s and federates 250+ tools behind one endpoint, with SSO and central observability. Built the first internal MCP servers and the plugin library, then, with the platform team, the mesh every team uses. Our own servers for New Relic and PagerDuty live inside it instead of paid vendor connectors.",
+    link: { href: "https://agentgateway.dev", text: "agentgateway.dev" },
     flowLabel:
-      "How the mesh fits together: every team uses the plugin library, which goes through the MCP gateway to 250+ tools, including the org’s own New Relic and PagerDuty servers",
+      "How the MCP Mesh fits together: every team uses the plugin library, which goes through AgentGateway on K8s to 250+ federated tools, including the org’s own New Relic and PagerDuty servers",
     flow: [
       { title: "Every team", detail: "Engineering, product, cross-functional" },
       { title: "Plugin library", detail: "Repeatable workflows, not one-off prompts" },
-      { title: "MCP gateway", detail: "SSO and central observability", highlight: true },
-      { title: "250+ tools", detail: "Including our own New Relic and PagerDuty servers" },
+      { title: "AgentGateway", detail: "On K8s: one endpoint, SSO, central observability", highlight: true },
+      { title: "250+ tools", detail: "Federated MCP servers, including our own New Relic and PagerDuty" },
     ],
   },
   {
@@ -141,16 +101,6 @@ export const workItems: WorkItem[] = [
     metric: { value: "400+", label: "Services instrumented the same way, no developer effort" },
   },
   {
-    context: "Open source · 2026–",
-    title: "Sauce",
-    description:
-      "An agentic operating loop for Obsidian. Notes become node-based work graphs that agents like Claude Code and Codex execute in isolated workers, with scheduling, retries, handoffs between agents, and a persistent task store. Started as a loop-based forward deployment mechanism, rebuilt around graphs. Versioned vault platform shipped via Homebrew, MIT.",
-    install: ["brew tap willfell/sauce", "brew install willfell/sauce/sauce"],
-    href: "https://github.com/willfell/sauce",
-    hrefText: "github.com/willfell/sauce",
-    hrefLabel: "github.com/willfell/sauce (Sauce on GitHub)",
-  },
-  {
     context: "forml · 2024–2025",
     title: "On-prem in four hours",
     description:
@@ -170,10 +120,11 @@ export const roles: Role[] = [
   {
     dates: "Mar 2026 – Now",
     employer: "Accuris",
+    logo: getImageUrl("/images/logos/accuris-logo.png"),
     title: "Principal Software Engineer",
-    line: "MCP mesh, observability, multi-region K8s, 70+ AWS accounts",
+    line: "MCP Mesh, observability, multi-region K8s",
     bullets: [
-      "Built and launched the MCP mesh: one governed entry point to 250+ tools for engineering, product, and cross-functional teams, with SSO and centralized observability",
+      "Built and launched the MCP Mesh on AgentGateway: one governed entry point to 250+ tools for engineering, product, and cross-functional teams, with SSO and centralized observability",
       "Designed and shipped production MCP servers that give AI agents natural-language access to internal systems, including our own New Relic and PagerDuty servers in place of paid vendor connectors",
       "Built the incident plugin that takes a PagerDuty alert to a root cause in New Relic and documents it in the team’s Obsidian vault in the same pass",
       "Grew the AI plugin library into how teams use AI day to day, turning one-off prompts into repeatable workflows",
@@ -187,6 +138,7 @@ export const roles: Role[] = [
   {
     dates: "Apr 2025 – Mar 2026",
     employer: "Accuris",
+    logo: getImageUrl("/images/logos/accuris-logo.png"),
     title: "Senior Software Engineer",
     line: "GitHub migration, first internal MCP servers",
     bullets: [
@@ -197,6 +149,7 @@ export const roles: Role[] = [
   {
     dates: "Aug 2024 – Apr 2025",
     employer: "forml",
+    logo: getImageUrl("/images/logos/forml-logo.png"),
     title: "Senior Full Stack Engineer",
     line: "First engineering hire, on-prem deploys",
     bullets: [
@@ -208,6 +161,7 @@ export const roles: Role[] = [
   {
     dates: "May 2023 – Aug 2024",
     employer: "Project Canary",
+    logo: getImageUrl("/images/logos/project-canary-logo.png"),
     title: "DevOps Engineer",
     line: "Ephemeral environments, RAG, SOC 2",
     bullets: [
@@ -221,6 +175,7 @@ export const roles: Role[] = [
   {
     dates: "Aug 2021 – May 2023",
     employer: "Lendflow",
+    logo: getImageUrl("/images/logos/lendflow-logo.png"),
     title: "DevSecOps Engineer",
     line: "OpenSearch logging, WAF, on-call",
     bullets: [
@@ -233,6 +188,7 @@ export const roles: Role[] = [
   {
     dates: "Mar 2020 – Aug 2021",
     employer: "MCG Health",
+    logo: getImageUrl("/images/logos/mcg-logo.png"),
     title: "Cloud / DevOps Engineer",
     line: "On-prem to Azure, Chef to Ansible",
     bullets: [
@@ -244,6 +200,7 @@ export const roles: Role[] = [
   {
     dates: "Oct 2018 – Mar 2020",
     employer: "Cerner Corporation",
+    logo: getImageUrl("/images/logos/cerner-logo.png"),
     title: "System Engineer",
     line: "Ansible automation, AWX portal",
     bullets: [
@@ -257,34 +214,46 @@ export const roles: Role[] = [
 export const education: Education = {
   year: "2018",
   school: "Wichita State University",
+  logo: getImageUrl("/images/logos/wsu-logo.png"),
   degree: "Management Information Systems",
 };
 
 export const experienceHeading = "Eight years, seven roles.";
 
-export const positionsIntro: Intro = {
-  heading: "Things I’ll argue for.",
-  lede: "I like a real discussion about the right way to do things, and I change my mind when the better argument wins. These are the ones I keep coming back to.",
+export const sauce: Project = {
+  name: "Sauce",
+  context: "Open source · 2026– · MIT",
+  logo: getImageUrl("/images/projects/obsidian.svg"),
+  description:
+    "An agentic operating loop for Obsidian. Notes become node-based work graphs that agents like Claude Code and Codex execute in isolated workers, with scheduling, retries, handoffs between agents, and a persistent task store. Started as a loop-based forward deployment mechanism, rebuilt around graphs. Versioned vault platform shipped via Homebrew, MIT.",
+  flowTitle: "How a run works",
+  flowLabel:
+    "How a Sauce run works: a graph note goes to the dispatcher, which runs Claude Code and Codex workers in their own git worktrees and writes every outcome back into the vault",
+  flow: [
+    { title: "Graph note", detail: "Agent, judge, shell and human nodes in an Obsidian note" },
+    { title: "Dispatcher", detail: "sauce run fires edges, with retry budgets", highlight: true },
+    { title: "Workers", detail: "Claude Code and Codex, each in its own git worktree" },
+    { title: "Back into the vault", detail: "An append-only ledger and a Runs section in the note" },
+  ],
+  install: ["brew tap willfell/sauce", "brew install willfell/sauce/sauce"],
+  href: "https://github.com/willfell/sauce",
+  hrefText: "github.com/willfell/sauce",
+  hrefLabel: "github.com/willfell/sauce (Sauce on GitHub)",
+  phoneShot: {
+    src: getImageUrl("/images/projects/sauce-epic.png"),
+    alt: "Obsidian on a phone showing the epic note Delivery Coordinator Rail Repairs: three slice cards, OPS-1, OPS-2b and OPS-3c, each marked done, and a rollup reading 3 deployed",
+    caption: "An epic and its slices on a phone. Card status is projected from the coordinator’s ledger, not typed by hand.",
+    width: 553,
+    height: 1200,
+  },
+  wideShot: {
+    src: getImageUrl("/images/projects/sauce-dependency-graph.png"),
+    alt: "A dependency graph in Obsidian with slice cards PERF-9a in progress and PERF-10a done, and a dashed placeholder node standing in for work in another epic",
+    caption: "A wider dependency graph. The dashed node stands in for a dependency that lives in another epic.",
+    width: 1400,
+    height: 645,
+  },
 };
-
-export const positions: Position[] = [
-  {
-    title: "Listen first, argue early, write it down.",
-    body: "Most rework comes from a misunderstanding nobody caught early. So I listen more than I talk, push back while it’s still cheap, and put the decision where the next person will look.",
-  },
-  {
-    title: "Plugins over prompts.",
-    body: "A prompt helps one person, once. A plugin backed by an MCP server gives a whole team the same tools, the same context, and the same result.",
-  },
-  {
-    title: "The knowledge base comes first.",
-    body: "Personal notes, team runbooks, org decisions. If it isn’t somewhere an agent can read it, the agent is guessing. Obsidian, for me and for the teams I work with.",
-  },
-  {
-    title: "Workflows need a schema.",
-    body: "Agents are only as consistent as the work they’re handed. Typed notes, templates, and defined handoffs beat clever one-off chains. Sauce is that idea, open-sourced.",
-  },
-];
 
 export const repos: Repo[] = [
   {
@@ -308,8 +277,3 @@ export const repos: Repo[] = [
     meta: ["TypeScript", "Terraform"],
   },
 ];
-
-export const contact: Intro = {
-  heading: "Working on something that needs to ship?",
-  lede: "Platform, AI, customer-facing engineering, or a role that doesn’t have a name yet. If the hard part is getting it into people’s hands, I’d like to hear about it.",
-};

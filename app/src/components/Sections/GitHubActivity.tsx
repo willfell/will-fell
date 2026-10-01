@@ -42,7 +42,7 @@ const GitHubActivity: FC = memo(() => (
     innerClassName="flex flex-col gap-9 pb-16 pt-14 md:pb-24 md:pt-20 xl:pb-[120px] xl:pt-[88px]"
     sectionId="github"
   >
-    <Eyebrow band="pine" label="GitHub" number="05" />
+    <Eyebrow band="pine" label="GitHub" number="04" />
     <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
       <h2 className="flex flex-col gap-3">
         <span

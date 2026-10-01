@@ -2,6 +2,21 @@
 
 Date: 2026-09-29. Branch: `claude/personal-website-redesign-8e0916`. Design canvas: https://claude.ai/artifact/Mz2NZSLN8VzmU3tttuNBfd. The artboard "A · Field Manual — desktop, dark" (`project/Main.dc.html`) is the source of truth for layout and copy; "A · Field Manual — phone" is the same page at 390px. Artboards B and C were explored and not chosen.
 
+## Revision 2026-10-01: let the work speak
+
+Will's direction after the first deploy: less said about him by him, more of the work shown. This section overrides anything below it that disagrees.
+
+| Change | Now |
+|---|---|
+| Hero | h1 is the name. The "I end up wherever the gap is…" headline is gone; that line now sits inside the lede. Currently card reads "Agentic AI development, Operations, K8s." |
+| Removed | The five-number strip (including the 70+ AWS accounts figure), How I work, Positions, and the contact band with its headline. Strava is off the page |
+| Order | Hero, 01 Experience, 02 Selected work, 03 Personal projects, 04 GitHub, footer |
+| Experience | Directly after the hero. Every role and the school show their logo on a paper tile (the marks are drawn for white grounds). The logos were cut on 2026-09-28 by the three-screens spec ("no bullets, no logos") and are restored from git history, trimmed and resized, in `app/public/images/logos/` |
+| MCP Mesh | Capital M. The gateway is named: AgentGateway, the open-source gateway for MCP and agent traffic (agentgateway.dev), running on K8s and federating 250+ tools behind one endpoint. The site may now say "AgentGateway"; "Entra ID" stays off it (SSO) |
+| Personal projects | Sauce leaves the work grid for its own section: Obsidian mark, the frozen blurb, a four-step "How a run works" flow from the README, install commands, the repo link, and the README's two screenshots |
+| Footer | Email with Copy (moved from the contact band), LinkedIn, GitHub, Site source |
+| Gate | Strava no longer required; the copy button is checked in the footer; the Sauce link in `#projects`; every role and the school must show a logo that loads |
+
 ## Purpose
 
 willfellhoelter.com exists so a hiring manager or recruiter leaves knowing three things: Will listens first and then ships across whatever layer the outcome needs; he has done that at scale (the MCP mesh, observability for 400+ services, 1,000+ repos, 70+ AWS accounts) with teams, not alone; and he has a point of view on how agents should be used inside a team. The 2026-09-28 "three screens" site said the first thing and buried the other two: the numbers sat inside one paragraph, GitHub was a footer icon, and nothing on the page argued for anything.

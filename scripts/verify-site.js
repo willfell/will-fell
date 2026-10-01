@@ -24,7 +24,6 @@ const REQUIRED_LINKS = [
   PDF_PATH,
   "https://github.com/willfell",
   "https://linkedin.com/in/will-fellhoelter-1aa17312b",
-  "https://www.strava.com/athletes/112909908",
   "https://github.com/willfell/sauce",
   "https://github.com/willfell/will-fell",
 ];
@@ -231,7 +230,7 @@ async function desktopChecks(browser, origin) {
   );
 
   const sauceLabel = await page.evaluate(() => {
-    const a = document.querySelector('#work a[href*="sauce"]');
+    const a = document.querySelector('#projects a[href*="sauce"]');
     return a ? a.getAttribute("aria-label") : null;
   });
   check(
@@ -272,11 +271,11 @@ async function desktopChecks(browser, origin) {
       return (hi + 0.05) / (lo + 0.05);
     };
     const targets = {
-      "sauce link": document.querySelector('#work a[href*="sauce"]'),
+      "sauce link": document.querySelector('#projects a[href*="sauce"]'),
       "footer source line": document.querySelector('footer a[href*="will-fell"]'),
-      "glance label": document.querySelector("#glance dt"),
       "role date": document.querySelector("#experience summary span"),
-      "positions strip": document.querySelector("#positions p"),
+      "github strip": document.querySelector("#github p"),
+      "project caption": document.querySelector("#projects figcaption"),
     };
     return Object.entries(targets).map(([name, el]) =>
       el ? { name, ratio: Math.round(ratio(el) * 100) / 100 } : { name, ratio: null },
@@ -367,6 +366,28 @@ async function rolesChecks(browser, origin) {
     };
   });
   check(rest.count === 7, `experience has ${rest.count} expandable roles, expected 7`);
+
+  // Every role and the school carry their logo, and every logo actually loaded.
+  const logos = await page.evaluate(async () => {
+    const imgs = Array.from(document.querySelectorAll("#experience img"));
+    // The logos are lazy; ask for them now rather than scrolling the page.
+    await Promise.all(
+      imgs.map((img) => {
+        img.loading = "eager";
+        return img.decode().catch(() => {});
+      }),
+    );
+    return {
+      roles: document.querySelectorAll("#experience summary img").length,
+      all: imgs.map((img) => ({
+        src: img.getAttribute("src"),
+        loaded: img.complete && img.naturalWidth > 0,
+      })),
+    };
+  });
+  check(logos.roles === rest.count, `${logos.roles} of ${rest.count} roles show a logo`);
+  check(logos.all.length === rest.count + 1, `experience shows ${logos.all.length} logos, expected ${rest.count + 1}`);
+  for (const { src, loaded } of logos.all) check(loaded, `logo ${src} did not load`);
   check(
     rest.bullets.length > 0 && rest.bullets.every((n) => n >= 2),
     `every role needs at least two bullets; counts are [${rest.bullets.join(", ")}]`,
@@ -395,8 +416,8 @@ async function rolesChecks(browser, origin) {
   const text = await page.evaluate(() => document.body.textContent);
   check(!/\b(run|ran|running) 100\+/i.test(text), 'page says "run 100+"; the wording is "operate"');
   check(
-    !/Entra ID|AgentGateway/.test(text),
-    "page names Entra ID or AgentGateway; the site keeps Accuris specifics generic",
+    !/Entra ID/.test(text),
+    "page names Entra ID; the site keeps Accuris identity specifics generic (SSO)",
   );
   check(!/Kubernetes/.test(text), 'page says "Kubernetes"; the site says "K8s"');
   await context.close();
@@ -537,9 +558,9 @@ async function clipboardChecks(browser, origin) {
   const pageErrors = [];
   page.on("pageerror", (e) => pageErrors.push(String(e)));
   await page.goto(`${origin}/`, { waitUntil: "networkidle" });
-  const button = page.locator('#contact button[aria-label="Copy email address"]');
+  const button = page.locator('footer button[aria-label="Copy email address"]');
   const buttons = await button.count();
-  check(buttons === 1, `expected one copy button in #contact, found ${buttons}`);
+  check(buttons === 1, `expected one copy button in the footer, found ${buttons}`);
   if (buttons !== 1) {
     await context.close();
     return;
@@ -547,7 +568,7 @@ async function clipboardChecks(browser, origin) {
   await button.click();
   await page.waitForTimeout(150);
   const after = await page.evaluate(() => ({
-    label: document.querySelector('#contact button[aria-label="Copy email address"]')?.textContent,
+    label: document.querySelector('footer button[aria-label="Copy email address"]')?.textContent,
     selection: String(window.getSelection()),
   }));
   check(pageErrors.length === 0, `copy button threw when the clipboard was refused: ${pageErrors[0]}`);

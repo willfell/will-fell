@@ -7,7 +7,7 @@ import { DownloadGlyph, ExternalGlyph } from "../Icon/Glyphs";
 import Section from "../Layout/Section";
 
 const Hero: FC = memo(() => {
-  const { headline, emphasis, lede, imageSrc, imageAlt, currently } = heroData;
+  const { name, lede, imageSrc, imageAlt, currently } = heroData;
 
   return (
     <Section
@@ -18,10 +18,7 @@ const Hero: FC = memo(() => {
       <div className="hero-enter flex flex-wrap items-center gap-x-[72px] gap-y-12">
         <div className="flex min-w-0 flex-[1_1_540px] flex-col gap-7">
           <h1 className="text-[38px] font-[650] leading-[1.03] tracking-[-0.03em] [text-wrap:balance] md:text-[56px] xl:text-[66px]">
-            {`${headline} `}
-            <span className="underline decoration-amber decoration-[0.14em] underline-offset-[0.12em]">
-              {emphasis}
-            </span>
+            {name}
           </h1>
           <p
             className="max-w-[58ch] text-[17px] leading-[1.55] text-paper-2 [text-wrap:pretty] md:text-lg xl:text-xl"
