@@ -164,6 +164,7 @@ export const roles: Role[] = [
     dates: "May 2023 – Aug 2024",
     employer: "Project Canary",
     logo: getImageUrl("/images/logos/project-canary-logo.png"),
+    logoTone: "white",
     title: "DevOps Engineer",
     line: "Ephemeral environments, RAG, SOC 2",
     bullets: [
