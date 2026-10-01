@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "build": "yarn compile && yarn lint:check && yarn next build",
+    "build": "yarn github:fetch && yarn compile && yarn lint:check && yarn next build",
     "clean": "rm -rf build-tsc .next",
     "compile": "yarn run -T tsc --build --verbose",
     "dev": "yarn compile && yarn next dev",
@@ -14,6 +14,7 @@
     "lint": "eslint . --fix",
     "lint:check": "eslint .",
     "format": "prettier --write .",
+    "github:fetch": "node scripts/github/fetch-contributions.js",
     "images:validate": "node scripts/images/validate.js",
     "images:optimize": "node scripts/images/optimize.js",
     "images:archive": "node scripts/images/archive-orphans.js"

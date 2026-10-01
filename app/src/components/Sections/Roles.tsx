@@ -1,48 +1,83 @@
 import { FC, memo } from "react";
 
-import { roles } from "../../data/data";
+import { education, experienceHeading, resumeHref, roles } from "../../data/data";
 import { trackEvent } from "../../utils/analytics";
+import { DownloadGlyph, PlusGlyph } from "../Icon/Glyphs";
 import Section from "../Layout/Section";
+import SectionHeader from "../Layout/SectionHeader";
+
+const dateClass = "w-[180px] shrink-0 whitespace-nowrap font-mono text-[13px] text-muted";
+const nameClass =
+  "flex min-w-0 flex-[1_1_200px] flex-wrap items-baseline gap-x-3.5 gap-y-0.5";
+const employerClass = "text-[21px] font-[750] tracking-[-0.015em] [font-stretch:115%]";
 
 const Roles: FC = memo(() => (
-  <Section className="bg-cream" sectionId="experience">
-    <h2 className="mb-8 text-3xl font-bold text-forest-green">Experience</h2>
-    <ul className="space-y-4 md:space-y-3">
-      {roles.map(({ dates, employer, title, line, bullets }) => (
-        <li key={`${employer}-${title}`}>
-          <details
-            className="group"
-            onToggle={(e) =>
-              e.currentTarget.open &&
-              trackEvent("Role Expand", { role: `${employer} ${title}` })
-            }
+  <Section className="border-t border-line" sectionId="experience">
+    <div className="flex flex-col gap-10">
+      <SectionHeader
+        action={
+          <a
+            className="inline-flex min-h-[44px] items-center gap-2 font-mono text-sm text-paper underline decoration-1 underline-offset-[5px]"
+            download=""
+            href={resumeHref}
+            onClick={() => trackEvent("Download Click", { file: "Resume" })}
           >
-            <summary className="grid cursor-pointer list-none gap-y-1 rounded md:grid-cols-[12rem_1fr] md:gap-x-6 [&::-webkit-details-marker]:hidden">
-              <span className="whitespace-nowrap font-mono text-sm leading-relaxed tracking-wide text-stone-600">
-                {dates}
-              </span>
-              <span className="leading-relaxed">
-                <span className="font-semibold">{employer}</span> · {title} ·{" "}
-                <span className="text-stone-600">{line}</span>{" "}
-                <svg
+            Full resume, PDF
+            <DownloadGlyph />
+          </a>
+        }
+        heading={experienceHeading}
+        label="Experience"
+        number="03"
+      />
+      <ol className="border-t border-paper">
+        {roles.map(({ dates, employer, title, line, bullets }) => (
+          <li className="border-b border-line" key={`${employer}-${title}`}>
+            <details
+              className="group"
+              onToggle={(e) =>
+                e.currentTarget.open &&
+                trackEvent("Role Expand", { role: `${employer} ${title}` })
+              }
+            >
+              <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-6 gap-y-2 py-[22px] [&::-webkit-details-marker]:hidden">
+                <span className={dateClass}>{dates}</span>
+                <span className={nameClass}>
+                  <span className={employerClass}>{employer}</span>
+                  <span className="text-[17px]">{title}</span>
+                  <span className="basis-full text-[15px] leading-normal text-muted">
+                    {line}
+                  </span>
+                </span>
+                <span
                   aria-hidden="true"
-                  className="inline-block h-3 w-3 align-baseline text-forest-green transition-transform group-open:rotate-90"
-                  fill="currentColor"
-                  viewBox="0 0 12 12"
+                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center border border-line-hi"
                 >
-                  <path d="M4 2l5 4-5 4z" />
-                </svg>
-              </span>
-            </summary>
-            <ul className="mb-3 mt-3 list-disc space-y-1.5 pl-5 text-[15px] leading-relaxed text-stone-700 marker:text-stone-500 md:ml-[13.5rem]">
-              {bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-          </details>
+                  <PlusGlyph className="transition-transform group-open:rotate-45 motion-reduce:transition-none" />
+                </span>
+              </summary>
+              <div className="flex flex-wrap gap-x-6 pb-[26px]">
+                <span aria-hidden="true" className="hidden w-[180px] shrink-0 md:block" />
+                <ul className="flex min-w-0 flex-[1_1_200px] list-[square] flex-col gap-2 pl-[18px] text-[15.5px] leading-[1.55] text-paper-2 marker:text-muted">
+                  {bullets.map((bullet) => (
+                    <li className="pl-1 [text-wrap:pretty]" key={bullet}>
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
+          </li>
+        ))}
+        <li className="flex flex-wrap items-baseline gap-x-6 gap-y-2 py-[22px]">
+          <span className={dateClass}>{education.year}</span>
+          <span className={nameClass}>
+            <span className={employerClass}>{education.school}</span>
+            <span className="text-[17px]">{education.degree}</span>
+          </span>
         </li>
-      ))}
-    </ul>
+      </ol>
+    </div>
   </Section>
 ));
 

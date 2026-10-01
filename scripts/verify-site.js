@@ -10,11 +10,13 @@ const { chromium } = require("playwright");
 const ROOT = path.resolve(__dirname, "..");
 const OUT = path.join(ROOT, "app", "out");
 const SHOTS = path.join(ROOT, "app", ".screenshots");
+const SNAPSHOT = path.join(ROOT, "app", "src", "data", "github-contributions.json");
 const SITE_ORIGIN = "https://willfellhoelter.com";
-const MAX_HEIGHT = 2600;
-const MAX_WORDS = 400;
+const MAX_HEIGHT = 8000;
+const MAX_WORDS = 1500;
 const PHONE_WIDTHS = [390, 320];
-const BODY_FONT_PX = "17px";
+const MIN_LEDE_PX = 17;
+const FONTS = ["Archivo", "JetBrains Mono"];
 const PDF_PATH = "/WillFellhoelterResume.pdf";
 const PDF_SHA256 =
   "ee0c9243f632798e01287555ce940188ed21459eebd4c26bd81eb6a45fb144ef";
@@ -117,6 +119,10 @@ function staticChecks() {
     !/opacity-0|animate-on-/.test(html),
     "static HTML still carries opacity-0 or animate-on-* classes",
   );
+  check(
+    !/kubernetes/i.test(html),
+    'out/index.html says "Kubernetes" (text, an attribute or a <meta>); the site says "K8s"',
+  );
   for (const [tag] of html.matchAll(/<link[^>]*>/g)) {
     const rel = (tag.match(/rel="([^"]+)"/) || [])[1];
     const href = (tag.match(/href="([^"]+)"/) || [])[1];
@@ -183,17 +189,26 @@ async function desktopChecks(browser, origin) {
     "hero photo was not served from out/images/about/profilepic.jpg",
   );
 
-  const bodyFont = await page.evaluate(
-    () => getComputedStyle(document.querySelector("#hero p")).fontSize,
+  const lede = await page.evaluate(() => {
+    const p = document.querySelector("#hero [data-lede]");
+    return p ? parseFloat(getComputedStyle(p).fontSize) : null;
+  });
+  check(lede !== null, "no element matches #hero [data-lede]");
+  check(
+    lede === null || lede >= MIN_LEDE_PX,
+    `hero lede is ${lede}px, spec says at least ${MIN_LEDE_PX}px`,
   );
-  check(bodyFont === BODY_FONT_PX, `hero paragraph is ${bodyFont}, spec says ${BODY_FONT_PX}`);
 
-  const monoLoaded = await page.evaluate(() =>
-    Array.from(document.fonts).some(
-      (f) => f.family.replace(/["']/g, "") === "Fira Code" && f.status === "loaded",
-    ),
-  );
-  check(monoLoaded, "Fira Code never loaded; mono labels are falling back");
+  const missingFonts = await page.evaluate(async (families) => {
+    await document.fonts.ready;
+    return families.filter(
+      (family) =>
+        !Array.from(document.fonts).some(
+          (f) => f.family.replace(/["']/g, "") === family && f.status === "loaded",
+        ),
+    );
+  }, FONTS);
+  check(missingFonts.length === 0, `fonts never loaded: ${missingFonts.join(", ")}`);
 
   const clippedSvgs = await page.evaluate(() =>
     Array.from(document.querySelectorAll("svg"))
@@ -259,13 +274,17 @@ async function desktopChecks(browser, origin) {
     const targets = {
       "sauce link": document.querySelector('#work a[href*="sauce"]'),
       "footer source line": document.querySelector('footer a[href*="will-fell"]'),
+      "glance label": document.querySelector("#glance dt"),
+      "role date": document.querySelector("#experience summary span"),
+      "positions strip": document.querySelector("#positions p"),
     };
     return Object.entries(targets).map(([name, el]) =>
-      el ? { name, ratio: Math.round(ratio(el) * 100) / 100 } : { name, ratio: 0 },
+      el ? { name, ratio: Math.round(ratio(el) * 100) / 100 } : { name, ratio: null },
     );
   });
   for (const { name, ratio } of contrast) {
-    check(ratio >= 4.5, `${name} contrast ${ratio}:1 is below AA 4.5:1`);
+    check(ratio !== null, `no element matches the ${name} contrast target`);
+    check(ratio === null || ratio >= 4.5, `${name} contrast ${ratio}:1 is below AA 4.5:1`);
   }
 
   fs.mkdirSync(SHOTS, { recursive: true });
@@ -379,6 +398,7 @@ async function rolesChecks(browser, origin) {
     !/Entra ID|AgentGateway/.test(text),
     "page names Entra ID or AgentGateway; the site keeps Accuris specifics generic",
   );
+  check(!/Kubernetes/.test(text), 'page says "Kubernetes"; the site says "K8s"');
   await context.close();
 
   const phone = await browser.newContext({ viewport: { width: 320, height: 844 } });
@@ -390,6 +410,95 @@ async function rolesChecks(browser, origin) {
   );
   const expandedWidth = await small.evaluate(() => document.documentElement.scrollWidth);
   check(expandedWidth <= 320, `horizontal overflow at 320px with every role open: ${expandedWidth}`);
+  await phone.close();
+}
+
+// The GitHub band renders the committed snapshot: one column per week, one
+// cell per day, and the total the snapshot carries.
+async function githubChecks(browser, origin) {
+  const present = fs.existsSync(SNAPSHOT);
+  check(present, "app/src/data/github-contributions.json missing; run `yarn github:fetch` in app/");
+  if (!present) return;
+  let snapshot;
+  try {
+    snapshot = JSON.parse(fs.readFileSync(SNAPSHOT, "utf8"));
+    if (
+      !Array.isArray(snapshot.days) ||
+      !snapshot.days.length ||
+      !Number.isInteger(snapshot.total)
+    ) {
+      throw new Error("no days or total");
+    }
+  } catch (error) {
+    check(
+      false,
+      `github-contributions.json is unusable (${error.message}); ` +
+        "run `yarn github:fetch --check` in app/",
+    );
+    return;
+  }
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await routeSiteOrigin(context, new Set());
+  const page = await context.newPage();
+  await page.goto(`${origin}/`, { waitUntil: "networkidle" });
+  const rendered = await page.evaluate(() => ({
+    dates: Array.from(document.querySelectorAll("#github [data-day]"), (el) =>
+      el.getAttribute("data-day"),
+    ),
+    offWeek: Array.from(document.querySelectorAll("#github [data-week]"))
+      .slice(1)
+      .map((w) => w.querySelector("[data-day]")?.getAttribute("data-day"))
+      .filter((d) => d && new Date(`${d}T00:00:00Z`).getUTCDay() !== 0),
+    weeks: document.querySelectorAll("#github [data-week]").length,
+    total: document.querySelector("#github [data-total]")?.textContent ?? null,
+    labels: Array.from(
+      document.querySelectorAll("#github [data-week] > span:first-child"),
+    ).filter((s) => s.textContent.trim()).length,
+    link: !!document.querySelector('#github a[href="https://github.com/willfell"]'),
+  }));
+  const lead = new Date(`${snapshot.days[0].date}T00:00:00Z`).getUTCDay();
+  const weeks = Math.ceil((lead + snapshot.days.length) / 7);
+  const expected = snapshot.days.map((d) => d.date);
+  let at = expected.findIndex((date, i) => rendered.dates[i] !== date);
+  if (at === -1 && rendered.dates.length !== expected.length) at = expected.length;
+  check(
+    at === -1,
+    `heatmap day ${at} is ${rendered.dates[at] ?? "missing"}, the snapshot's is ` +
+      `${expected[at] ?? "missing"} (${rendered.dates.length} rendered, ${expected.length} in ` +
+      "the snapshot; rebuild app/out if the snapshot changed)",
+  );
+  check(
+    rendered.offWeek.length === 0,
+    `heatmap columns must start on Sunday; ${rendered.offWeek.slice(0, 3).join(", ")} do not`,
+  );
+  check(rendered.weeks === weeks, `heatmap renders ${rendered.weeks} weeks, expected ${weeks}`);
+  check(
+    rendered.total === snapshot.total.toLocaleString("en-US"),
+    `GitHub total reads ${JSON.stringify(rendered.total)}, snapshot says ${snapshot.total}`,
+  );
+  check(
+    rendered.labels >= 11,
+    `heatmap shows ${rendered.labels} month labels, expected at least 11`,
+  );
+  check(rendered.link, "GitHub band has no link to github.com/willfell");
+  await context.close();
+
+  // A phone visitor must be able to reach the oldest week: the heatmap's own
+  // scroller carries the overflow, so the page never does.
+  const phone = await browser.newContext({ viewport: { width: 320, height: 844 } });
+  await routeSiteOrigin(phone, new Set());
+  const small = await phone.newPage();
+  await small.goto(`${origin}/`, { waitUntil: "networkidle" });
+  const oldestLeft = await small.evaluate(() => {
+    const oldest = document.querySelector("#github [data-week]");
+    if (!oldest) return null;
+    oldest.scrollIntoView({ behavior: "instant", inline: "start", block: "nearest" });
+    return Math.round(oldest.getBoundingClientRect().left);
+  });
+  check(
+    oldestLeft !== null && oldestLeft >= 0,
+    `at 320px the oldest heatmap week sits at ${oldestLeft}px and cannot be scrolled into view`,
+  );
   await phone.close();
 }
 
@@ -428,15 +537,24 @@ async function clipboardChecks(browser, origin) {
   const pageErrors = [];
   page.on("pageerror", (e) => pageErrors.push(String(e)));
   await page.goto(`${origin}/`, { waitUntil: "networkidle" });
-  const button = page.locator('footer button[aria-label="Copy email address"]');
+  const button = page.locator('#contact button[aria-label="Copy email address"]');
+  const buttons = await button.count();
+  check(buttons === 1, `expected one copy button in #contact, found ${buttons}`);
+  if (buttons !== 1) {
+    await context.close();
+    return;
+  }
   await button.click();
   await page.waitForTimeout(150);
   const after = await page.evaluate(() => ({
-    label: document.querySelector('footer button[aria-label="Copy email address"]')?.textContent,
+    label: document.querySelector('#contact button[aria-label="Copy email address"]')?.textContent,
     selection: String(window.getSelection()),
   }));
   check(pageErrors.length === 0, `copy button threw when the clipboard was refused: ${pageErrors[0]}`);
-  check(after.label !== "copied", 'copy button claims "copied" although the clipboard was refused');
+  check(
+    !/copied/i.test(after.label || ""),
+    'copy button claims "Copied" although the clipboard was refused',
+  );
   check(
     after.selection.includes("@"),
     "when the clipboard is refused the email address is not selected for the visitor",
@@ -454,6 +572,7 @@ async function main() {
     await phoneChecks(browser, origin);
     await laterYearChecks(browser, origin);
     await rolesChecks(browser, origin);
+    await githubChecks(browser, origin);
     await noScriptChecks(browser, origin);
     await clipboardChecks(browser, origin);
     console.log(

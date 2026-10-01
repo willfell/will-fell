@@ -4,11 +4,34 @@
 
 html {
   -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
-  @apply bg-cream text-stone-black antialiased;
+  @apply bg-ink text-paper antialiased;
+}
+
+/* Keyboard focus on a dark ground: the browser default is easy to lose. */
+:focus-visible {
+  outline: 2px solid theme("colors.paper");
+  outline-offset: 2px;
+}
+
+@layer utilities {
+  /* The faint 32px grid behind the hero; the two gradients are the only
+     gradients on the page. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, theme("colors.paper / 4.5%") 1px, transparent 1px),
+      linear-gradient(to bottom, theme("colors.paper / 4.5%") 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
 }
 
 @keyframes hero-enter {
