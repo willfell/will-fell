@@ -13,7 +13,7 @@ Decisions Will made on 2026-09-29, all locked:
 | Direction | A, "Field Manual": spec-sheet layout, mono labels, numbered sections, hard edges, no shadows or gradients |
 | Theme | Dark. Near-black ground, off-white type, one amber accent |
 | Voice | Humbler than the first draft. The numbers were team efforts and the page says so. Listening is named in the hero, in How I work, and in the first Position |
-| Lanes | Not pinned to forward deployed. Hero: "Open to new roles". Contact: "Platform, AI, customer-facing engineering, or a role that doesn't have a name yet" |
+| Lanes | Not pinned to forward deployed. The hero carries no availability line (its "Open to new roles · Denver or remote" eyebrow was removed on 2026-09-30 at Will's request). Contact: "Platform, AI, customer-facing engineering, or a role that doesn't have a name yet" |
 | Kubernetes | Written "K8s" everywhere on the site |
 | Currently card | "Principal Software Engineer at Accuris. Agentic AI development, operations, K8s. Jack of all trades and master of none." and "Building Sauce." |
 | New work shown | The New Relic and PagerDuty MCP servers written instead of paid vendor connectors; the incident plugin that takes a PagerDuty alert to a root cause in New Relic and documents it in the team's Obsidian vault; the New Relic K8s operator rollout with the platform team, 400+ services |
@@ -40,7 +40,7 @@ Bands inside `<main>`, in order, each with its `id`:
 
 | # | id | Content |
 |---|---|---|
-| 1 | `hero` | Eyebrow "Open to new roles · Denver or remote"; h1 "I end up wherever the gap is between what a client needs and *what actually ships.*" (the emphasis is amber-underlined); lede; `Download resume` + `GitHub` `LinkedIn` `Email`; photo card with the Currently caption |
+| 1 | `hero` | h1 "I end up wherever the gap is between what a client needs and *what actually ships.*" (the emphasis is amber-underlined); lede; `Download resume` + `GitHub` `LinkedIn` `Email`; photo card with the Currently caption |
 | 2 | `glance` | Five numbers: 8 years, 250+ tools, 100+ microservices, 1,000+ repositories, 70+ AWS accounts; caption "Accuris, 2025 to now. All of it with a team." |
 | 3 | `how` | 01 How I work. "Defined, communicated, delivered." Four steps, each with a mono example line |
 | 4 | `work` | 02 Selected work. Two featured cards with a four-node flow (MCP mesh; From a page to a documented root cause) and four cards in a 2×2 grid (observability, Sauce with install commands, forml on-prem, ephemeral environments) |

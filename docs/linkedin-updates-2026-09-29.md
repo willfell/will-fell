@@ -4,29 +4,25 @@ Written 2026-09-29 alongside the site redesign. The site's copy is the source of
 
 The working rules from `docs/linkedin-handoff-state-2026-09-25.md` still apply: show Will the form contents and stop before every Save; Notify network stays Off; no suggested skill chips; skip the connect prompts.
 
-## 1. Accuris, Principal Software Engineer: two new bullets, one edited
+## 1. Accuris, Principal Software Engineer: the nine-bullet description
 
-Wording is exactly what the site shows under Experience.
+LinkedIn's wording differs from the site's resume bullets (LinkedIn keeps "AgentGateway" and "Entra ID"; the site genericizes them to "one gateway" and "SSO"; LinkedIn has a technical-consultant line the resume does not). So this is the whole description as it should read on LinkedIn, in order. Bullets 2 to 6 are the changes: 2 extended, 3 and 5 new, 4 and 6 Kubernetes → K8s. The rest are the existing lines verbatim.
 
-Edit the existing bullet:
+> • Built and launched the MCP mesh on AgentGateway, giving engineering, product, and cross-functional teams governed access to 250+ tools with Entra ID auth and centralized observability
+> • Designed and shipped multiple production MCP servers exposing internal systems to AI agents through natural language, including our own New Relic and PagerDuty servers in place of paid vendor connectors
+> • Built the incident plugin that takes a PagerDuty alert to a root cause in New Relic and documents it in the team's Obsidian vault in the same pass
+> • Operate 100+ microservices on multi-region K8s across 6 regions; led the multi-region expansion of compute and data tiers for multiple core services
+> • With the platform team, rolled out the New Relic K8s operator so 400+ deployed services get consistent APM injection with no manual work from developers, standardizing naming and troubleshooting across the org
+> • Help map out and drive the projects standardizing deployment patterns and CI/CD across 1,000+ repositories with template-driven K8s
+> • Own architecture and cost management across 70+ AWS accounts, consulting with teams on design and security
+> • Build and operate CDC pipelines from PostgreSQL into Databricks for mission-critical data
+> • Act as technical consultant to engineering teams across the company on architecture, deployment, and AI adoption
 
-> Designed and shipped production MCP servers that give AI agents natural-language access to internal systems
-
-to:
-
-> Designed and shipped production MCP servers that give AI agents natural-language access to internal systems, including our own New Relic and PagerDuty servers in place of paid vendor connectors
-
-Add two bullets:
-
-> Built the incident plugin that takes a PagerDuty alert to a root cause in New Relic and documents it in the team's Obsidian vault in the same pass
-
-> With the platform team, rolled out the New Relic K8s operator so 400+ deployed services get consistent APM injection with no manual work from developers, standardizing naming and troubleshooting across the org
-
-Suggested order in the role description: mesh, MCP servers (edited), incident plugin, plugin library, operator rollout, operate 100+ microservices, CI/CD standardization, AWS accounts, CDC pipelines. That is the order the site uses.
+Status 2026-09-30: the headline was saved with "K8s"; the description above was handed to Will to paste, since the session's permission classifier would not let the agent type that much role detail into the form.
 
 ## 2. "Kubernetes" becomes "K8s" in prose
 
-Will's call on 2026-09-29: the site says K8s everywhere. To match, on LinkedIn:
+Will's call on 2026-09-29: the site says K8s everywhere. To match, on LinkedIn (the headline row was saved on 2026-09-30; the two bullet rows are covered by section 1):
 
 | Field | Now | Proposed |
 |---|---|---|
