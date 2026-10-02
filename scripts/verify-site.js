@@ -118,6 +118,12 @@ function staticChecks() {
     !/opacity-0|animate-on-/.test(html),
     "static HTML still carries opacity-0 or animate-on-* classes",
   );
+  check(!/AWS accounts/i.test(html), 'out/index.html mentions "AWS accounts"; Will asked for that figure to be gone');
+  const ogImage = (html.match(/<meta[^>]*property="og:image"[^>]*content="([^"]+)"|<meta[^>]*content="([^"]+)"[^>]*property="og:image"/) || []).slice(1).find(Boolean);
+  check(
+    !!ogImage && ogImage.startsWith(`${SITE_ORIGIN}/`) && resolveOut(new URL(ogImage).pathname) !== null,
+    `og:image is ${JSON.stringify(ogImage)}; it must be an absolute ${SITE_ORIGIN} URL to a file in out/`,
+  );
   check(
     !/kubernetes/i.test(html),
     'out/index.html says "Kubernetes" (text, an attribute or a <meta>); the site says "K8s"',
@@ -567,6 +573,19 @@ async function motionChecks(browser, origin) {
   });
   check(footerShown, "the footer cannot be scrolled into view; snapping pulls the page back up");
   await context.close();
+
+  const snapAt = async (width) => {
+    const ctx = await browser.newContext({ viewport: { width, height: 844 } });
+    await routeSiteOrigin(ctx, new Set());
+    const pg = await ctx.newPage();
+    await pg.goto(`${origin}/`, { waitUntil: "networkidle" });
+    const value = await pg.evaluate(() => getComputedStyle(document.documentElement).scrollSnapType);
+    await ctx.close();
+    return value;
+  };
+  check((await snapAt(390)) === "none", "sections snap on a 390px phone; snapping is for tablet width and up");
+  // Chrome serialises "y proximity" as "y": proximity is the default strictness.
+  check((await snapAt(1280)).startsWith("y"), "sections do not snap at 1280px");
 
   const calm = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" });
   await routeSiteOrigin(calm, new Set());

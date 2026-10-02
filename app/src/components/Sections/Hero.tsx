@@ -21,8 +21,8 @@ const Hero: FC = memo(() => {
       />
       <div aria-hidden="true" className="hero-shade absolute inset-0 -z-20" />
       <div aria-hidden="true" className="bg-grid hero-grid-fade absolute inset-x-0 bottom-0 -z-10 h-48" />
-      <div className="mx-auto max-w-page px-5 pb-16 pt-40 md:px-8 md:pb-24 md:pt-36 xl:px-12 xl:pb-[120px] xl:pt-[168px]">
-        <div className="hero-enter flex flex-wrap items-center gap-x-[72px] gap-y-12">
+      <div className="mx-auto max-w-page px-5 pb-14 pt-36 md:px-8 md:pb-24 md:pt-36 xl:px-12 xl:pb-[120px] xl:pt-[168px]">
+        <div className="hero-enter flex flex-wrap items-center gap-x-[72px] gap-y-10 xl:gap-y-12">
           <div className="flex min-w-0 flex-[1_1_540px] flex-col gap-7">
             <h1 className="text-[38px] font-[650] leading-[1.03] tracking-[-0.03em] [text-wrap:balance] md:text-[56px] xl:text-[66px]">
               {name}
@@ -60,21 +60,24 @@ const Hero: FC = memo(() => {
               </ul>
             </div>
           </div>
-          <figure className="flex min-w-0 flex-[0_1_380px] flex-col border border-line-mid bg-surface">
+          {/* Below desktop width the photo shrinks to a square thumbnail beside the
+              Currently lines, so the first screen holds the whole hero; from xl it
+              is the tall card beside the text. */}
+          <figure className="flex min-w-0 max-w-xl flex-[1_1_100%] flex-row items-stretch border border-line-mid bg-surface xl:max-w-none xl:flex-[0_1_380px] xl:flex-col">
             <Image
               alt={imageAlt}
-              className="aspect-[4/5] h-auto w-full border-b border-line-mid object-cover object-[50%_45%]"
+              className="aspect-square w-[104px] shrink-0 border-r border-line-mid object-cover object-[50%_35%] sm:w-[128px] xl:aspect-[4/5] xl:h-auto xl:w-full xl:border-b xl:border-r-0 xl:object-[50%_45%]"
               height={475}
               priority
               src={imageSrc}
               width={380}
             />
-            <figcaption className="flex flex-col gap-3.5 px-5 pb-5 pt-[18px]">
+            <figcaption className="flex min-w-0 flex-col justify-center gap-2.5 px-4 py-3 xl:gap-3.5 xl:px-5 xl:pb-5 xl:pt-[18px]">
               <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
                 Currently
               </span>
               {currently.map(({ lead, rest }, i) => (
-                <span className="flex gap-3.5 text-[15px] leading-[1.45] text-paper-2" key={lead}>
+                <span className="flex gap-3 text-[14px] leading-[1.4] text-paper-2 xl:gap-3.5 xl:text-[15px] xl:leading-[1.45]" key={lead}>
                   <span className="shrink-0 font-mono text-xs leading-[21px] text-muted">
                     {String(i + 1).padStart(2, "0")}
                   </span>

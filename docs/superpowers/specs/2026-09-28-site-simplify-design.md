@@ -95,7 +95,7 @@ Heading: `Experience`. One line per role: date range in the mono face, employer 
 
 | Dates | Employer | Title | Line |
 |---|---|---|---|
-| Mar 2026 – now | Accuris | Principal Software Engineer | MCP mesh, multi-region Kubernetes, 70+ AWS accounts |
+| Mar 2026 – now | Accuris | Principal Software Engineer | MCP mesh, multi-region Kubernetes |
 | Apr 2025 – Mar 2026 | Accuris | Senior Software Engineer | GitHub migration, first internal MCP servers |
 | Aug 2024 – Apr 2025 | Forml | Senior Full Stack Engineer | first engineering hire, on-prem deploys |
 | May 2023 – Aug 2024 | Project Canary | DevOps Engineer | observability, ephemeral environments, RAG |

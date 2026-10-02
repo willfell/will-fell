@@ -426,7 +426,7 @@ export const roles: Role[] = [
     dates: "Mar 2026 – now",
     employer: "Accuris",
     title: "Principal Software Engineer",
-    line: "MCP mesh, multi-region Kubernetes, 70+ AWS accounts",
+    line: "MCP mesh, multi-region Kubernetes",
   },
   {
     dates: "Apr 2025 – Mar 2026",

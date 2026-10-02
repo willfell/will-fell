@@ -9,7 +9,7 @@ import { HomepageMeta } from "../../data/dataDef";
 const SITE_URL = "https://willfellhoelter.com/";
 
 const Page: NextPage<PropsWithChildren<HomepageMeta>> = memo(
-  ({ children, title, description }) => (
+  ({ children, title, description, image }) => (
     <>
       <Head>
         <title>{title}</title>
@@ -23,7 +23,12 @@ const Page: NextPage<PropsWithChildren<HomepageMeta>> = memo(
         <meta content={title} property="og:title" />
         <meta content={description} property="og:description" />
         <meta content={SITE_URL} property="og:url" />
+        <meta content={image} property="og:image" />
+        <meta content="1200" property="og:image:width" />
+        <meta content="630" property="og:image:height" />
 
+        <meta content="summary_large_image" name="twitter:card" />
+        <meta content={image} name="twitter:image" />
         <meta content={title} name="twitter:title" />
         <meta content={description} name="twitter:description" />
       </Head>

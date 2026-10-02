@@ -9,7 +9,7 @@ Will's direction after the first deploy: less said about him by him, more of the
 | Change | Now |
 |---|---|
 | Hero | h1 is the name. The "I end up wherever the gap is…" headline is gone; that line now sits inside the lede. Currently card reads "Agentic AI development, Operations, K8s." |
-| Removed | The five-number strip (including the 70+ AWS accounts figure), How I work, Positions, and the contact band with its headline. Strava is off the page |
+| Removed | The five-number strip, How I work, Positions, and the contact band with its headline. Strava is off the page |
 | Order | Hero, 01 Experience, 02 Selected work, 03 Personal projects, 04 GitHub, footer |
 | Experience | Directly after the hero. Every role and the school show their logo on a paper tile (the marks are drawn for white grounds). The logos were cut on 2026-09-28 by the three-screens spec ("no bullets, no logos") and are restored from git history, trimmed and resized, in `app/public/images/logos/` |
 | MCP Mesh | Capital M. The gateway is named: AgentGateway, the open-source gateway for MCP and agent traffic (agentgateway.dev), running on K8s and federating 250+ tools behind one endpoint. The site may now say "AgentGateway"; "Entra ID" stays off it (SSO) |
@@ -29,7 +29,7 @@ Will's direction after the first deploy: less said about him by him, more of the
 
 ## Purpose
 
-willfellhoelter.com exists so a hiring manager or recruiter leaves knowing three things: Will listens first and then ships across whatever layer the outcome needs; he has done that at scale (the MCP mesh, observability for 400+ services, 1,000+ repos, 70+ AWS accounts) with teams, not alone; and he has a point of view on how agents should be used inside a team. The 2026-09-28 "three screens" site said the first thing and buried the other two: the numbers sat inside one paragraph, GitHub was a footer icon, and nothing on the page argued for anything.
+willfellhoelter.com exists so a hiring manager or recruiter leaves knowing three things: Will listens first and then ships across whatever layer the outcome needs; he has done that at scale (the MCP mesh, observability for 400+ services, 1,000+ repos) with teams, not alone; and he has a point of view on how agents should be used inside a team. The 2026-09-28 "three screens" site said the first thing and buried the other two: the numbers sat inside one paragraph, GitHub was a footer icon, and nothing on the page argued for anything.
 
 Decisions Will made on 2026-09-29, all locked:
 
@@ -66,7 +66,7 @@ Bands inside `<main>`, in order, each with its `id`:
 | # | id | Content |
 |---|---|---|
 | 1 | `hero` | h1 "I end up wherever the gap is between what a client needs and *what actually ships.*" (the emphasis is amber-underlined); lede; `Download resume` + `GitHub` `LinkedIn` `Email`; photo card with the Currently caption |
-| 2 | `glance` | Five numbers: 8 years, 250+ tools, 100+ microservices, 1,000+ repositories, 70+ AWS accounts; caption "Accuris, 2025 to now. All of it with a team." |
+| 2 | `glance` | Five numbers: years across the stack, tools, microservices, repositories; caption "Accuris, 2025 to now. All of it with a team." |
 | 3 | `how` | 01 How I work. "Defined, communicated, delivered." Four steps, each with a mono example line |
 | 4 | `work` | 02 Selected work. Two featured cards with a four-node flow (MCP mesh; From a page to a documented root cause) and four cards in a 2×2 grid (observability, Sauce with install commands, forml on-prem, ephemeral environments) |
 | 5 | `experience` | 03 Experience. "Eight years, seven roles." Seven `<details>` roles, education line, "Full resume, PDF" link |
