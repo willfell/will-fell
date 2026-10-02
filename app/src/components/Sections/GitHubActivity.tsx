@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { CSSProperties, FC, memo } from "react";
 
-import { githubHref, repos } from "../../data/data";
+import { contributionsCaption, githubHref, repos } from "../../data/data";
 import snapshot from "../../data/github-contributions.json";
 import { trackEvent } from "../../utils/analytics";
 import { ExternalGlyph } from "../Icon/Glyphs";
@@ -43,15 +43,20 @@ const GitHubActivity: FC = memo(() => (
   >
     <Eyebrow label="GitHub" number="04" />
     <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-      <h2 className="reveal flex flex-col gap-3">
-        <span
-          className="text-[64px] font-[750] leading-[0.88] tracking-[-0.045em] [font-stretch:125%] md:text-[104px] xl:text-[136px]"
-          data-total=""
-        >
-          {total}
-        </span>
-        <span className="text-[19px] text-paper-2">contributions in the last year</span>
-      </h2>
+      <div className="reveal flex max-w-[60ch] flex-col gap-3">
+        <h2 className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span
+            className="text-[30px] font-[750] leading-none tracking-[-0.03em] [font-stretch:125%] md:text-[42px] xl:text-[50px]"
+            data-total=""
+          >
+            {total}
+          </span>
+          <span className="text-[19px] text-paper-2">contributions in the last year</span>
+        </h2>
+        <p className="text-[15.5px] leading-relaxed text-muted [text-wrap:pretty]">
+          {contributionsCaption}
+        </p>
+      </div>
       <a
         className="reveal inline-flex min-h-[48px] items-center gap-2 border border-paper px-5 font-mono text-sm text-paper"
         href={githubHref}
@@ -114,7 +119,7 @@ const GitHubActivity: FC = memo(() => (
         </span>
       </figcaption>
     </figure>
-    <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {repos.map(({ name, href, description, meta }, i) => (
         <li
           className="reveal flex flex-col gap-2.5 border border-line-mid bg-surface p-[22px]"

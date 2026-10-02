@@ -5,9 +5,15 @@
 html {
   -webkit-tap-highlight-color: transparent;
   color-scheme: dark;
-  /* Sections snap flush when a scroll ends near their top; "proximity" never
-     traps a reader mid-way through a long section. */
-  scroll-snap-type: y proximity;
+}
+
+/* From tablet width up, sections snap flush when a scroll ends near their
+   top; "proximity" never traps a reader mid-way through a long section.
+   Phones scroll freely: the page is long there and snapping fights the thumb. */
+@media (min-width: theme("screens.md")) {
+  html {
+    scroll-snap-type: y proximity;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -917,7 +917,6 @@ export const stats: Stat[] = [
   { value: "250+", label: "Tools behind the org’s MCP gateway" },
   { value: "100+", label: "Microservices in operations, 6 regions" },
   { value: "1,000+", label: "Repositories moved to GitHub" },
-  { value: "70+", label: "AWS accounts reviewed for architecture and cost" },
 ];
 
 export const statsCaption = "Accuris, 2025 to now. All of it with a team.";
@@ -934,7 +933,7 @@ export const howIWork: HowIWork = {
     {
       title: "Communicated",
       body: "Say it back in plain language, argue the approach while it’s still cheap, and keep the decision where everyone can find it.",
-      example: "Accuris → design reviews with teams across 70+ AWS accounts",
+      example: "Accuris → design reviews with teams for cost and security",
     },
     {
       title: "Delivered",
@@ -1024,7 +1023,7 @@ export const roles: Role[] = [
     dates: "Mar 2026 – Now",
     employer: "Accuris",
     title: "Principal Software Engineer",
-    line: "MCP mesh, observability, multi-region K8s, 70+ AWS accounts",
+    line: "MCP mesh, observability, multi-region K8s",
     bullets: [
       "Built and launched the MCP mesh: one governed entry point to 250+ tools for engineering, product, and cross-functional teams, with SSO and centralized observability",
       "Designed and shipped production MCP servers that give AI agents natural-language access to internal systems, including our own New Relic and PagerDuty servers in place of paid vendor connectors",
@@ -1033,7 +1032,6 @@ export const roles: Role[] = [
       "With the platform team, rolled out the New Relic K8s operator so 400+ deployed services get consistent APM injection with no manual work from developers, standardizing naming and troubleshooting across the org",
       "Operate 100+ microservices on K8s across 6 regions; led the multi-region buildout of compute and data tiers",
       "Help map out and drive the standardization of deployment and CI/CD across 1,000+ repositories with templated K8s",
-      "Own architecture and cost across 70+ AWS accounts, reviewing designs with teams for cost and security",
       "Build and run CDC pipelines from PostgreSQL into Databricks for mission-critical data",
     ],
   },

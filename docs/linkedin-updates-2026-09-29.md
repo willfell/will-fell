@@ -4,21 +4,20 @@ Written 2026-09-29 alongside the site redesign. The site's copy is the source of
 
 The working rules from `docs/linkedin-handoff-state-2026-09-25.md` still apply: show Will the form contents and stop before every Save; Notify network stays Off; no suggested skill chips; skip the connect prompts.
 
-## 1. Accuris, Principal Software Engineer: the nine-bullet description
+## 1. Accuris, Principal Software Engineer: the description
 
-LinkedIn's wording differs from the site's resume bullets (LinkedIn keeps "AgentGateway" and "Entra ID"; the site genericizes them to "one gateway" and "SSO"; LinkedIn has a technical-consultant line the resume does not). So this is the whole description as it should read on LinkedIn, in order. Bullets 2 to 6 are the changes: 2 extended, 3 and 5 new, 4 and 6 Kubernetes → K8s. The rest are the existing lines verbatim.
+LinkedIn's wording differs from the site's resume bullets (LinkedIn keeps "AgentGateway" and "Entra ID"; the site genericizes them to "one gateway" and "SSO"; LinkedIn has a technical-consultant line the resume does not). So this is the whole description as it should read on LinkedIn, in order. Against the original: bullet 1 credits the platform team, 2 is extended, 3 and 5 are new, 4 and 6 say K8s, and the AWS-accounts bullet is gone. The rest are the existing lines verbatim.
 
-> • Built and launched the MCP mesh on AgentGateway, giving engineering, product, and cross-functional teams governed access to 250+ tools with Entra ID auth and centralized observability
+> • With the platform team, built and launched the MCP mesh on AgentGateway, giving engineering, product, and cross-functional teams governed access to 250+ tools with Entra ID auth and centralized observability
 > • Designed and shipped multiple production MCP servers exposing internal systems to AI agents through natural language, including our own New Relic and PagerDuty servers in place of paid vendor connectors
 > • Built the incident plugin that takes a PagerDuty alert to a root cause in New Relic and documents it in the team's Obsidian vault in the same pass
 > • Operate 100+ microservices on multi-region K8s across 6 regions; led the multi-region expansion of compute and data tiers for multiple core services
 > • With the platform team, rolled out the New Relic K8s operator so 400+ deployed services get consistent APM injection with no manual work from developers, standardizing naming and troubleshooting across the org
 > • Help map out and drive the projects standardizing deployment patterns and CI/CD across 1,000+ repositories with template-driven K8s
-> • Own architecture and cost management across 70+ AWS accounts, consulting with teams on design and security
 > • Build and operate CDC pipelines from PostgreSQL into Databricks for mission-critical data
 > • Act as technical consultant to engineering teams across the company on architecture, deployment, and AI adoption
 
-Status 2026-09-30: the headline was saved with "K8s"; the description above was handed to Will to paste, since the session's permission classifier would not let the agent type that much role detail into the form.
+Status 2026-10-02: saved on LinkedIn exactly as above (eight bullets), Notify network off. The headline was saved with "K8s" on 2026-09-30. At Will's request the AWS-accounts bullet was removed from LinkedIn and the site, and is not to be mentioned anywhere.
 
 ## 2. "Kubernetes" becomes "K8s" in prose
 
@@ -65,4 +64,4 @@ The PDF is produced outside the repo. Carry section 1's bullets and section 2's 
 
 ## 7. Site changes since (2026-10-01), for consistency
 
-The site now writes "MCP Mesh" with a capital M and names AgentGateway on the work card and in the Principal role's first bullet. LinkedIn's Principal description already says "MCP mesh on AgentGateway"; changing "mesh" to "Mesh" there is optional and cosmetic. The Principal role's one-liner on the site dropped "70+ AWS accounts"; the bullet about the accounts stays on both.
+The site now writes "MCP Mesh" with a capital M and names AgentGateway on the work card and in the Principal role's first bullet. LinkedIn's Principal description already says "MCP mesh on AgentGateway"; changing "mesh" to "Mesh" there is optional and cosmetic. The AWS-accounts line is gone from both, at Will's request.

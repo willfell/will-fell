@@ -1,6 +1,7 @@
 export interface HomepageMeta {
   title: string;
   description: string;
+  image: string;
 }
 
 export interface NavLink {
