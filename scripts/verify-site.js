@@ -251,12 +251,26 @@ async function desktopChecks(browser, origin) {
       const [r, g, b, a = "1"] = m[1].split(",").map((v) => v.trim());
       return { r: +r, g: +g, b: +b, a: +a };
     };
+    // The ground behind an element: every painted ancestor, composited from
+    // the first opaque one outward, so a section's translucent lift over the
+    // page colour counts as the faint lift it is and not as a solid colour.
     const background = (el) => {
+      const layers = [];
       for (let node = el; node; node = node.parentElement) {
         const c = parse(getComputedStyle(node).backgroundColor);
-        if (c && c.a > 0) return c;
+        if (c && c.a > 0) layers.push(c);
+        if (c && c.a >= 1) break;
       }
-      return { r: 255, g: 255, b: 255, a: 1 };
+      let ground = { r: 255, g: 255, b: 255, a: 1 };
+      for (const c of layers.reverse()) {
+        ground = {
+          r: c.a * c.r + (1 - c.a) * ground.r,
+          g: c.a * c.g + (1 - c.a) * ground.g,
+          b: c.a * c.b + (1 - c.a) * ground.b,
+          a: 1,
+        };
+      }
+      return ground;
     };
     const luminance = ({ r, g, b }) => {
       const lin = (v) => {
@@ -291,6 +305,42 @@ async function desktopChecks(browser, origin) {
     check(ratio !== null, `no element matches the ${name} contrast target`);
     check(ratio === null || ratio >= 4.5, `${name} contrast ${ratio}:1 is below AA 4.5:1`);
   }
+
+  // Every other section after the hero is a faint translucent lift over the
+  // one grid, so boundaries read on a long phone page; nothing paints a solid
+  // ground over the grid, and each lifted or later section starts with a hairline.
+  const grounds = await page.evaluate(() =>
+    Object.fromEntries(
+      ["experience", "work", "projects", "github"].map((id) => {
+        const s = getComputedStyle(document.getElementById(id));
+        return [id, { bg: s.backgroundColor, hairline: s.borderTopWidth }];
+      }),
+    ),
+  );
+  // Paper at a few percent; the browser rounds channels of translucent colours.
+  const lifted = (bg) => {
+    const m = bg.match(/^rgba\((\d+), (\d+), (\d+), ([\d.]+)\)$/);
+    return (
+      !!m &&
+      Math.abs(m[1] - 236) <= 2 &&
+      Math.abs(m[2] - 235) <= 2 &&
+      Math.abs(m[3] - 229) <= 2 &&
+      +m[4] > 0 &&
+      +m[4] <= 0.1
+    );
+  };
+  check(
+    grounds.experience.bg === "rgba(0, 0, 0, 0)" &&
+      lifted(grounds.work.bg) &&
+      grounds.projects.bg === "rgba(0, 0, 0, 0)" &&
+      lifted(grounds.github.bg),
+    `sections should run ink / lift / ink / lift over the one grid, got ${JSON.stringify(grounds)}`,
+  );
+  check(
+    grounds.experience.hairline === "0px" &&
+      ["work", "projects", "github"].every((id) => grounds[id].hairline === "1px"),
+    `Work, Projects and GitHub should each start with a hairline and Experience follow the hero fade, got ${JSON.stringify(grounds)}`,
+  );
 
   fs.mkdirSync(SHOTS, { recursive: true });
   await page.screenshot({ path: path.join(SHOTS, "home-1280.png"), fullPage: true });

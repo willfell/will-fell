@@ -38,7 +38,9 @@ const dayTitle = (date: string, count: number) => {
 
 const GitHubActivity: FC = memo(() => (
   <Section
+    className="border-t border-line"
     innerClassName="flex flex-col gap-9 pb-16 pt-14 md:pb-24 md:pt-20 xl:pb-[120px] xl:pt-[88px]"
+    lift
     sectionId="github"
   >
     <Eyebrow label="GitHub" number="04" />
