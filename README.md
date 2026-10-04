@@ -13,16 +13,16 @@ A page to show my portfolio and provide some form of contact, you can see it on 
 
 ## Features
 
-- One dark page: hero, experience (roles with their logos, each expanding to its resume bullets), selected work, personal projects (Sauce), GitHub activity; email and links in the footer
+- One dark page: hero (with the last year of GitHub contributions under the intro), experience (roles with their logos, each expanding to its resume bullets), selected work, personal projects (Sauce), the public repos; email and links in the footer
 - GitHub contribution calendar fetched at build time from the public profile into `app/src/data/github-contributions.json` (`yarn github:fetch`); the committed snapshot is the fallback whenever GitHub is unreachable. The window slides daily, so `yarn build` rewrites that file whenever the calendar moved: commit it to refresh the fallback, or `git checkout -- app/src/data/github-contributions.json` to drop it. The deploy can skip the fetch by passing `build_env: GITHUB_CONTRIBUTIONS_SKIP=1` to the shared workflow
 - Resume download (the PDF is produced outside the repo; commit it to both `app/public/` and `app/src/assets/`)
-- Static export, responsive. Motion is CSS only: a mountain hero that settles in and drifts with a slow parallax, sections that unveil as they scroll in (scroll-driven animations) and snap flush near their tops, smooth anchor scrolling, the roles' plus turning. With reduced motion, or in a browser without scroll-driven animations, everything renders in place
+- Static export, responsive. Motion is CSS only: a mountain hero that settles in and drifts with a slow parallax, one load sequence (the name wipes up, the photo card opens, the heatmap fills in week by week while its total rolls up), sections that unveil as they scroll in (scroll-driven animations) and snap flush near their tops, smooth anchor scrolling, roles that animate open, links whose underline and arrow answer the pointer. The heatmap reads each day's count back on hover or with the arrow keys (the one bit of script). With reduced motion everything renders in place; without scroll-driven animations or animatable `auto` sizes, those parts do
 - Deployed by GitHub Actions on every merge to `main`
 
 ## Verification
 
 From `app/`: `yarn images:validate && yarn github:fetch --check && yarn build && yarn copy-resume`. `yarn build` refreshes the GitHub snapshot first (skip it offline with `GITHUB_CONTRIBUTIONS_SKIP=1`), then type-checks and runs `yarn lint:check` (eslint without `--fix`) before `next build`, so CI's build step is also the lint gate; `yarn lint` is the autofixing variant for local use.
-From the repo root: `npm run site:verify` renders `app/out/` in Playwright and checks page height, word count, required links, fonts, contrast, the roles, the GitHub band against the snapshot, dead routes and the resume checksum. Screenshots land in `app/.screenshots/`.
+From the repo root: `npm run site:verify` renders `app/out/` in Playwright and checks page height, word count, required links, fonts, contrast, the roles, the hero heatmap and its readout against the snapshot, the hero load sequence landing (and staying still under reduced motion), dead routes and the resume checksum. Screenshots land in `app/.screenshots/`.
 
 ## Hosting and Deployment
 

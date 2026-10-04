@@ -259,7 +259,9 @@ export const sauce: Project = {
 };
 
 export const contributionsCaption =
-  "Most since May are Sauce: agents do the work in their own git worktrees, and I steer and merge what lands.";
+  "Since May 2026, most of it is Sauce: agents do the work in their own git worktrees, I steer and merge what lands, and each release bumps its Homebrew tap.";
+
+export const githubHeading = "Read the code.";
 
 export const repos: Repo[] = [
   {

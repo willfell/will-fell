@@ -2,6 +2,19 @@
 
 Date: 2026-09-29. Branch: `claude/personal-website-redesign-8e0916`. Design canvas: https://claude.ai/artifact/Mz2NZSLN8VzmU3tttuNBfd. The artboard "A · Field Manual — desktop, dark" (`project/Main.dc.html`) is the source of truth for layout and copy; "A · Field Manual — phone" is the same page at 390px. Artboards B and C were explored and not chosen.
 
+## Revision 2026-10-03: the year in the hero
+
+Will's direction: fill the open water under the hero's links with the year on GitHub, check the facts, and take the motion further. This section overrides anything below it that disagrees.
+
+| Change | Now |
+|---|---|
+| Hero | From xl the hero is a grid: the intro top left, the heatmap (`#activity`) bottom left, ending flush with the photo card, which spans both rows on the right. Below xl: intro, photo card, heatmap. The heatmap carries the total ("contributions in the last year"), a Less/More legend, and the caption. On phones it starts scrolled to the latest weeks and drops the weekday labels |
+| 04 GitHub | No second heatmap or total. "Read the code.", the github.com/willfell button, and the two repo cards |
+| Caption | "Since May 2026, most of it is Sauce: agents do the work in their own git worktrees, I steer and merge what lands, and each release bumps its Homebrew tap." Sauce itself is 42% of contributions from May to October; with its Homebrew tap, 56%; the rest are private. "Since May" now names its year |
+| Readout | Pointing at a day, or arrowing through the days once the heatmap has focus (left/right a week, up/down a day, Home/End), swaps the legend for "392 contributions on Fri, Sep 11, 2026". The one piece of script on the page; the squares are memoised apart from it |
+| Motion | One load sequence, about two seconds: nav fades, the name wipes up from its baseline (clip and translate only, so its opacity is 1 throughout), the photo card opens from its bottom edge, the lede and links rise, then the 371 squares fill in on a diagonal (`--w` week, `--d` weekday) while each digit of the total rolls into place on an odometer strip. Roles animate open and closed (`::details-content` with `interpolate-size`, where supported). Text links turn their underline amber and drop it 2px; download and external arrows lean the way they go; the amber buttons go paper. The heatmap's scroll sweep is gone with the second heatmap. All of it under `prefers-reduced-motion: no-preference` |
+| Gate | The heatmap checks read `#activity` inside `#hero`; the readout is checked at rest, on hover, on focus and on ArrowLeft; `heroMotionChecks` checks the sequence runs, has landed 3.5s after load with every digit parked on its value, and that nothing animates or starts hidden under reduced motion; `rolesChecks` waits for the open transition |
+
 ## Revision 2026-10-01: let the work speak
 
 Will's direction after the first deploy: less said about him by him, more of the work shown. This section overrides anything below it that disagrees.

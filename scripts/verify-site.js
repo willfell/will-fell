@@ -405,6 +405,8 @@ async function rolesChecks(browser, origin) {
 
   if (rest.count > 0) {
     await page.locator("#experience summary").first().click();
+    // The role animates open; read it once the transition has settled.
+    await page.waitForTimeout(500);
     const opened = await page.evaluate(() => {
       const d = document.querySelector("#experience details");
       return {
@@ -440,8 +442,9 @@ async function rolesChecks(browser, origin) {
   await phone.close();
 }
 
-// The GitHub band renders the committed snapshot: one column per week, one
-// cell per day, and the total the snapshot carries.
+// The hero's heatmap (#activity) renders the committed snapshot: one column
+// per week, one cell per day, and the total the snapshot carries. Pointing at
+// a day, or arrowing through the days, reads that day's count back.
 async function githubChecks(browser, origin) {
   const present = fs.existsSync(SNAPSHOT);
   check(present, "app/src/data/github-contributions.json missing; run `yarn github:fetch` in app/");
@@ -469,17 +472,18 @@ async function githubChecks(browser, origin) {
   const page = await context.newPage();
   await page.goto(`${origin}/`, { waitUntil: "networkidle" });
   const rendered = await page.evaluate(() => ({
-    dates: Array.from(document.querySelectorAll("#github [data-day]"), (el) =>
+    dates: Array.from(document.querySelectorAll("#activity [data-day]"), (el) =>
       el.getAttribute("data-day"),
     ),
-    offWeek: Array.from(document.querySelectorAll("#github [data-week]"))
+    offWeek: Array.from(document.querySelectorAll("#activity [data-week]"))
       .slice(1)
       .map((w) => w.querySelector("[data-day]")?.getAttribute("data-day"))
       .filter((d) => d && new Date(`${d}T00:00:00Z`).getUTCDay() !== 0),
-    weeks: document.querySelectorAll("#github [data-week]").length,
-    total: document.querySelector("#github [data-total]")?.textContent ?? null,
+    weeks: document.querySelectorAll("#activity [data-week]").length,
+    total: document.querySelector("#activity [data-total]")?.textContent ?? null,
+    inHero: !!document.querySelector("#hero #activity"),
     labels: Array.from(
-      document.querySelectorAll("#github [data-week] > span:first-child"),
+      document.querySelectorAll("#activity [data-week] > span:first-child"),
     ).filter((s) => s.textContent.trim()).length,
     link: !!document.querySelector('#github a[href="https://github.com/willfell"]'),
   }));
@@ -507,7 +511,35 @@ async function githubChecks(browser, origin) {
     rendered.labels >= 11,
     `heatmap shows ${rendered.labels} month labels, expected at least 11`,
   );
+  check(rendered.inHero, "the contribution heatmap (#activity) is not inside the hero");
   check(rendered.link, "GitHub band has no link to github.com/willfell");
+
+  // The readout: the legend at rest, the day's count under the pointer and
+  // under the keyboard cursor, the legend again once both have left.
+  const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const says = ({ date, count }) => {
+    const d = new Date(`${date}T00:00:00Z`);
+    const n = count === 0 ? "No" : count.toLocaleString("en-US");
+    return `${n} contribution${count === 1 ? "" : "s"} on ${DAYS[d.getUTCDay()]}, ${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+  };
+  const readout = () => page.locator("#activity [aria-live]").innerText();
+  const busiest = snapshot.days.reduce((a, b) => (b.count > a.count ? b : a));
+  const latest = snapshot.days[snapshot.days.length - 1];
+  check(/Less[\s\S]*More/.test(await readout()), "the heatmap readout does not show the legend at rest");
+  await page.hover(`#activity [data-day="${busiest.date}"]`);
+  const pointed = await readout();
+  check(pointed === says(busiest), `pointing at ${busiest.date} reads "${pointed}", expected "${says(busiest)}"`);
+  await page.mouse.move(1, 1);
+  await page.focus('#activity [role="region"]');
+  const focused = await readout();
+  check(focused === says(latest), `focusing the heatmap reads "${focused}", expected the latest day, "${says(latest)}"`);
+  await page.keyboard.press("ArrowLeft");
+  const weekBack = snapshot.days[snapshot.days.length - 8];
+  const stepped = await readout();
+  check(stepped === says(weekBack), `ArrowLeft reads "${stepped}", expected a week back, "${says(weekBack)}"`);
+  await page.keyboard.press("Tab");
+  check(/Less[\s\S]*More/.test(await readout()), "the heatmap readout keeps a day after focus leaves");
   await context.close();
 
   // A phone visitor must be able to reach the oldest week: the heatmap's own
@@ -517,7 +549,7 @@ async function githubChecks(browser, origin) {
   const small = await phone.newPage();
   await small.goto(`${origin}/`, { waitUntil: "networkidle" });
   const oldestLeft = await small.evaluate(() => {
-    const oldest = document.querySelector("#github [data-week]");
+    const oldest = document.querySelector("#activity [data-day]");
     if (!oldest) return null;
     oldest.scrollIntoView({ behavior: "instant", inline: "start", block: "nearest" });
     return Math.round(oldest.getBoundingClientRect().left);
@@ -535,7 +567,7 @@ async function githubChecks(browser, origin) {
 // and with reduced motion everything is shown from the start.
 async function motionChecks(browser, origin) {
   const readState = () =>
-    Array.from(document.querySelectorAll(".reveal, .reveal-sweep")).map((el) => {
+    Array.from(document.querySelectorAll(".reveal")).map((el) => {
       const s = getComputedStyle(el);
       return { opacity: Number(s.opacity), clip: s.clipPath, id: el.closest("[id]")?.id };
     });
@@ -593,7 +625,51 @@ async function motionChecks(browser, origin) {
   await still.goto(`${origin}/`, { waitUntil: "networkidle" });
   const calmHidden = hidden(await still.evaluate(readState));
   check(calmHidden.length === 0, `with reduced motion ${calmHidden.length} elements start hidden`);
+  const calmHero = await still.evaluate(readHero);
+  check(calmHero.running === 0, `with reduced motion ${calmHero.running} hero animations still run`);
+  check(calmHero.hidden === 0, `with reduced motion ${calmHero.hidden} hero elements start hidden`);
+  check(calmHero.digits === calmHero.parked, "with reduced motion the hero total is not parked on its value");
   await calm.close();
+}
+
+// The hero's load sequence: the name, photo card, lede and links, every day
+// of the heatmap and each digit of the total animate in, and all of it has
+// landed, fully shown, a few seconds after load.
+const readHero = () => {
+  const els = Array.from(document.querySelectorAll(".hero-title, .hero-card, .hero-rise, .heat-cell"));
+  const shown = (el) => {
+    const s = getComputedStyle(el);
+    return Number(s.opacity) >= 0.99 && (s.clipPath === "none" || !/inset\((?!-|0)/.test(s.clipPath));
+  };
+  const strips = Array.from(document.querySelectorAll(".odometer-strip"));
+  const em = (el) => parseFloat(getComputedStyle(el).fontSize);
+  return {
+    count: els.length,
+    hidden: els.filter((el) => !shown(el)).length,
+    running: document.getAnimations().filter((a) => a.playState === "running" && a.animationName && /^(title-wipe|card-wipe|rise|heat-pop|fade-in|odometer-roll)$/.test(a.animationName)).length,
+    digits: strips.length,
+    parked: strips.filter((el) => {
+      const y = parseFloat(getComputedStyle(el).translate.split(" ")[1] || "0");
+      const d = Number(el.parentElement.style.getPropertyValue("--d"));
+      return Math.abs(y + (10 + d) * em(el)) < 0.5;
+    }).length,
+  };
+};
+
+async function heroMotionChecks(browser, origin) {
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  await routeSiteOrigin(context, new Set());
+  const page = await context.newPage();
+  await page.goto(`${origin}/`, { waitUntil: "load" });
+  const early = await page.evaluate(readHero);
+  check(early.count >= 370, `the hero animates only ${early.count} elements; expected the name, card, intro and every day`);
+  check(early.running > 0 || early.hidden > 0, "the hero load sequence is not running");
+  await page.waitForTimeout(3500);
+  const landed = await page.evaluate(readHero);
+  check(landed.running === 0, `${landed.running} hero animations are still running 3.5s after load`);
+  check(landed.hidden === 0, `${landed.hidden} hero elements are still hidden 3.5s after load`);
+  check(landed.digits > 0 && landed.digits === landed.parked, `${landed.digits - landed.parked} digits of the hero total did not land on their value`);
+  await context.close();
 }
 
 async function noScriptChecks(browser, origin) {
@@ -668,6 +744,7 @@ async function main() {
     await rolesChecks(browser, origin);
     await githubChecks(browser, origin);
     await motionChecks(browser, origin);
+    await heroMotionChecks(browser, origin);
     await noScriptChecks(browser, origin);
     await clipboardChecks(browser, origin);
     console.log(
