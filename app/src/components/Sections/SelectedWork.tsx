@@ -36,7 +36,7 @@ const WorkCard: FC<WorkItem> = memo(({ context, title, description, metric }) =>
 WorkCard.displayName = "WorkCard";
 
 const SelectedWork: FC = memo(() => (
-  <Section className="border-t border-line" sectionId="work">
+  <Section className="border-t border-line" lift sectionId="work">
     <div className="flex flex-col gap-10">
       <SectionHeader
         heading={selectedWorkIntro.heading}
