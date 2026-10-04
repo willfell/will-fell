@@ -59,14 +59,14 @@ const SelectedWork: FC = memo(() => (
             </p>
             {link && (
               <a
-                className="inline-flex min-h-[44px] items-center gap-1.5 self-start font-mono text-[13.5px] text-paper underline decoration-1 underline-offset-[5px]"
+                className="link group inline-flex min-h-[44px] items-center gap-1.5 self-start font-mono text-[13.5px] text-paper"
                 href={link.href}
                 onClick={() => trackEvent("Project Click", { project: link.text })}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 {link.text}
-                <ExternalGlyph />
+                <ExternalGlyph className="glyph-out" />
               </a>
             )}
           </div>

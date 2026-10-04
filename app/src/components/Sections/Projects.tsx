@@ -65,14 +65,14 @@ const Projects: FC = memo(() => {
               </pre>
               <a
                 aria-label={sauce.hrefLabel}
-                className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-[13.5px] text-paper underline decoration-1 underline-offset-[5px]"
+                className="link group inline-flex min-h-[44px] items-center gap-1.5 font-mono text-[13.5px] text-paper"
                 href={sauce.href}
                 onClick={() => trackEvent("Project Click", { project: name })}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 {sauce.hrefText}
-                <ExternalGlyph />
+                <ExternalGlyph className="glyph-out" />
               </a>
             </div>
           </div>

@@ -67,15 +67,103 @@ body {
   }
 }
 
-@keyframes hero-enter {
+@layer components {
+  /* Text links are underlined at rest; pointing at one turns the underline
+     amber and lets it drop a little, so the hover reads without a colour
+     change in the type itself. */
+  .link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
+  }
+
+  .link:hover {
+    text-decoration-color: theme("colors.amber");
+    text-underline-offset: 7px;
+  }
+
+  /* The day under the pointer, or under the keyboard cursor. */
+  .heat-cell:hover,
+  .heat-cell[data-active] {
+    outline: 1.5px solid theme("colors.paper");
+    outline-offset: 1px;
+  }
+
+  /* Each digit of the hero's total: a window one line tall onto a strip of
+     0-9 twice over, parked on its value in the second run. */
+  .odometer {
+    line-height: 1;
+  }
+
+  .odometer-digit {
+    display: inline-block;
+    height: 1em;
+    overflow: hidden;
+  }
+
+  .odometer-strip {
+    display: flex;
+    flex-direction: column;
+    translate: 0 calc((10 + var(--d)) * -1em);
+  }
+
+  .odometer-strip > span {
+    display: block;
+    height: 1em;
+  }
+}
+
+@keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+/* The name comes up from behind its own baseline. Clip and translate only,
+   so the heading's opacity is 1 from the first frame. */
+@keyframes title-wipe {
+  from {
+    clip-path: inset(0 0 100% 0);
+    translate: 0 0.35em;
   }
 
   to {
-    opacity: 1;
-    transform: none;
+    clip-path: inset(-25% -5% -25% -5%);
+    translate: 0 0;
+  }
+}
+
+/* The photo card opens upward from its bottom edge, solid the whole way, so
+   the lake never shows through the photo. */
+@keyframes card-wipe {
+  from {
+    clip-path: inset(100% 0 0 0);
+    translate: 0 24px;
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    translate: 0 0;
+  }
+}
+
+@keyframes heat-pop {
+  from {
+    opacity: 0;
+    scale: 0.2;
+  }
+}
+
+@keyframes odometer-roll {
+  from {
+    translate: 0 0;
   }
 }
 
@@ -121,16 +209,6 @@ body {
   }
 }
 
-@keyframes reveal-sweep {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-
 .hero-photo {
   scale: 1.06;
 }
@@ -142,8 +220,107 @@ body {
 /* All motion is opt-in: with reduced motion, or in a browser without
    scroll-driven animations, everything simply renders in place. */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-enter {
-    animation: hero-enter 500ms ease-out both;
+  /* The load sequence, about two seconds end to end: nav and name first, the
+     photo card opening beside them, the lede and links on --i, then the heatmap fills in on a
+     diagonal, one week (--w) and one weekday (--d) at a time, while each digit
+     of the total rolls into place, left to right, landing as the wave
+     reaches today. Level-0 days only fade, so the active ones pop. */
+  .nav-enter {
+    animation: fade-in 700ms ease-out both;
+  }
+
+  .hero-title {
+    animation: title-wipe 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 80ms both;
+  }
+
+  .hero-rise {
+    animation: rise 800ms cubic-bezier(0.2, 0.7, 0.2, 1) calc(150ms + var(--i, 0) * 110ms) both;
+  }
+
+  .hero-card {
+    animation: card-wipe 1000ms cubic-bezier(0.7, 0, 0.2, 1) 200ms both;
+  }
+
+  .heat-week > :nth-child(3) {
+    --d: 1;
+  }
+
+  .heat-week > :nth-child(4) {
+    --d: 2;
+  }
+
+  .heat-week > :nth-child(5) {
+    --d: 3;
+  }
+
+  .heat-week > :nth-child(6) {
+    --d: 4;
+  }
+
+  .heat-week > :nth-child(7) {
+    --d: 5;
+  }
+
+  .heat-week > :nth-child(8) {
+    --d: 6;
+  }
+
+  .heat-cell {
+    animation: heat-pop 460ms cubic-bezier(0.34, 1.45, 0.64, 1)
+      calc(560ms + var(--w, 0) * 12ms + var(--d, 0) * 20ms) both;
+  }
+
+  .heat-cell[data-level="0"] {
+    animation-name: fade-in;
+  }
+
+  .odometer-strip {
+    animation: odometer-roll 1100ms cubic-bezier(0.25, 0.8, 0.25, 1) calc(560ms + var(--i, 0) * 80ms)
+      both;
+  }
+
+  .link {
+    transition:
+      text-decoration-color 200ms ease-out,
+      text-underline-offset 200ms ease-out;
+  }
+
+  /* The glyph beside a link or button leans the way it goes. */
+  .glyph-down,
+  .glyph-out {
+    transition: translate 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .group:hover .glyph-down {
+    translate: 0 2px;
+  }
+
+  .group:hover .glyph-out {
+    translate: 2px -2px;
+  }
+
+  /* A role opens to its bullets instead of jumping: the content grows from
+     nothing and fades up, and closes the same way. Browsers that cannot
+     animate to "auto" open it at once, as before. */
+  @supports (interpolate-size: allow-keywords) {
+    .expand {
+      interpolate-size: allow-keywords;
+    }
+
+    .expand::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow-y: clip;
+      transition:
+        block-size 380ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        opacity 300ms ease-out,
+        content-visibility 380ms allow-discrete;
+    }
+
+    .expand[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
   }
 
   .hero-photo {
@@ -183,13 +360,5 @@ body {
       animation-range: entry 20% cover 30%;
     }
 
-    .reveal-sweep {
-      animation-name: reveal-sweep;
-      animation-duration: auto;
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-      animation-timeline: view();
-      animation-range: entry 10% cover 40%;
-    }
   }
 }

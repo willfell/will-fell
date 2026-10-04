@@ -18,13 +18,13 @@ const Roles: FC = memo(() => (
       <SectionHeader
         action={
           <a
-            className="inline-flex min-h-[44px] items-center gap-2 font-mono text-sm text-paper underline decoration-1 underline-offset-[5px]"
+            className="link group inline-flex min-h-[44px] items-center gap-2 font-mono text-sm text-paper"
             download=""
             href={resumeHref}
             onClick={() => trackEvent("Download Click", { file: "Resume" })}
           >
             Full resume, PDF
-            <DownloadGlyph />
+            <DownloadGlyph className="glyph-down" />
           </a>
         }
         heading={experienceHeading}
@@ -35,13 +35,13 @@ const Roles: FC = memo(() => (
         {roles.map(({ dates, employer, logo, logoTone, title, line, bullets }) => (
           <li className="reveal border-b border-line" key={`${employer}-${title}`}>
             <details
-              className="group"
+              className="expand group"
               onToggle={(e) =>
                 e.currentTarget.open &&
                 trackEvent("Role Expand", { role: `${employer} ${title}` })
               }
             >
-              <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-6 gap-y-2 py-[22px] [&::-webkit-details-marker]:hidden">
+              <summary className="group/summary flex cursor-pointer list-none flex-wrap items-center gap-x-6 gap-y-2 py-[22px] [&::-webkit-details-marker]:hidden">
                 <span className={dateClass}>{dates}</span>
                 <span className={orgClass}>
                   <Logo src={logo} tone={logoTone} />
@@ -55,9 +55,9 @@ const Roles: FC = memo(() => (
                 </span>
                 <span
                   aria-hidden="true"
-                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center border border-line-hi"
+                  className="inline-flex h-9 w-9 shrink-0 items-center justify-center border border-line-hi transition-colors duration-200 group-hover/summary:border-paper group-open:border-paper motion-reduce:transition-none"
                 >
-                  <PlusGlyph className="transition-transform group-open:rotate-45 motion-reduce:transition-none" />
+                  <PlusGlyph className="transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.2,1)] group-open:rotate-45 motion-reduce:transition-none" />
                 </span>
               </summary>
               <div className="flex flex-wrap gap-x-6 pb-[26px]">

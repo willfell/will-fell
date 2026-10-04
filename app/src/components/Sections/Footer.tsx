@@ -61,7 +61,7 @@ const Footer: FC = memo(() => {
             </a>
             <button
               aria-label="Copy email address"
-              className="min-h-[44px] min-w-[64px] border border-line-mid px-3 text-paper"
+              className="min-h-[44px] min-w-[64px] border border-line-mid px-3 text-paper transition-colors duration-200 hover:border-paper motion-reduce:transition-none"
               onClick={copyEmail}
               type="button"
             >
@@ -74,7 +74,7 @@ const Footer: FC = memo(() => {
           {links.map(({ href, text }) => (
             <li key={text}>
               <a
-                className="flex min-h-[44px] items-center"
+                className="flex min-h-[44px] items-center transition-colors duration-200 hover:text-paper motion-reduce:transition-none"
                 href={href}
                 onClick={() => trackEvent("Social Click", { platform: text })}
                 rel="noopener noreferrer"
